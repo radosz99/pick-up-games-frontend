@@ -1,11 +1,13 @@
 import React from "react";
 import "./App.css";
+import ResponsiveAppBar from "./components/AppBar";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>Welcome in Matcher!</p>
+      <ResponsiveAppBar />
+      <header>
+        <h1>Welcome in Matcher!</h1>
       </header>
     </div>
   );
