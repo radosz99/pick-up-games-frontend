@@ -1,0 +1,26 @@
+.leaflet-container{
+    height: 70vh;
+}
+
+.leaflet-control-geosearch form{
+    height: 60px;
+    width: 500px;
+}
+
+.leaflet-control-geosearch form input.glass{
+    font-size: 20px;
+    height: 50px;
+}
+
+.leaflet-control-geosearch form div.results{
+    font-size: 20px;
+}
+
+.leaflet-control-geosearch form div.results div{
+    font-size: 20px;
+    height: 50px;
+}
+
+.leaflet-control-geosearch form a.reset{
+    font-size: 30px;
+}
