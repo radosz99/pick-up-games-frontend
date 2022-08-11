@@ -14,9 +14,12 @@ import Box from "@mui/material/Box";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
+const center = {
+  lat: 51.109175,
+  lng: 17.032684,
+}; // Wrocław coordinates
+
 export default function Map({ handleOpenAddCourtModal }) {
-  // const [lat, setLat] = useState(null);
-  // const [lon, setLon] = useState(null);
   const [markers, setMarkers] = useState([[0, 0]]);
   const [addCourtFlag, setAddCourtFlag] = useState(false);
 
@@ -38,7 +41,7 @@ export default function Map({ handleOpenAddCourtModal }) {
 
   return (
     <MapContainer
-      center={[51.109175, 17.032684]}
+      center={center}
       zoom={13}
       zoomControl={false}
       scrollWheelZoom={true}
