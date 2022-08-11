@@ -63,7 +63,7 @@ export default function Map({ handleOpenAddCourtModal }) {
           sx={{
             backgroundColor: "#E3F2FD",
             p: 2,
-            mt: 40,
+            mt: 10,
             border: 15,
             borderColor: "#E3F2FD",
             borderRadius: 10,
