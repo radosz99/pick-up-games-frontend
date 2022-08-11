@@ -39,10 +39,7 @@ export default function Map() {
     <>
       {lon && (
         <MapContainer center={[lat, lon]} zoom={13} scrollWheelZoom={true}>
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
+          <TileLayer url="https://tile.thunderforest.com/neighbourhood/{z}/{x}/{y}.png?apikey=4a73bc6859bf49d089f11fef85911536" />
           <SearchField />
           {addCourtFlag && <AddMarker />}
           <Marker position={[lat, lon]}>
