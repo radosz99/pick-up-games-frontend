@@ -7,6 +7,8 @@ import {
 } from "react-leaflet";
 import React, { useEffect, useState } from "react";
 import SearchField from "./SearchField";
+import "leaflet/dist/leaflet.css";
+import Leaflet from "leaflet";
 
 const AddMarker = () => {
   const [position, setPosition] = useState(null);
@@ -21,6 +23,16 @@ const AddMarker = () => {
 
   return position === null ? null : <Marker position={position}></Marker>;
 };
+
+Leaflet.Icon.Default.imagePath = "../node_modules/leaflet";
+
+delete Leaflet.Icon.Default.prototype._getIconUrl;
+
+Leaflet.Icon.Default.mergeOptions({
+  iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
+  iconUrl: require("leaflet/dist/images/marker-icon.png"),
+  shadowUrl: require("leaflet/dist/images/marker-shadow.png"),
+});
 
 export default function Map() {
   const [lat, setLat] = useState(null);
