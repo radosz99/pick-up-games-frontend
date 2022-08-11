@@ -39,7 +39,7 @@ export default function Map() {
     <>
       {lon && (
         <MapContainer center={[lat, lon]} zoom={13} scrollWheelZoom={true}>
-          <TileLayer url="https://tile.thunderforest.com/neighbourhood/{z}/{x}/{y}.png?apikey=4a73bc6859bf49d089f11fef85911536" />
+          <TileLayer url="https://tile.thunderforest.com/atlas/{z}/{x}/{y}.png?apikey=4a73bc6859bf49d089f11fef85911536" />
           <SearchField />
           {addCourtFlag && <AddMarker />}
           <Marker position={[lat, lon]}>
