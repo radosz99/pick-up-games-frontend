@@ -43,6 +43,8 @@ export default function Map() {
     navigator.geolocation.getCurrentPosition(function (position) {
       setLat(position.coords.latitude);
       setLon(position.coords.longitude);
+      console.log(position.coords.latitude);
+      console.log(position.coords.longitude);
       setAddCourtFlag(false); //TODO : REMOVE
     });
   }, []);
