@@ -49,18 +49,16 @@ export default function Map() {
 
   return (
     <>
-      {lon && (
-        <MapContainer center={[lat, lon]} zoom={13} scrollWheelZoom={true}>
-          <TileLayer url="https://tile.thunderforest.com/atlas/{z}/{x}/{y}.png?apikey=4a73bc6859bf49d089f11fef85911536" />
-          <SearchField />
-          {addCourtFlag && <AddMarker />}
-          <Marker position={[lat, lon]}>
-            <Popup>
-              A pretty CSS3 popup. <br /> Easily customizable.
-            </Popup>
-          </Marker>
-        </MapContainer>
-      )}
+      <MapContainer center={[12, 45]} zoom={13} scrollWheelZoom={true}>
+        <TileLayer url="https://tile.thunderforest.com/atlas/{z}/{x}/{y}.png?apikey=4a73bc6859bf49d089f11fef85911536" />
+        <SearchField />
+        {addCourtFlag && <AddMarker />}
+        <Marker position={[12, 45]}>
+          <Popup>
+            A pretty CSS3 popup. <br /> Easily customizable.
+          </Popup>
+        </Marker>
+      </MapContainer>
     </>
   );
 }
