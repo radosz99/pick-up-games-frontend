@@ -13,15 +13,11 @@ import Control from "react-leaflet-custom-control";
 import Box from "@mui/material/Box";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import { useStore } from "../stores/store";
+import { observer } from "mobx-react-lite";
 
-const center = {
-  lat: 51.109175,
-  lng: 17.032684,
-}; // Wrocław coordinates
-
-export default function Map({ handleOpenAddCourtModal }) {
-  const [markers, setMarkers] = useState([[0, 0]]);
-  const [addCourtFlag, setAddCourtFlag] = useState(false);
+function Map() {
+  const { appStore } = useStore();
 
   const AddMarker = () => {
     const [position, setPosition] = useState(null);
@@ -29,10 +25,9 @@ export default function Map({ handleOpenAddCourtModal }) {
     useMapEvents({
       click: (e) => {
         setPosition(e.latlng); // 👈 add marker
-        /* CODE TO ADD NEW PLACE TO STORE (check the source code) */
-        setMarkers([...markers, [e.latlng.lat, e.latlng.lng]]);
-        setAddCourtFlag(false);
-        handleOpenAddCourtModal();
+        appStore.setNewCourtcoordinates(e.latlng);
+        appStore.setAddCourtFlag(false);
+        appStore.setAddCourtModalOpen(true);
       },
     });
 
@@ -41,7 +36,7 @@ export default function Map({ handleOpenAddCourtModal }) {
 
   return (
     <MapContainer
-      center={center}
+      center={appStore.coordinates}
       zoom={13}
       zoomControl={false}
       scrollWheelZoom={true}
@@ -52,11 +47,12 @@ export default function Map({ handleOpenAddCourtModal }) {
       <Control prepend position="topleft">
         <Button
           variant="contained"
+          disabled={appStore.addCourtFlag}
           size="large"
           color="primary"
           onClick={(e) => {
             e.stopPropagation();
-            setAddCourtFlag(!addCourtFlag);
+            appStore.setAddCourtFlag(true);
           }}
           sx={{ mt: 5, ml: 5 }}
         >
@@ -101,8 +97,8 @@ export default function Map({ handleOpenAddCourtModal }) {
           </Box>
         </Box>
       </Control>
-      {addCourtFlag && <AddMarker />}
-      {markers.map((position, idx) => (
+      {appStore.addCourtFlag && <AddMarker />}
+      {appStore.courtsMarkers.map((position, idx) => (
         <Marker key={`marker-${idx}`} position={position}>
           <Popup>
             <span>This will be court description.</span>
@@ -112,3 +108,5 @@ export default function Map({ handleOpenAddCourtModal }) {
     </MapContainer>
   );
 }
+
+export default observer(Map);

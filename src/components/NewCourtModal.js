@@ -3,6 +3,9 @@ import TextField from "@mui/material/TextField";
 import { Typography, Modal } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import { Button } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import { useStore } from "../stores/store";
+import { observer } from "mobx-react-lite";
 
 const style = {
   position: "absolute",
@@ -16,15 +19,24 @@ const style = {
   p: 4,
 };
 
-export default function NewCourtModal({ handleClose, open }) {
+function NewCourtModal() {
+  const { appStore } = useStore();
+
   return (
     <Modal
-      open={open}
-      onClose={handleClose}
+      open={appStore.addCourtModalOpen}
+      onClose={() => appStore.setAddCourtModalOpen(false)}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
       <Box sx={style}>
+        <Box
+          onClick={() => appStore.setAddCourtModalOpen(false)}
+          sx={{ position: "absolute", right: 30, cursor: "pointer" }}
+        >
+          <CloseIcon />
+        </Box>
+
         <Typography variant="h2" align="center">
           ADD NEW COURT
         </Typography>
@@ -106,11 +118,14 @@ export default function NewCourtModal({ handleClose, open }) {
         </Box>
         <Box textAlign="center" sx={{ mt: 5 }}>
           <Button
-            alignItems="center"
             variant="contained"
             size="large"
             color="primary"
             sx={{ width: "60vw" }}
+            onClick={() => {
+              appStore.addCourtMarker(appStore.newCourtCoordinates);
+              appStore.setAddCourtModalOpen(false);
+            }}
           >
             SUBMIT COURT
           </Button>
@@ -119,3 +134,5 @@ export default function NewCourtModal({ handleClose, open }) {
     </Modal>
   );
 }
+
+export default observer(NewCourtModal);

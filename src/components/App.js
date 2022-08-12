@@ -10,16 +10,15 @@ import SportsKabaddiIcon from "@mui/icons-material/SportsKabaddi";
 import "../styles.css";
 import Map from "./Map";
 import NewCourtModal from "./NewCourtModal";
+import { observer } from "mobx-react-lite";
 
 function App() {
-  const [modalOpen, setModalopen] = React.useState(false);
-  const handleOpen = () => setModalopen(true);
-  const handleClose = () => setModalopen(false);
+  // const { appStore } = useStore();
 
   return (
     <ThemeProvider theme={theme}>
       <Header />
-      <NewCourtModal handleClose={handleClose} open={modalOpen} />
+      <NewCourtModal />
       <Grid
         container
         direction="column"
@@ -33,7 +32,7 @@ function App() {
             width: "100vw",
           }}
         >
-          <Map handleOpenAddCourtModal={handleOpen} />
+          <Map />
         </Grid>
         <Grid item sx={{ width: "100%" }}>
           <Grid
@@ -95,4 +94,4 @@ function App() {
   );
 }
 
-export default App;
+export default observer(App);
