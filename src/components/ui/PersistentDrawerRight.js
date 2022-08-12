@@ -6,6 +6,10 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import { useStore } from "../../stores/store";
 import { observer } from "mobx-react-lite";
+import { Typography } from "@mui/material";
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
+import Paper from "@mui/material/Paper";
 
 const drawerWidth = "25vw";
 
@@ -16,6 +20,14 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: "flex-start",
+}));
+
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  textAlign: "center",
+  color: theme.palette.text.secondary,
 }));
 
 function PersistentDrawerRight() {
@@ -49,6 +61,9 @@ function PersistentDrawerRight() {
           )}
         </IconButton>
       </DrawerHeader>
+      <Box textAlign="center">
+        <Typography variant="h4">COURTS NEARBY</Typography>
+      </Box>
       {/* <List>
         {["All mail", "Trash", "Spam"].map((text, index) => (
           <ListItem key={text} disablePadding>
