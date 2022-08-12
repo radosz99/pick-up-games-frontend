@@ -11,6 +11,7 @@ import "../styles.css";
 import Map from "./Map";
 import NewCourtModal from "./NewCourtModal";
 import { observer } from "mobx-react-lite";
+import PersistentDrawerRight from "./ui/PersistentDrawerRight";
 
 function App() {
   // const { appStore } = useStore();
@@ -90,6 +91,7 @@ function App() {
           </Grid>
         </Grid>
       </Grid>
+      <PersistentDrawerRight />
     </ThemeProvider>
   );
 }

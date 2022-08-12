@@ -11,10 +11,10 @@ export default createTheme({
       orange: arcOrange,
     },
     primary: {
-      main: arcBlue,
+      main: arcOrange,
     },
     secondary: {
-      main: arcOrange,
+      main: arcBlue,
     },
   },
   typography: {

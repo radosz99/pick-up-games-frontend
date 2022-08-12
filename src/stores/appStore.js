@@ -6,6 +6,7 @@ export default class AppStore {
   courtsMarkers = [];
   addCourtFlag = false;
   addCourtModalOpen = false;
+  openDrawer = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -26,6 +27,12 @@ export default class AppStore {
   setAddCourtFlag = (flag) => {
     runInAction(() => {
       this.addCourtFlag = flag;
+    });
+  };
+
+  setOpenDrawer = (flag) => {
+    runInAction(() => {
+      this.openDrawer = flag;
     });
   };
 
