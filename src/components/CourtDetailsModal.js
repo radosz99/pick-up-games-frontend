@@ -203,13 +203,14 @@ function CourtDetailsModal() {
         </Box>
         <Grid
           container
-          direction="row"
-          justifyContent="space-between"
+          direction="ROW"
+          justifyContent="center"
           alignItems="center"
           sx={{ mt: 5 }}
         >
           <Grid
             item
+            xs={3}
             sx={{
               display: "flex",
               alignItems: "center",
@@ -220,12 +221,26 @@ function CourtDetailsModal() {
               PLAYER AMOUNT: 4
             </Typography>
           </Grid>
-          <Grid item>
-            <Box sx={{ mt: 5, textAlign: "center" }}>
-              <Typography sx={{ color: "blue" }}>
-                TODO: WEATHER COMPONENT
-              </Typography>
-            </Box>
+          <Grid
+            item
+            xs={3}
+            container
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+          >
+            <Grid item>
+              <Icon
+                icon="emojione:sun-behind-rain-cloud"
+                height={60}
+                sx={{ pr: 5 }}
+              />
+            </Grid>
+            <Grid item>
+              <Typography>RAIN PROBABILITY: </Typography>
+              <Typography>HUMIDITY: </Typography>
+              <Typography>WIND: </Typography>
+            </Grid>
           </Grid>
         </Grid>
       </Box>
