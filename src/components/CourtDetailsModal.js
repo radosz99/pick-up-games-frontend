@@ -201,6 +201,33 @@ function CourtDetailsModal() {
             TODO: TIMELINE SLIDER COMPONENT
           </Typography>
         </Box>
+        <Grid
+          container
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+          sx={{ mt: 5 }}
+        >
+          <Grid
+            item
+            sx={{
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <Icon icon="gis:location-man-alt" height={40} />
+            <Typography sx={{ ml: 4, color: "red" }}>
+              PLAYER AMOUNT: 4
+            </Typography>
+          </Grid>
+          <Grid item>
+            <Box sx={{ mt: 5, textAlign: "center" }}>
+              <Typography sx={{ color: "blue" }}>
+                TODO: WEATHER COMPONENT
+              </Typography>
+            </Box>
+          </Grid>
+        </Grid>
       </Box>
     </Modal>
   );
