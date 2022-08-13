@@ -10,7 +10,7 @@ import SportsKabaddiIcon from "@mui/icons-material/SportsKabaddi";
 import "../styles.css";
 import Map from "./Map";
 import NewCourtModal from "./NewCourtModal";
-import CourtDetailsModal from "./CourtDetailsModal";
+import CourtDetailsModal from "./courtDetails/CourtDetailsModal";
 import { observer } from "mobx-react-lite";
 import PersistentDrawerRight from "./ui/PersistentDrawerRight";
 

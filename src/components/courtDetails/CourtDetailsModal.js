@@ -2,7 +2,7 @@ import Box from "@mui/material/Box";
 import { Typography, Modal } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import CloseIcon from "@mui/icons-material/Close";
-import { useStore } from "../stores/store";
+import { useStore } from "../../stores/store";
 import { observer } from "mobx-react-lite";
 import Rating from "@mui/material/Rating";
 import NavigationIcon from "@mui/icons-material/Navigation";
@@ -10,6 +10,8 @@ import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import Carousel from "react-material-ui-carousel";
 import { Icon } from "@iconify/react";
 import { useTheme } from "@mui/material/styles";
+import WeatherComponent from "./WeatherComponent";
+import TimelineSliderComponent from "./TimelineSliderComponent";
 
 const style = {
   position: "absolute",
@@ -204,11 +206,7 @@ function CourtDetailsModal() {
             </Grid>
           </Grid>
         </Grid>
-        <Box sx={{ mt: 5, textAlign: "center" }}>
-          <Typography sx={{ color: "blue" }}>
-            TODO: TIMELINE SLIDER COMPONENT
-          </Typography>
-        </Box>
+        <TimelineSliderComponent />
         <Grid
           container
           direction="ROW"
@@ -229,27 +227,7 @@ function CourtDetailsModal() {
               PLAYER AMOUNT: 4
             </Typography>
           </Grid>
-          <Grid
-            item
-            xs={3}
-            container
-            direction="row"
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Grid item>
-              <Icon
-                icon="emojione:sun-behind-rain-cloud"
-                height={60}
-                sx={{ pr: 5 }}
-              />
-            </Grid>
-            <Grid item>
-              <Typography>RAIN PROBABILITY: 90%</Typography>
-              <Typography>HUMIDITY: 43%</Typography>
-              <Typography>WIND: 13 KM/H</Typography>
-            </Grid>
-          </Grid>
+          <WeatherComponent />
         </Grid>
       </Box>
     </Modal>
