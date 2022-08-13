@@ -8,10 +8,10 @@ import { useStore } from "../../stores/store";
 import { observer } from "mobx-react-lite";
 import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-
-const drawerWidth = "25vw";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import ListItem from "@mui/material/ListItem";
+import List from "@mui/material/List";
+import CourtListItem from "../CourtListItem";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -22,17 +22,12 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-start",
 }));
 
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  textAlign: "center",
-  color: theme.palette.text.secondary,
-}));
-
 function PersistentDrawerRight() {
   const { appStore } = useStore();
   const theme = useTheme();
+  let isXL = useMediaQuery(theme.breakpoints.down("xl"));
+
+  let drawerWidth = isXL ? "35vw" : "25vw";
 
   const handleDrawerClose = () => {
     appStore.setOpenDrawer(false);
@@ -64,18 +59,14 @@ function PersistentDrawerRight() {
       <Box textAlign="center">
         <Typography variant="h4">COURTS NEARBY</Typography>
       </Box>
-      {/* <List>
+
+      <List>
         {["All mail", "Trash", "Spam"].map((text, index) => (
           <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
+            <CourtListItem />
           </ListItem>
         ))}
-      </List> */}
+      </List>
     </Drawer>
   );
 }
