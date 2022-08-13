@@ -10,6 +10,7 @@ import SportsKabaddiIcon from "@mui/icons-material/SportsKabaddi";
 import "../styles.css";
 import Map from "./Map";
 import NewCourtModal from "./NewCourtModal";
+import CourtDetailsModal from "./CourtDetailsModal";
 import { observer } from "mobx-react-lite";
 import PersistentDrawerRight from "./ui/PersistentDrawerRight";
 
@@ -20,6 +21,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <Header />
       <NewCourtModal />
+      <CourtDetailsModal />
       <GlobalStyles
         styles={{
           body: { backgroundColor: theme.palette.background.default },

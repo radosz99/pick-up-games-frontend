@@ -5,8 +5,10 @@ import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import NavigationIcon from "@mui/icons-material/Navigation";
 import { observer } from "mobx-react-lite";
 import { Button } from "@mui/material";
+import { useStore } from "../stores/store";
 
 function CourtListItem() {
+  const { appStore } = useStore();
   return (
     <Box
       sx={{
@@ -39,10 +41,12 @@ function CourtListItem() {
           mt: 3,
         }}
       >
-        <Button sx={{ color: "red" }}>See court details</Button>
-        {/* <Typography component="button" variant="h6" sx={{ color: "red" }}>
-      See court details
-    </Typography> */}
+        <Button
+          sx={{ color: "red" }}
+          onClick={() => appStore.setCourtModalOpen(true)}
+        >
+          See court details
+        </Button>
         <Box
           sx={{
             mx: 3,

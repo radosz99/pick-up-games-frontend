@@ -6,6 +6,7 @@ export default class AppStore {
   courtsMarkers = [];
   addCourtFlag = false;
   addCourtModalOpen = false;
+  courtModalOpen = false;
   openDrawer = false;
 
   constructor() {
@@ -39,7 +40,12 @@ export default class AppStore {
   setAddCourtModalOpen = (flag) => {
     runInAction(() => {
       this.addCourtModalOpen = flag;
-      if (!flag) this.addCourtSubmitted = false; // temporary solution
+    });
+  };
+
+  setCourtModalOpen = (flag) => {
+    runInAction(() => {
+      this.courtModalOpen = flag;
     });
   };
 
