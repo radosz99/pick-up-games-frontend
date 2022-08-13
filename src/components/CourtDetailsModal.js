@@ -9,6 +9,7 @@ import NavigationIcon from "@mui/icons-material/Navigation";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
 import Carousel from "react-material-ui-carousel";
 import { Icon } from "@iconify/react";
+import { useTheme } from "@mui/material/styles";
 
 const style = {
   position: "absolute",
@@ -39,6 +40,7 @@ function Item(props) {
 
 function CourtDetailsModal() {
   const { appStore } = useStore();
+  const theme = useTheme();
 
   return (
     <Modal
@@ -65,8 +67,14 @@ function CourtDetailsModal() {
           alignItems="center"
           sx={{ mt: 4 }}
         >
-          <Grid item xs={2}>
-            <Box>
+          <Grid item xs={1}>
+            <Box
+              sx={{
+                backgroundColor: theme.palette.primary.main,
+                width: 100,
+                textAlign: "center",
+              }}
+            >
               <Typography>OUTDOOR</Typography>
             </Box>
           </Grid>
@@ -237,9 +245,9 @@ function CourtDetailsModal() {
               />
             </Grid>
             <Grid item>
-              <Typography>RAIN PROBABILITY: </Typography>
-              <Typography>HUMIDITY: </Typography>
-              <Typography>WIND: </Typography>
+              <Typography>RAIN PROBABILITY: 90%</Typography>
+              <Typography>HUMIDITY: 43%</Typography>
+              <Typography>WIND: 13 KM/H</Typography>
             </Grid>
           </Grid>
         </Grid>
