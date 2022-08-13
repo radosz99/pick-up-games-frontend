@@ -4,7 +4,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import theme from "./ui/Theme";
 import Grid from "@mui/material/Grid";
 import SearchIcon from "@mui/icons-material/Search";
-import { Typography } from "@mui/material";
+import { Typography, GlobalStyles } from "@mui/material";
 import GroupsIcon from "@mui/icons-material/Groups";
 import SportsKabaddiIcon from "@mui/icons-material/SportsKabaddi";
 import "../styles.css";
@@ -20,6 +20,11 @@ function App() {
     <ThemeProvider theme={theme}>
       <Header />
       <NewCourtModal />
+      <GlobalStyles
+        styles={{
+          body: { backgroundColor: theme.palette.background.default },
+        }}
+      />
       <Grid
         container
         direction="column"

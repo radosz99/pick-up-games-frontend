@@ -12,8 +12,8 @@ function CourtListItem() {
       sx={{
         backgroundColor: "#E3F2FD",
         p: 2,
-        mt: 5,
-        mx: 2,
+        mt: 3,
+        ml: 2,
         border: 15,
         borderColor: "#E3F2FD",
         borderRadius: 3,

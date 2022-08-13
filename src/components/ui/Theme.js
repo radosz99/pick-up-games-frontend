@@ -16,6 +16,9 @@ export default createTheme({
     secondary: {
       main: arcBlue,
     },
+    background: {
+      default: arcGrey,
+    },
   },
   typography: {
     tab: {
