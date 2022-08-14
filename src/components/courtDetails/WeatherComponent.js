@@ -15,12 +15,21 @@ function WeatherComponent() {
       justifyContent="center"
       alignItems="center"
     >
-      <Grid item>
+      <Grid
+        item
+        sx={{
+          mx: 1,
+          display: "flex",
+          alignItems: "center",
+          flexWrap: "wrap",
+        }}
+      >
         <Icon
           icon="emojione:sun-behind-rain-cloud"
           height={60}
           sx={{ pr: 5 }}
         />
+        <Typography sx={{ mx: 2 }}>28°C</Typography>
       </Grid>
       <Grid item>
         <Typography>RAIN PROBABILITY: 90%</Typography>
