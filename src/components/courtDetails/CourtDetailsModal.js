@@ -118,12 +118,6 @@ function CourtDetailsModal() {
         <Carousel
           sx={{ textAlign: "center", mt: 5 }}
           navButtonsAlwaysVisible={true}
-          next={(next, active) =>
-            console.log(`we left ${active}, and are now at ${next}`)
-          }
-          prev={(prev, active) =>
-            console.log(`we left ${active}, and are now at ${prev}`)
-          }
         >
           {items.map((item, i) => (
             <Item key={i} item={item} />
@@ -209,7 +203,7 @@ function CourtDetailsModal() {
         <TimelineSliderComponent />
         <Grid
           container
-          direction="ROW"
+          direction="row"
           justifyContent="center"
           alignItems="center"
           sx={{ mt: 5 }}

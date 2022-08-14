@@ -4,6 +4,8 @@ export default class AppStore {
   coordinates = [51.109175, 17.032684]; // Wrocław coordinates
   newCourtCoordinates = []; // Wrocław coordinates
   courtsMarkers = [];
+  hoursRange = [0, 1];
+
   addCourtFlag = false;
   addCourtModalOpen = false;
   courtModalOpen = false;
@@ -22,6 +24,12 @@ export default class AppStore {
   setNewCourtcoordinates = (newCoordinates) => {
     runInAction(() => {
       this.newCourtCoordinates = newCoordinates;
+    });
+  };
+
+  setHoursRange = (newHoursRange) => {
+    runInAction(() => {
+      this.hoursRange = newHoursRange;
     });
   };
 
