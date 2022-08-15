@@ -35,26 +35,24 @@ export default createTheme({
       color: "white",
     },
     h2: {
-      fontFamily: "Raleway",
-      fontWeight: 700,
-      fontSize: "2.5rem",
-      lineHeight: 1.5,
+      fontFamily: "Crimson pro",
+      fontSize: 48,
     },
     h3: {
-      fontFamily: "Pacifico",
-      fontSize: "2.5rem",
-      color: arcBlue,
+      fontFamily: "Crimson pro",
+      fontSize: 32,
     },
     h4: {
-      fontFamily: "Raleway",
-      fontSize: "1.75rem",
-      color: arcBlue,
-      fontWeight: 700,
+      fontFamily: "Crimson pro",
+      fontSize: 24,
     },
-    h6: {
-      fontWeight: 500,
-      fontFamily: "Raleway",
-      color: arcBlue,
+    h5: {
+      fontFamily: "Crimson pro",
+      fontSize: 18,
+    },
+    p: {
+      fontFamily: "Dosis",
+      fontSize: 16,
     },
     subtitle1: {
       fontSize: "1.25rem",

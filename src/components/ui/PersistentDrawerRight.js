@@ -57,11 +57,11 @@ function PersistentDrawerRight() {
         </IconButton>
       </DrawerHeader>
       <Box textAlign="center">
-        <Typography variant="h4">COURTS NEARBY</Typography>
+        <Typography variant="h3">COURTS NEARBY</Typography>
       </Box>
 
       <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
+        {["All mail", "Trash", "Spam"].map((text) => (
           <ListItem key={text} disablePadding>
             <CourtListItem />
           </ListItem>

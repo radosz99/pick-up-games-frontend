@@ -8,7 +8,7 @@ import {
 } from "react-leaflet";
 import React, { useState } from "react";
 import SearchField from "./SearchField";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import Control from "react-leaflet-custom-control";
 import Box from "@mui/material/Box";
 import Checkbox from "@mui/material/Checkbox";
@@ -31,7 +31,9 @@ function Map() {
       },
     });
 
-    return position === null ? null : <Marker position={position}></Marker>;
+    return position === null ? null : (
+      <Marker draggable={true} position={position}></Marker>
+    );
   };
 
   return (
@@ -54,14 +56,14 @@ function Map() {
             e.stopPropagation();
             appStore.setAddCourtFlag(true);
           }}
-          sx={{ mt: 5, ml: 5 }}
+          sx={{ mt: 5, ml: 5, fontSize: 24 }}
         >
           Add court
         </Button>
         <Box
           sx={{
             backgroundColor: "#E3F2FD",
-            p: 2,
+            p: 1,
             mt: 10,
             border: 15,
             borderColor: "#E3F2FD",
@@ -71,28 +73,28 @@ function Map() {
           <Box>
             <FormControlLabel
               control={<Checkbox defaultChecked />}
-              label="Outdoor"
+              label={<Typography variant="p">Outdoor</Typography>}
             />
             <br />
             <FormControlLabel
               control={<Checkbox defaultChecked />}
-              label="Indoor"
+              label={<Typography variant="p">Indoor</Typography>}
             />
           </Box>
-          <Box sx={{ mt: 5 }}>
+          <Box sx={{ mt: 2 }}>
             <FormControlLabel
               control={<Checkbox defaultChecked />}
-              label="With players today"
+              label={<Typography variant="p">With players today</Typography>}
             />
             <br />
             <FormControlLabel
               control={<Checkbox defaultChecked />}
-              label="With photos"
+              label={<Typography variant="p">With photos</Typography>}
             />
             <br />
             <FormControlLabel
               control={<Checkbox defaultChecked />}
-              label="Highly rated"
+              label={<Typography variant="p">Highly rated</Typography>}
             />
           </Box>
         </Box>

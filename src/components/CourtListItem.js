@@ -21,7 +21,7 @@ function CourtListItem() {
         borderRadius: 3,
       }}
     >
-      <Typography variant="h4">Court name</Typography>
+      <Typography variant="h5">Court name</Typography>
       <Box
         sx={{
           display: "flex",
@@ -29,11 +29,13 @@ function CourtListItem() {
         }}
       >
         <Rating name="read-only" value={4} readOnly />
-        <Typography component="legend" sx={{ ml: 4 }}>
+        <Typography variant="p" component="legend" sx={{ ml: 4 }}>
           2 ratings
         </Typography>
       </Box>
-      <Typography sx={{ mt: 2 }}>Location, Country</Typography>
+      <Typography variant="p" sx={{ mt: 2 }}>
+        Location, Country
+      </Typography>
       <Box
         sx={{
           display: "flex",
@@ -42,7 +44,7 @@ function CourtListItem() {
         }}
       >
         <Button
-          sx={{ color: "red" }}
+          sx={{ color: "red", fontSize: 18 }}
           onClick={() => appStore.setCourtModalOpen(true)}
         >
           See court details
@@ -56,7 +58,7 @@ function CourtListItem() {
           }}
         >
           <PeopleAltIcon sx={{ mr: 1 }} />
-          <Typography>2</Typography>
+          <Typography variant="p">2</Typography>
         </Box>
 
         <Box
@@ -68,7 +70,7 @@ function CourtListItem() {
           }}
         >
           <NavigationIcon />
-          <Typography>1.5 km</Typography>
+          <Typography variant="p">1.5 km</Typography>
         </Box>
       </Box>
     </Box>

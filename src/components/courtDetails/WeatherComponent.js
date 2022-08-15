@@ -9,7 +9,7 @@ function WeatherComponent() {
   return (
     <Grid
       item
-      xs={3}
+      xs={4}
       container
       direction="row"
       justifyContent="center"
@@ -24,17 +24,17 @@ function WeatherComponent() {
           flexWrap: "wrap",
         }}
       >
-        <Icon
-          icon="emojione:sun-behind-rain-cloud"
-          height={60}
-          sx={{ pr: 5 }}
-        />
-        <Typography sx={{ mx: 2 }}>28°C</Typography>
+        <Icon icon="emojione:sun-behind-rain-cloud" height={60} />
+        <Typography variant="p" sx={{ mx: 2 }}>
+          28°C
+        </Typography>
       </Grid>
       <Grid item>
-        <Typography>RAIN PROBABILITY: 90%</Typography>
-        <Typography>HUMIDITY: 43%</Typography>
-        <Typography>WIND: 13 KM/H</Typography>
+        <Typography variant="p">RAIN PROBABILITY: 90%</Typography>
+        <br />
+        <Typography variant="p">HUMIDITY: 43%</Typography>
+        <br />
+        <Typography variant="p">WIND: 13 KM/H</Typography>
       </Grid>
     </Grid>
   );

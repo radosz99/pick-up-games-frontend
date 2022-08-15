@@ -62,8 +62,8 @@ function App() {
                 flexWrap: "wrap",
               }}
             >
-              <SearchIcon sx={{ fontSize: "60px", mr: 2 }} />
-              <Typography variant="h2" sx={{ color: "white" }}>
+              <SearchIcon sx={{ fontSize: "40px", mr: 2 }} />
+              <Typography variant="h3" sx={{ color: "white" }}>
                 FIND COURTS
               </Typography>
             </Grid>
@@ -76,8 +76,8 @@ function App() {
                 flexWrap: "wrap",
               }}
             >
-              <GroupsIcon sx={{ fontSize: "60px", mr: 2 }} />
-              <Typography variant="h2" sx={{ color: "white" }}>
+              <GroupsIcon sx={{ fontSize: "40px", mr: 2 }} />
+              <Typography variant="h3" sx={{ color: "white" }}>
                 FIND TEAMMATES
               </Typography>
             </Grid>
@@ -90,8 +90,8 @@ function App() {
                 flexWrap: "wrap",
               }}
             >
-              <SportsKabaddiIcon sx={{ fontSize: "60px", mr: 2 }} />
-              <Typography variant="h2" sx={{ color: "white" }}>
+              <SportsKabaddiIcon sx={{ fontSize: "40px", mr: 2 }} />
+              <Typography variant="h3" sx={{ color: "white" }}>
                 PLAY GAME
               </Typography>
             </Grid>

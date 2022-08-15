@@ -197,7 +197,7 @@ function TimelineSliderComponent() {
         </Box>
       </Grid>
       <Grid item sx={{ mt: 5 }}>
-        <Typography variant="h5">
+        <Typography variant="h4">
           TIME CHOSEN: {numFormatter(appStore.hoursRange[0]).toUpperCase()}
         </Typography>
       </Grid>

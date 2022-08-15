@@ -59,7 +59,7 @@ function CourtDetailsModal() {
           <CloseIcon />
         </Box>
 
-        <Typography variant="h3" align="center">
+        <Typography variant="h2" align="center">
           COURT NAME
         </Typography>
         <Grid
@@ -77,7 +77,7 @@ function CourtDetailsModal() {
                 textAlign: "center",
               }}
             >
-              <Typography>OUTDOOR</Typography>
+              <Typography variant="p">OUTDOOR</Typography>
             </Box>
           </Grid>
           <Grid
@@ -88,7 +88,9 @@ function CourtDetailsModal() {
             }}
           >
             <Rating name="read-only" value={4} readOnly />
-            <Typography component="legend">2 ratings</Typography>
+            <Typography variant="p" component="legend">
+              2 ratings
+            </Typography>
           </Grid>
           <Grid
             item
@@ -99,7 +101,7 @@ function CourtDetailsModal() {
             }}
           >
             <PeopleAltIcon sx={{ mr: 1 }} />
-            <Typography>2</Typography>
+            <Typography variant="p">2 PLAYERS IN HERE</Typography>
           </Grid>
           <Grid
             item
@@ -110,7 +112,7 @@ function CourtDetailsModal() {
             }}
           >
             <NavigationIcon sx={{ mr: 1 }} />
-            <Typography>
+            <Typography variant="p">
               Andrzeja Modrzewskiego-Frycza 12 Wroclaw 50-155, Poland
             </Typography>
           </Grid>
@@ -146,10 +148,10 @@ function CourtDetailsModal() {
               alignItems="center"
             >
               <Grid item>
-                <Typography>Number of courts</Typography>
+                <Typography variant="p">Number of courts</Typography>
               </Grid>
               <Grid item>
-                <Typography>1</Typography>
+                <Typography variant="h3">1</Typography>
               </Grid>
             </Grid>
           </Grid>
@@ -169,10 +171,10 @@ function CourtDetailsModal() {
               alignItems="center"
             >
               <Grid item>
-                <Typography>Number of hoops</Typography>
+                <Typography variant="p">Number of hoops</Typography>
               </Grid>
               <Grid item>
-                <Typography>1</Typography>
+                <Typography variant="h3">1</Typography>
               </Grid>
             </Grid>
           </Grid>
@@ -192,10 +194,10 @@ function CourtDetailsModal() {
               alignItems="center"
             >
               <Grid item>
-                <Typography>Lightning</Typography>
+                <Typography variant="p">Lightning</Typography>
               </Grid>
               <Grid item>
-                <Typography>n/a</Typography>
+                <Typography variant="h3">n/a</Typography>
               </Grid>
             </Grid>
           </Grid>
@@ -217,7 +219,7 @@ function CourtDetailsModal() {
             }}
           >
             <Icon icon="gis:location-man-alt" height={40} />
-            <Typography sx={{ ml: 4, color: "red" }}>
+            <Typography variant="p" sx={{ ml: 4, color: "red" }}>
               PLAYER AMOUNT: 4
             </Typography>
           </Grid>
