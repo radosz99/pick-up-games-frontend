@@ -49,6 +49,8 @@ export default class AppStore {
     runInAction(() => {
       this.addCourtModalOpen = flag;
     });
+    var element = document.getElementsByClassName("leaflet-container")[0];
+    element.classList.remove("cursor");
   };
 
   setCourtModalOpen = (flag) => {

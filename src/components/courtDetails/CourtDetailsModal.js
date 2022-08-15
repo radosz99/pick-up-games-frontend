@@ -94,7 +94,7 @@ function CourtDetailsModal() {
           </Grid>
           <Grid
             item
-            xs={1}
+            xs={2}
             sx={{
               display: "flex",
               alignItems: "center",
@@ -212,7 +212,7 @@ function CourtDetailsModal() {
         >
           <Grid
             item
-            xs={3}
+            xs={4}
             sx={{
               display: "flex",
               alignItems: "center",

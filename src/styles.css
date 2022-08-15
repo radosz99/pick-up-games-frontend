@@ -24,3 +24,7 @@
 .leaflet-control-geosearch form a.reset{
     font-size: 30px;
 }
+
+.leaflet-container.cursor {
+    cursor: url("../public/addLocation.svg"), auto;
+  }

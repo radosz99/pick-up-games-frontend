@@ -55,6 +55,9 @@ function Map() {
           onClick={(e) => {
             e.stopPropagation();
             appStore.setAddCourtFlag(true);
+            var element =
+              document.getElementsByClassName("leaflet-container")[0];
+            element.classList.add("cursor");
           }}
           sx={{ mt: 5, ml: 5, fontSize: 24 }}
         >
