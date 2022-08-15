@@ -32,12 +32,12 @@ function App() {
         direction="column"
         justifyContent="center"
         alignItems="center"
-        spacing={4}
       >
         <Grid
           item
           sx={{
             width: "100vw",
+            overflow: "hidden",
           }}
         >
           <Map />
