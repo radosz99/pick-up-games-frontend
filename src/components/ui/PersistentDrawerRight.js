@@ -9,9 +9,8 @@ import { observer } from "mobx-react-lite";
 import { Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import useMediaQuery from "@mui/material/useMediaQuery";
-import ListItem from "@mui/material/ListItem";
-import List from "@mui/material/List";
 import CourtListItem from "../CourtListItem";
+import Grid from "@mui/material/Grid";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -27,7 +26,7 @@ function PersistentDrawerRight() {
   const theme = useTheme();
   let isXL = useMediaQuery(theme.breakpoints.down("xl"));
 
-  let drawerWidth = isXL ? "35vw" : "25vw";
+  let drawerWidth = isXL ? "32vw" : "24vw";
 
   const handleDrawerClose = () => {
     appStore.setOpenDrawer(false);
@@ -59,14 +58,18 @@ function PersistentDrawerRight() {
       <Box textAlign="center">
         <Typography variant="h3">COURTS NEARBY</Typography>
       </Box>
-
-      <List>
+      <Grid
+        container
+        direction="column"
+        justifyContent="center"
+        alignItems="center"
+      >
         {["All mail", "Trash", "Spam"].map((text) => (
-          <ListItem key={text} disablePadding>
+          <Grid item key={text} disablePadding>
             <CourtListItem />
-          </ListItem>
+          </Grid>
         ))}
-      </List>
+      </Grid>
     </Drawer>
   );
 }

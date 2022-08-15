@@ -15,9 +15,11 @@ import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { useStore } from "../stores/store";
 import { observer } from "mobx-react-lite";
+import { useTheme } from "@mui/material/styles";
 
 function Map() {
   const { appStore } = useStore();
+  const theme = useTheme();
 
   const AddMarker = () => {
     const [position, setPosition] = useState(null);
@@ -65,11 +67,11 @@ function Map() {
         </Button>
         <Box
           sx={{
-            backgroundColor: "#E3F2FD",
+            backgroundColor: theme.palette.secondary.main,
             p: 1,
             mt: 10,
             border: 15,
-            borderColor: "#E3F2FD",
+            borderColor: theme.palette.secondary.main,
             borderRadius: 10,
           }}
         >

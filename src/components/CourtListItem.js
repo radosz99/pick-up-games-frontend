@@ -6,22 +6,27 @@ import NavigationIcon from "@mui/icons-material/Navigation";
 import { observer } from "mobx-react-lite";
 import { Button } from "@mui/material";
 import { useStore } from "../stores/store";
+import { useTheme } from "@mui/material/styles";
 
 function CourtListItem() {
   const { appStore } = useStore();
+  const theme = useTheme();
+
   return (
     <Box
       sx={{
-        backgroundColor: "#E3F2FD",
+        backgroundColor: theme.palette.secondary.main,
         p: 2,
         mt: 3,
         ml: 2,
         border: 15,
-        borderColor: "#E3F2FD",
+        borderColor: theme.palette.secondary.main,
         borderRadius: 3,
       }}
     >
-      <Typography variant="h5">Court name</Typography>
+      <Typography fontWeight="bold" variant="h5">
+        Court name
+      </Typography>
       <Box
         sx={{
           display: "flex",
@@ -44,7 +49,7 @@ function CourtListItem() {
         }}
       >
         <Button
-          sx={{ color: "red", fontSize: 18 }}
+          sx={{ color: "red", fontSize: 14 }}
           onClick={() => appStore.setCourtModalOpen(true)}
         >
           See court details

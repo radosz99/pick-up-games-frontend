@@ -191,7 +191,7 @@ function TimelineSliderComponent() {
             min={0}
             max={23}
             onChange={handleChange}
-            valueLabelDisplay="on"
+            // valueLabelDisplay="on"
             sx={{}}
           />
         </Box>
