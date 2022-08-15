@@ -271,7 +271,7 @@ function NewCourtModal() {
             variant="contained"
             size="large"
             color="primary"
-            sx={{ width: "60vw" }}
+            sx={{ width: "60vw", height: 60 }}
             onClick={() => {
               appStore.addCourtMarker(appStore.newCourtCoordinates);
               appStore.setAddCourtModalOpen(false);
