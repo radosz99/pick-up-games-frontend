@@ -190,9 +190,8 @@ function TimelineSliderComponent() {
             valueLabelFormat={numFormatter}
             min={0}
             max={23}
+            step={0.5}
             onChange={handleChange}
-            // valueLabelDisplay="on"
-            sx={{}}
           />
         </Box>
       </Grid>
