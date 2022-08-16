@@ -11,6 +11,7 @@ import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import { useState } from "react";
 import FormControl from "@mui/material/FormControl";
+import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 
 const style = {
   position: "absolute",
@@ -120,10 +121,10 @@ function NewCourtModal() {
               item
               container
               direction="row"
-              justifyContent="space-between"
+              justifyContent="flex-start"
               alignItems="flex-start"
             >
-              <Grid item xs={2}>
+              <Grid item sx={{ mr: 5 }} xs={2}>
                 <FormControl fullWidth>
                   <InputLabel id="surface-type-select-label">
                     Surface type
@@ -149,7 +150,7 @@ function NewCourtModal() {
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid item xs={2}>
+              <Grid item sx={{ mr: 5 }} xs={2}>
                 <FormControl fullWidth>
                   <InputLabel id="number-of-hoops-select-label">
                     Number of hoops
@@ -202,10 +203,10 @@ function NewCourtModal() {
               item
               container
               direction="row"
-              justifyContent="space-between"
+              justifyContent="flex-start"
               alignItems="flex-start"
             >
-              <Grid item xs={2}>
+              <Grid item xs={2} sx={{ mr: 5 }}>
                 <FormControl fullWidth>
                   <InputLabel id="lightning-select-label">Lightning</InputLabel>
                   <Select
@@ -223,7 +224,7 @@ function NewCourtModal() {
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid item xs={2}>
+              <Grid item sx={{ mr: 5 }} xs={2}>
                 <FormControl fullWidth>
                   <InputLabel id="openToPublic-select-label">
                     Lightning
@@ -266,6 +267,32 @@ function NewCourtModal() {
             </Grid>
           </Grid>
         </Box>
+        <Box
+          textAlign="center"
+          sx={{
+            position: "absolute",
+            right: 80,
+            bottom: 120,
+          }}
+        >
+          <Typography variant="h3" sx={{ mb: 2 }}>
+            Photos
+          </Typography>
+          <Box
+            textAlign="center"
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            sx={{
+              width: 250,
+              height: 250,
+              backgroundColor: "#988989",
+            }}
+          >
+            <AddAPhotoIcon sx={{ fontSize: 65 }} />
+          </Box>
+        </Box>
+
         <Box textAlign="center" sx={{ mt: 5 }}>
           <Button
             variant="contained"
