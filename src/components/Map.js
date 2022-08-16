@@ -16,10 +16,22 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import { useStore } from "../stores/store";
 import { observer } from "mobx-react-lite";
 import { useTheme } from "@mui/material/styles";
+import { useRef, useEffect } from "react";
 
 function Map() {
   const { appStore } = useStore();
   const theme = useTheme();
+
+  const ref = useRef(null);
+  const sateliteMapUrl = "https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}";
+  const mapUrl =
+    "https://tile.thunderforest.com/atlas/{z}/{x}/{y}.png?apikey=4a73bc6859bf49d089f11fef85911536";
+
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.setUrl(appStore.sateliteView ? sateliteMapUrl : mapUrl);
+    }
+  }, [appStore.sateliteView]);
 
   const AddMarker = () => {
     const [position, setPosition] = useState(null);
@@ -38,25 +50,6 @@ function Map() {
     );
   };
 
-  function LocationMarker() {
-    const [position, setPosition] = useState(null);
-    const map = useMapEvents({
-      click() {
-        map.locate();
-      },
-      locationfound(e) {
-        setPosition(e.latlng);
-        map.flyTo(e.latlng, map.getZoom());
-      },
-    });
-
-    return position === null ? null : (
-      <Marker position={position}>
-        <Popup>You are here</Popup>
-      </Marker>
-    );
-  }
-
   return (
     <MapContainer
       center={appStore.coordinates}
@@ -64,9 +57,12 @@ function Map() {
       zoomControl={false}
       scrollWheelZoom={true}
     >
-      <TileLayer url="https://tile.thunderforest.com/atlas/{z}/{x}/{y}.png?apikey=4a73bc6859bf49d089f11fef85911536" />
+      <TileLayer
+        ref={ref}
+        url={appStore.sateliteView ? sateliteMapUrl : mapUrl}
+        subdomains={["mt1", "mt2", "mt3"]}
+      />
       <ZoomControl position={"bottomleft"} />
-      <LocationMarker />
       <SearchField />
       <Control prepend position="topleft">
         <Button
@@ -75,6 +71,7 @@ function Map() {
           size="large"
           color="primary"
           onClick={(e) => {
+            appStore.setSateliteView(true);
             e.stopPropagation();
             appStore.setAddCourtFlag(true);
             var element =

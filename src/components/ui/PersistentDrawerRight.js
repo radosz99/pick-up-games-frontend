@@ -65,7 +65,7 @@ function PersistentDrawerRight() {
         alignItems="center"
       >
         {["All mail", "Trash", "Spam"].map((text) => (
-          <Grid item key={text} disablePadding>
+          <Grid item key={text}>
             <CourtListItem />
           </Grid>
         ))}
