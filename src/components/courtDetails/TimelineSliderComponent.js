@@ -174,9 +174,16 @@ function TimelineSliderComponent() {
 
   const numFormatter = (num) => {
     if (num === 0) return "12 pm";
-    if (num < 13) return num + " am";
+
+    if (num < 13 && num % 1 !== 0)
+      return num.toString().split(".")[0] + ":30 am";
+    else if (num < 13) return num + " am";
+    else if (num % 1 !== 0)
+      return (num - 12).toString().split(".")[0] + ":30 pm";
     else return num - 12 + " pm";
   };
+
+  // return num.toString().trim(".")[0] + ":30 am";
 
   return (
     <Grid container direction="row" justifyContent="center" alignItems="center">
