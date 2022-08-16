@@ -38,6 +38,25 @@ function Map() {
     );
   };
 
+  function LocationMarker() {
+    const [position, setPosition] = useState(null);
+    const map = useMapEvents({
+      click() {
+        map.locate();
+      },
+      locationfound(e) {
+        setPosition(e.latlng);
+        map.flyTo(e.latlng, map.getZoom());
+      },
+    });
+
+    return position === null ? null : (
+      <Marker position={position}>
+        <Popup>You are here</Popup>
+      </Marker>
+    );
+  }
+
   return (
     <MapContainer
       center={appStore.coordinates}
@@ -47,6 +66,7 @@ function Map() {
     >
       <TileLayer url="https://tile.thunderforest.com/atlas/{z}/{x}/{y}.png?apikey=4a73bc6859bf49d089f11fef85911536" />
       <ZoomControl position={"bottomleft"} />
+      <LocationMarker />
       <SearchField />
       <Control prepend position="topleft">
         <Button
