@@ -183,8 +183,6 @@ function TimelineSliderComponent() {
     else return num - 12 + " pm";
   };
 
-  // return num.toString().trim(".")[0] + ":30 am";
-
   return (
     <Grid container direction="row" justifyContent="center" alignItems="center">
       <Grid item>
