@@ -4,10 +4,9 @@ export default class AppStore {
   coordinates = [51.109175, 17.032684]; // Wrocław coordinates
   newCourtCoordinates = []; // Wrocław coordinates
   courtsMarkers = [];
-  hoursRange = [14, 18];
+  hoursRange = [new Date().getHours() + 10, new Date().getHours() + 14];
   sateliteView = false;
   selectedDay = 0; // 0 - today, 1 - tommorow, and so on...
-
   addCourtFlag = false;
   addCourtModalOpen = false;
   courtModalOpen = false;

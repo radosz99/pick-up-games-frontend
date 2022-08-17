@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite";
 import { useStore } from "../../stores/store";
 import Box from "@mui/material/Box";
 import Slider, { SliderThumb } from "@mui/material/Slider";
-import { useState } from "react";
+import { useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import "../../styles.css";
 import { styled } from "@mui/material/styles";
@@ -10,6 +10,9 @@ import clsx from "clsx";
 import PropTypes from "prop-types";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import { Typography } from "@mui/material";
+import { hoursMarks } from "../../constants/constants";
+
+const currentHour = new Date().getHours();
 
 const AirbnbSlider = styled(Slider)(({ theme }) => ({
   color: "##3a8589",
@@ -69,121 +72,54 @@ AirbnbThumbComponent.propTypes = {
   children: PropTypes.node,
 };
 
-const hoursMarks = [
-  {
-    value: 0,
-    label: "12pm",
-  },
-  {
-    value: 1,
-    label: "1am",
-  },
-  {
-    value: 2,
-    label: "2am",
-  },
-  {
-    value: 3,
-    label: "3am",
-  },
-  {
-    value: 4,
-    label: "4am",
-  },
-  {
-    value: 5,
-    label: "5am",
-  },
-  {
-    value: 6,
-    label: "6am",
-  },
-  {
-    value: 7,
-    label: "7am",
-  },
-  {
-    value: 8,
-    label: "8am",
-  },
-  {
-    value: 9,
-    label: "9am",
-  },
-  {
-    value: 10,
-    label: "10am",
-  },
-  {
-    value: 11,
-    label: "11am",
-  },
-  {
-    value: 12,
-    label: "12am",
-  },
-  {
-    value: 13,
-    label: "1pm",
-  },
-  {
-    value: 14,
-    label: "2pm",
-  },
-  {
-    value: 15,
-    label: "3pm",
-  },
-  {
-    value: 16,
-    label: "4am",
-  },
-  {
-    value: 17,
-    label: "5am",
-  },
-  {
-    value: 18,
-    label: "6pm",
-  },
-  {
-    value: 19,
-    label: "7pm",
-  },
-  {
-    value: 20,
-    label: "8pm",
-  },
-  {
-    value: 21,
-    label: "9am",
-  },
-  {
-    value: 22,
-    label: "10pm",
-  },
-  {
-    value: 23,
-    label: "11pm",
-  },
-];
-
 function TimelineSliderComponent() {
   const { appStore } = useStore();
+
+  useEffect(() => {
+    hoursMarks.map((el) => console.log(el));
+  }, []);
 
   const handleChange = (event, newValue) => {
     appStore.setHoursRange(newValue);
   };
 
   const numFormatter = (num) => {
-    if (num === 0) return "12 pm";
+    // console.log(num);
+    // 0 - 12 = 12pm - 12am
+    // 13 - 24 = 1pm - 12pm
+    // 25 - 36 = 1 am - 12am
+    // 37 - 48 = 1 pm - 12pm
+    let text = "";
+    if (num % 1 !== 0) {
+      if (Math.floor(num) % 12 === 0) num = 0.5;
+    } else {
+      if (num % 12 === 0) num = 0;
+    }
 
-    if (num < 13 && num % 1 !== 0)
-      return num.toString().split(".")[0] + ":30 am";
-    else if (num < 13) return num + " am";
-    else if (num % 1 !== 0)
-      return (num - 12).toString().split(".")[0] + ":30 pm";
-    else return num - 12 + " pm";
+    if (num % 1 !== 0) {
+      // :30
+      if (num < 13) {
+        text = num.toString().split(".")[0] + ":30 am";
+      } else if (num > 12 && num < 25) {
+        text = (num - 12).toString().split(".")[0] + ":30 pm";
+      } else if (num > 24 && num < 37) {
+        text = (num - 24).toString().split(".")[0] + ":30 am";
+      } else if (num > 36 && num < 49) {
+        text = (num - 24 - 12).toString().split(".")[0] + ":30 pm";
+      }
+    } else {
+      // :00
+      if (num < 13) {
+        text = num.toString() + " am";
+      } else if (num > 12 && num < 25) {
+        text = (num - 12).toString() + " pm";
+      } else if (num > 24 && num < 37) {
+        text = (num - 24).toString() + " am";
+      } else if (num > 36 && num < 49) {
+        text = (num - 24 - 12).toString() + " pm";
+      }
+    }
+    return text;
   };
 
   return (
@@ -197,8 +133,8 @@ function TimelineSliderComponent() {
             isRtl={true}
             marks={hoursMarks}
             valueLabelFormat={numFormatter}
-            min={0}
-            max={23}
+            min={currentHour}
+            max={currentHour + 23}
             step={0.5}
             onChange={handleChange}
           />

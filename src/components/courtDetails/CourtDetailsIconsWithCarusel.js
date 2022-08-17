@@ -4,7 +4,6 @@ import { useStore } from "../../stores/store";
 import { Icon } from "@iconify/react";
 import Grid from "@mui/material/Grid";
 import Carousel from "react-material-ui-carousel";
-import { Box } from "@mui/system";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -72,6 +71,7 @@ function CourtDetailsIconsWithCarusel() {
         direction="column"
         justifyContent="center"
         alignItems="center"
+        item
         xs={7}
       >
         <Grid
