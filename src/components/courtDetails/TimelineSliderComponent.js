@@ -12,7 +12,9 @@ import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import { Typography } from "@mui/material";
 
 const AirbnbSlider = styled(Slider)(({ theme }) => ({
-  //   color: "#3a8589",
+  color: "##3a8589",
+  background:
+    "linear-gradient(90deg, rgba(223,10,47,1) 0%, rgba(95,9,121,1) 50%, rgba(0,212,255,1) 100%)",
   height: 3,
   //   padding: "13px 0",
   "& .MuiSlider-thumb": {
@@ -33,20 +35,21 @@ const AirbnbSlider = styled(Slider)(({ theme }) => ({
       marginRight: 1,
     },
     "&.first-thumb .airbnb-bar": {
-      backgroundColor: "red",
-      color: "red",
+      // backgroundColor: "red",
+      // color: "red",
     },
     "&.second-thumb .airbnb-bar": {
-      backgroundColor: "currentColor",
+      // backgroundColor: "currentColor",
     },
   },
   "& .MuiSlider-track": {
     height: 3,
+    backgroundColor: theme.palette.primary.main,
   },
   "& .MuiSlider-rail": {
-    color: theme.palette.mode === "dark" ? "#bfbfbf" : "#d8d8d8",
+    color: theme.palette.mode === "dark" ? "##3a8589" : "#3a8589",
     opacity: theme.palette.mode === "dark" ? undefined : 1,
-    height: 3,
+    height: 0,
   },
 }));
 
@@ -191,6 +194,7 @@ function TimelineSliderComponent() {
             getAriaLabel={() => "Hour range"}
             components={{ Thumb: AirbnbThumbComponent }}
             value={appStore.hoursRange}
+            isRtl={true}
             marks={hoursMarks}
             valueLabelFormat={numFormatter}
             min={0}
