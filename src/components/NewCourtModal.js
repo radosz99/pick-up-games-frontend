@@ -66,17 +66,17 @@ function NewCourtModal() {
           <Grid
             container
             direction="row"
-            justifyContent="space-between"
+            justifyContent="flex-start"
             alignItems="flex-start"
             sx={{ mt: 2 }}
           >
-            <Grid item>
+            <Grid item xs={2} sx={{ mr: 5 }}>
               <TextField label="Court name" />
             </Grid>
-            <Grid item>
+            <Grid item xs={2} sx={{ mr: 5 }}>
               <TextField label="City" />
             </Grid>
-            <Grid item>
+            <Grid item xs={2} sx={{ mr: 5 }}>
               <TextField label="Street" />
             </Grid>
           </Grid>
