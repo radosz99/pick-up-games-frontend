@@ -4,6 +4,11 @@ import { useStore } from "../../stores/store";
 import { Icon } from "@iconify/react";
 import Grid from "@mui/material/Grid";
 import Carousel from "react-material-ui-carousel";
+import { Box } from "@mui/system";
+import Select from "@mui/material/Select";
+import InputLabel from "@mui/material/InputLabel";
+import MenuItem from "@mui/material/MenuItem";
+import { useState } from "react";
 
 var items = [
   {
@@ -16,12 +21,34 @@ var items = [
   },
 ];
 
+var days = [
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+  "Sunday",
+  "Monday",
+  "Tuesday",
+  "Wednesday",
+  "Thursday",
+  "Friday",
+  "Saturday",
+];
+
 function Item(props) {
   return <img height={200} alt="court" src={props.item.imgUrl} />;
 }
 
 function CourtDetailsIconsWithCarusel() {
   const { appStore } = useStore();
+  var now = new Date();
+
+  const handleChange = (event) => {
+    appStore.setSelectedDay(event.target.value);
+  };
   return (
     <Grid
       container
@@ -39,82 +66,108 @@ function CourtDetailsIconsWithCarusel() {
           ))}
         </Carousel>
       </Grid>
+
       <Grid
-        item
         container
-        direction="row"
+        direction="column"
         justifyContent="center"
         alignItems="center"
         xs={7}
       >
         <Grid
           item
-          xs={3}
-          sx={{
-            display: "flex",
-            alignItems: "center",
-          }}
+          container
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
         >
-          <Icon icon="icon-park:court" rotate="90deg" height={60} />
           <Grid
-            container
-            direction="column"
-            justifyContent="center"
-            alignItems="center"
+            item
+            xs={3}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+            }}
           >
-            <Grid item>
-              <Typography variant="p">Number of courts</Typography>
+            <Icon icon="icon-park:court" rotate="90deg" height={60} />
+            <Grid
+              container
+              direction="column"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Grid item>
+                <Typography variant="p">Number of courts</Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="h3">1</Typography>
+              </Grid>
             </Grid>
-            <Grid item>
-              <Typography variant="h3">1</Typography>
+          </Grid>
+          <Grid
+            item
+            xs={3}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <Icon icon="mdi:basketball-hoop-outline" height={60} />
+            <Grid
+              container
+              direction="column"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Grid item>
+                <Typography variant="p">Number of hoops</Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="h3">1</Typography>
+              </Grid>
+            </Grid>
+          </Grid>
+          <Grid
+            item
+            xs={3}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <Icon icon="material-symbols:table-lamp" height={60} />
+            <Grid
+              container
+              direction="column"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <Grid item>
+                <Typography variant="p">Lightning</Typography>
+              </Grid>
+              <Grid item>
+                <Typography variant="h3">n/a</Typography>
+              </Grid>
             </Grid>
           </Grid>
         </Grid>
-        <Grid
-          item
-          xs={3}
-          sx={{
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          <Icon icon="mdi:basketball-hoop-outline" height={60} />
-          <Grid
-            container
-            direction="column"
-            justifyContent="center"
-            alignItems="center"
+        <Grid item sx={{ mt: 3 }}>
+          <InputLabel id="day-select-label">Day</InputLabel>
+          <Select
+            labelId="day-select-label"
+            id="day-select"
+            value={appStore.selectedDay}
+            label="Day"
+            onChange={handleChange}
           >
-            <Grid item>
-              <Typography variant="p">Number of hoops</Typography>
-            </Grid>
-            <Grid item>
-              <Typography variant="h3">1</Typography>
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid
-          item
-          xs={3}
-          sx={{
-            display: "flex",
-            alignItems: "center",
-          }}
-        >
-          <Icon icon="material-symbols:table-lamp" height={60} />
-          <Grid
-            container
-            direction="column"
-            justifyContent="center"
-            alignItems="center"
-          >
-            <Grid item>
-              <Typography variant="p">Lightning</Typography>
-            </Grid>
-            <Grid item>
-              <Typography variant="h3">n/a</Typography>
-            </Grid>
-          </Grid>
+            <MenuItem value={0}>{days[now.getDay()]}</MenuItem>
+            <MenuItem value={1}>{days[now.getDay() + 1]}</MenuItem>
+            <MenuItem value={2}>{days[now.getDay() + 2]}</MenuItem>
+            <MenuItem value={3}>{days[now.getDay() + 3]}</MenuItem>
+            <MenuItem value={4}>{days[now.getDay() + 4]}</MenuItem>
+            <MenuItem value={5}>{days[now.getDay() + 5]}</MenuItem>
+            <MenuItem value={6}>{days[now.getDay() + 6]}</MenuItem>
+          </Select>
         </Grid>
       </Grid>
     </Grid>

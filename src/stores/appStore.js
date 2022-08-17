@@ -6,6 +6,7 @@ export default class AppStore {
   courtsMarkers = [];
   hoursRange = [14, 18];
   sateliteView = false;
+  selectedDay = 0; // 0 - today, 1 - tommorow, and so on...
 
   addCourtFlag = false;
   addCourtModalOpen = false;
@@ -19,6 +20,12 @@ export default class AppStore {
   setCoordinates = (newCoordinates) => {
     runInAction(() => {
       this.coordinates = newCoordinates;
+    });
+  };
+
+  setSelectedDay = (newselectedDay) => {
+    runInAction(() => {
+      this.selectedDay = newselectedDay;
     });
   };
 
