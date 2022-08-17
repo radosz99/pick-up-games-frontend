@@ -117,87 +117,97 @@ function CourtDetailsModal() {
             </Typography>
           </Grid>
         </Grid>
-        <Carousel
-          sx={{ textAlign: "center", mt: 5 }}
-          navButtonsAlwaysVisible={true}
-        >
-          {items.map((item, i) => (
-            <Item key={i} item={item} />
-          ))}
-        </Carousel>
         <Grid
           container
           direction="row"
-          justifyContent="center"
+          justifyContent="space-between"
           alignItems="center"
-          sx={{ mt: 4 }}
         >
-          <Grid
-            item
-            xs={3}
-            sx={{
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <Icon icon="icon-park:court" rotate="90deg" height={60} />
-            <Grid
-              container
-              direction="column"
-              justifyContent="center"
-              alignItems="center"
+          <Grid item xs={2}>
+            <Carousel
+              sx={{ textAlign: "center", mt: 5, width: "30vw" }}
+              navButtonsAlwaysVisible={true}
             >
-              <Grid item>
-                <Typography variant="p">Number of courts</Typography>
-              </Grid>
-              <Grid item>
-                <Typography variant="h3">1</Typography>
-              </Grid>
-            </Grid>
+              {items.map((item, i) => (
+                <Item key={i} item={item} />
+              ))}
+            </Carousel>
           </Grid>
           <Grid
             item
-            xs={3}
-            sx={{
-              display: "flex",
-              alignItems: "center",
-            }}
+            container
+            direction="row"
+            justifyContent="center"
+            alignItems="center"
+            xs={7}
           >
-            <Icon icon="mdi:basketball-hoop-outline" height={60} />
             <Grid
-              container
-              direction="column"
-              justifyContent="center"
-              alignItems="center"
+              item
+              xs={3}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+              }}
             >
-              <Grid item>
-                <Typography variant="p">Number of hoops</Typography>
-              </Grid>
-              <Grid item>
-                <Typography variant="h3">1</Typography>
+              <Icon icon="icon-park:court" rotate="90deg" height={60} />
+              <Grid
+                container
+                direction="column"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Grid item>
+                  <Typography variant="p">Number of courts</Typography>
+                </Grid>
+                <Grid item>
+                  <Typography variant="h3">1</Typography>
+                </Grid>
               </Grid>
             </Grid>
-          </Grid>
-          <Grid
-            item
-            xs={3}
-            sx={{
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <Icon icon="material-symbols:table-lamp" height={60} />
             <Grid
-              container
-              direction="column"
-              justifyContent="center"
-              alignItems="center"
+              item
+              xs={3}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+              }}
             >
-              <Grid item>
-                <Typography variant="p">Lightning</Typography>
+              <Icon icon="mdi:basketball-hoop-outline" height={60} />
+              <Grid
+                container
+                direction="column"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Grid item>
+                  <Typography variant="p">Number of hoops</Typography>
+                </Grid>
+                <Grid item>
+                  <Typography variant="h3">1</Typography>
+                </Grid>
               </Grid>
-              <Grid item>
-                <Typography variant="h3">n/a</Typography>
+            </Grid>
+            <Grid
+              item
+              xs={3}
+              sx={{
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <Icon icon="material-symbols:table-lamp" height={60} />
+              <Grid
+                container
+                direction="column"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Grid item>
+                  <Typography variant="p">Lightning</Typography>
+                </Grid>
+                <Grid item>
+                  <Typography variant="h3">n/a</Typography>
+                </Grid>
               </Grid>
             </Grid>
           </Grid>
