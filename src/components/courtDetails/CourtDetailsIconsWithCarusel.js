@@ -7,7 +7,6 @@ import Carousel from "react-material-ui-carousel";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import { useState } from "react";
 
 var items = [
   {
@@ -47,6 +46,9 @@ function CourtDetailsIconsWithCarusel() {
 
   const handleChange = (event) => {
     appStore.setSelectedDay(event.target.value);
+    if (event.target.value === 0)
+      appStore.setCurrentHour(new Date().getHours());
+    else appStore.setCurrentHour(5);
   };
   return (
     <Grid

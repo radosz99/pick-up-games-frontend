@@ -5,6 +5,7 @@ export default class AppStore {
   newCourtCoordinates = []; // Wrocław coordinates
   courtsMarkers = [];
   hoursRange = [new Date().getHours() + 10, new Date().getHours() + 14];
+  currentHour = new Date().getHours();
   sateliteView = false;
   selectedDay = 0; // 0 - today, 1 - tommorow, and so on...
   addCourtFlag = false;
@@ -19,6 +20,12 @@ export default class AppStore {
   setCoordinates = (newCoordinates) => {
     runInAction(() => {
       this.coordinates = newCoordinates;
+    });
+  };
+
+  setCurrentHour = (newCurrentHour) => {
+    runInAction(() => {
+      this.currentHour = newCurrentHour;
     });
   };
 

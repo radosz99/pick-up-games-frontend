@@ -12,8 +12,6 @@ import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import { Typography } from "@mui/material";
 import { hoursMarks } from "../../constants/constants";
 
-const currentHour = new Date().getHours();
-
 const AirbnbSlider = styled(Slider)(({ theme }) => ({
   color: "##3a8589",
   background:
@@ -76,8 +74,8 @@ function TimelineSliderComponent() {
   const { appStore } = useStore();
 
   useEffect(() => {
-    hoursMarks.map((el) => console.log(el));
-  }, []);
+    appStore.setCurrentHour(new Date().getHours());
+  }, [appStore]);
 
   const handleChange = (event, newValue) => {
     appStore.setHoursRange(newValue);
@@ -133,8 +131,8 @@ function TimelineSliderComponent() {
             isRtl={true}
             marks={hoursMarks}
             valueLabelFormat={numFormatter}
-            min={currentHour}
-            max={currentHour + 23}
+            min={appStore.currentHour}
+            max={appStore.currentHour + 23}
             step={0.5}
             onChange={handleChange}
           />
