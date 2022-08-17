@@ -17,6 +17,7 @@ import { useStore } from "../stores/store";
 import { observer } from "mobx-react-lite";
 import { useTheme } from "@mui/material/styles";
 import { useRef, useEffect } from "react";
+import Switch from "@mui/material/Switch";
 
 function Map() {
   const { appStore } = useStore();
@@ -64,6 +65,20 @@ function Map() {
       />
       <ZoomControl position={"bottomleft"} />
       <SearchField />
+      <Control>
+        <FormControlLabel
+          control={
+            <Switch
+              color="warning"
+              checked={appStore.sateliteView}
+              onChange={(e) => {
+                appStore.setSateliteView(e.target.checked);
+              }}
+            />
+          }
+          label={<Typography variant="h3">Satellite</Typography>}
+        />
+      </Control>
       <Control prepend position="topleft">
         <Button
           variant="contained"
