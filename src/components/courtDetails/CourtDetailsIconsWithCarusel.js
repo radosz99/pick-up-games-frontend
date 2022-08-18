@@ -4,9 +4,6 @@ import { useStore } from "../../stores/store";
 import { Icon } from "@iconify/react";
 import Grid from "@mui/material/Grid";
 import Carousel from "react-material-ui-carousel";
-import Select from "@mui/material/Select";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
@@ -22,23 +19,6 @@ var items = [
     imgUrl:
       "https://images.unsplash.com/photo-1600534220378-df36338afc40?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=627&q=80",
   },
-];
-
-var days = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
 ];
 
 function Item(props) {
@@ -164,7 +144,7 @@ function CourtDetailsIconsWithCarusel() {
           <LocalizationProvider dateAdapter={AdapterDateFns}>
             <DesktopDatePicker
               label="Date"
-              disablePast="true"
+              disablePast={true}
               inputFormat="dd/MM/yyyy"
               minDate={new Date().setDate(new Date().getDate() - 7)}
               maxDate={new Date().setDate(new Date().getDate() + 7)}
