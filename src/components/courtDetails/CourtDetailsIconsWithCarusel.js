@@ -7,6 +7,11 @@ import Carousel from "react-material-ui-carousel";
 import Select from "@mui/material/Select";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
+import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker";
+import TextField from "@mui/material/TextField";
+import { useState } from "react";
 
 var items = [
   {
@@ -42,14 +47,16 @@ function Item(props) {
 
 function CourtDetailsIconsWithCarusel() {
   const { appStore } = useStore();
-  var now = new Date();
 
-  const handleChange = (event) => {
-    appStore.setSelectedDay(event.target.value);
-    if (event.target.value === 0)
-      appStore.setCurrentHour(new Date().getHours());
+  const [value, setValue] = useState(new Date().getDate());
+
+  const handleDateChange = (newValue) => {
+    setValue(newValue);
+    let isToday = new Date(newValue).getDay() === new Date().getDay();
+    if (isToday) appStore.setCurrentHour(new Date().getHours());
     else appStore.setCurrentHour(5);
   };
+
   return (
     <Grid
       container
@@ -153,23 +160,19 @@ function CourtDetailsIconsWithCarusel() {
             </Grid>
           </Grid>
         </Grid>
-        <Grid item sx={{ mt: 3 }}>
-          <InputLabel id="day-select-label">Day</InputLabel>
-          <Select
-            labelId="day-select-label"
-            id="day-select"
-            value={appStore.selectedDay}
-            label="Day"
-            onChange={handleChange}
-          >
-            <MenuItem value={0}>{days[now.getDay()]}</MenuItem>
-            <MenuItem value={1}>{days[now.getDay() + 1]}</MenuItem>
-            <MenuItem value={2}>{days[now.getDay() + 2]}</MenuItem>
-            <MenuItem value={3}>{days[now.getDay() + 3]}</MenuItem>
-            <MenuItem value={4}>{days[now.getDay() + 4]}</MenuItem>
-            <MenuItem value={5}>{days[now.getDay() + 5]}</MenuItem>
-            <MenuItem value={6}>{days[now.getDay() + 6]}</MenuItem>
-          </Select>
+        <Grid item sx={{ mt: 6 }}>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <DesktopDatePicker
+              label="Date"
+              disablePast="true"
+              inputFormat="dd/MM/yyyy"
+              minDate={new Date().setDate(new Date().getDate() - 7)}
+              maxDate={new Date().setDate(new Date().getDate() + 7)}
+              value={value}
+              onChange={handleDateChange}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </LocalizationProvider>
         </Grid>
       </Grid>
     </Grid>
