@@ -14,9 +14,32 @@ import { hoursMarks } from "../../constants/constants";
 import { useState } from "react";
 
 const CustomSlider = styled(Slider)(({ theme }) => ({
-  color: "##3a8589",
-  background:
-    "linear-gradient(90deg, rgba(223,10,47,1) 0%, rgba(95,9,121,1) 50%, rgba(0,212,255,1) 100%)",
+  // color: "#3a8589",
+  background: `linear-gradient(90deg,
+    rgb(255,0,0) ${4.34783}%,
+    rgb(255,0,0) ${4.34783 * 2}%,
+    rgb(150,0,0) ${4.34783 * 3}%,
+    rgb(125,0,0) ${4.34783 * 4}%,
+    rgb(100,0,0) ${4.34783 * 5}%,
+    rgb(255,0,0) ${4.34783 * 6}%,
+    rgb(255,0,0) ${4.34783 * 7}%,
+    rgb(255,0,0) ${4.34783 * 8}%,
+    rgb(255,0,0) ${4.34783 * 9}%,
+    rgb(255,0,0) ${4.34783 * 10}%,
+    rgb(255,0,0) ${4.34783 * 11}%,
+    rgb(255,0,0) ${4.34783 * 12}%,
+    rgb(255,0,0) ${4.34783 * 13}%,
+    rgb(255,0,0) ${4.34783 * 14}%,
+    rgb(255,0,0) ${4.34783 * 15}%,
+    rgb(255,0,0) ${4.34783 * 16}%,
+    rgb(255,0,0) ${4.34783 * 17}%,
+    rgb(255,0,0) ${4.34783 * 18}%,
+    rgb(255,0,0) ${4.34783 * 19}%,
+    rgb(255,0,0) ${4.34783 * 20}%,
+    rgb(255,0,0) ${4.34783 * 21}%,
+    rgb(100,250,50) ${4.34783 * 22}%,
+    rgb(255,0,0) ${4.34783 * 23}%)
+   `,
   height: 3,
   //   padding: "13px 0",
   "& .MuiSlider-thumb": {
@@ -54,8 +77,10 @@ const CustomSlider = styled(Slider)(({ theme }) => ({
     height: 0,
   },
   "& .MuiSlider-mark": {
-    height: 10,
-    width: 10,
+    height: 12,
+    width: 12,
+    border: "1px solid",
+    borderRadius: "50px",
   },
   "& .MuiSlider-mark:hover": {
     backgroundColor: theme.palette.secondary.main,
