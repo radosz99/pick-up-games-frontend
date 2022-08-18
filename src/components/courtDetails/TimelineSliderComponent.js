@@ -1,7 +1,7 @@
 import { observer } from "mobx-react-lite";
 import { useStore } from "../../stores/store";
 import Box from "@mui/material/Box";
-import Slider, { SliderThumb } from "@mui/material/Slider";
+import Slider, { SliderThumb, SliderMark } from "@mui/material/Slider";
 import { useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import "../../styles.css";
@@ -11,6 +11,7 @@ import PropTypes from "prop-types";
 import ArrowDownwardIcon from "@mui/icons-material/ArrowDownward";
 import { Typography } from "@mui/material";
 import { hoursMarks } from "../../constants/constants";
+import { useState } from "react";
 
 const AirbnbSlider = styled(Slider)(({ theme }) => ({
   color: "##3a8589",
@@ -48,13 +49,25 @@ const AirbnbSlider = styled(Slider)(({ theme }) => ({
     backgroundColor: theme.palette.primary.main,
   },
   "& .MuiSlider-rail": {
-    color: theme.palette.mode === "dark" ? "##3a8589" : "#3a8589",
-    opacity: theme.palette.mode === "dark" ? undefined : 1,
+    // color: theme.palette.mode === "dark" ? "##3a8589" : "#3a8589",
+    // opacity: theme.palette.mode === "dark" ? undefined : 1,
     height: 0,
   },
+  "& .MuiSlider-mark": {
+    height: 6,
+    width: 6,
+  },
+  "& .MuiSlider-mark.even": {
+    height: 16,
+    // width: "4.34783%",
+  },
+  // "& .MuiSlider-mark:hover": {
+  //   height: 15,
+  //   width: 15,
+  // },
 }));
 
-function AirbnbThumbComponent(props) {
+function CustomThumbComponent(props) {
   const { children, className, ...other } = props;
   const extraClassName =
     other["data-index"] === 0 ? "first-thumb" : "second-thumb";
@@ -66,7 +79,39 @@ function AirbnbThumbComponent(props) {
   );
 }
 
-AirbnbThumbComponent.propTypes = {
+function CustomMarkComponent(props) {
+  const { children, className, ...other } = props;
+  const [visible, setVisible] = useState(false);
+
+  return (
+    <SliderMark
+      onMouseEnter={() => setVisible(true)}
+      onMouseLeave={() => setVisible(false)}
+      {...other}
+      className={className}
+    >
+      {children}
+      {visible && (
+        <span
+          style={{
+            position: "absolute",
+            top: -50,
+            left: -40,
+            width: 100,
+            color: "white",
+            backgroundColor: "black",
+            borderRadius: 6,
+            padding: "5 0",
+          }}
+        >
+          Players 2
+        </span>
+      )}
+    </SliderMark>
+  );
+}
+
+CustomThumbComponent.propTypes = {
   children: PropTypes.node,
 };
 
@@ -126,7 +171,10 @@ function TimelineSliderComponent() {
         <Box sx={{ width: "75vw", textAlign: "center", mt: 5 }}>
           <AirbnbSlider
             getAriaLabel={() => "Hour range"}
-            components={{ Thumb: AirbnbThumbComponent }}
+            components={{
+              Thumb: CustomThumbComponent,
+              Mark: CustomMarkComponent,
+            }}
             value={appStore.hoursRange}
             isRtl={true}
             marks={hoursMarks}
