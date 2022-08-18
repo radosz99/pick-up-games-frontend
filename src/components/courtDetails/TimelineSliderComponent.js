@@ -13,7 +13,7 @@ import { Typography } from "@mui/material";
 import { hoursMarks } from "../../constants/constants";
 import { useState } from "react";
 
-const AirbnbSlider = styled(Slider)(({ theme }) => ({
+const CustomSlider = styled(Slider)(({ theme }) => ({
   color: "##3a8589",
   background:
     "linear-gradient(90deg, rgba(223,10,47,1) 0%, rgba(95,9,121,1) 50%, rgba(0,212,255,1) 100%)",
@@ -54,17 +54,13 @@ const AirbnbSlider = styled(Slider)(({ theme }) => ({
     height: 0,
   },
   "& .MuiSlider-mark": {
-    height: 6,
-    width: 6,
+    height: 10,
+    width: 10,
   },
-  "& .MuiSlider-mark.even": {
-    height: 16,
+  "& .MuiSlider-mark:hover": {
+    backgroundColor: theme.palette.secondary.main,
     // width: "4.34783%",
   },
-  // "& .MuiSlider-mark:hover": {
-  //   height: 15,
-  //   width: 15,
-  // },
 }));
 
 function CustomThumbComponent(props) {
@@ -169,7 +165,7 @@ function TimelineSliderComponent() {
     <Grid container direction="row" justifyContent="center" alignItems="center">
       <Grid item>
         <Box sx={{ width: "75vw", textAlign: "center", mt: 5 }}>
-          <AirbnbSlider
+          <CustomSlider
             getAriaLabel={() => "Hour range"}
             components={{
               Thumb: CustomThumbComponent,
