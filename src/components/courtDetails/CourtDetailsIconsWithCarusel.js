@@ -48,7 +48,7 @@ function Item(props) {
 function CourtDetailsIconsWithCarusel() {
   const { appStore } = useStore();
 
-  const [value, setValue] = useState(new Date().getDate());
+  const [value, setValue] = useState(new Date().getTime());
 
   const handleDateChange = (newValue) => {
     setValue(newValue);
