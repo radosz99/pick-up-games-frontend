@@ -5,9 +5,7 @@ import WeatherWidget from "../weatherWidget/WeatherWidget";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 // mock data for testing without API call
-import testData from "../weatherWidget/testData.json";
-
-const OPEN_WEATHER_MAP_KEY = "";
+import { baseUrl } from "../../constants/constants";
 
 const cities = [
   { city: "taipei", label: "🇹🇼 Taipei" },
@@ -34,48 +32,56 @@ function WeatherComponent() {
 
   const fetchWeatherAsync = async (cityId) => {
     try {
-      const response = await axios.get(
-        "https://api.openweathermap.org/data/2.5/forecast",
-        {
-          params: {
-            q: cityId,
-            lang: "zh_tw",
-            appid: OPEN_WEATHER_MAP_KEY,
-            units: "metric",
-          },
-        }
-      );
-      const transformData = await response.data.list.map((data) => ({
-        dt: data.dt,
-        temp: data.main.temp,
-        temp_min: data.main.temp_min,
-        temp_max: data.main.temp_max,
-        humidity: data.main.humidity,
-        icon: data.weather[0].icon,
-        desc: data.weather[0].description,
-        clouds: data.clouds.all,
-        wind: data.wind.speed,
-      }));
+      const response = await axios.get(`${baseUrl}/weather?lat${51}`, {
+        // params: {
+        //   q: cityId,
+        //   lang: "zh_tw",
+        //   appid: OPEN_WEATHER_MAP_KEY,
+        //   units: "metric",
+        // },
+        params: {
+          lon: 17,
+          start: Math.floor(new Date().getTime() / 1000) + 3600,
+          end: Math.floor(new Date().getTime() / 1000) + 10800,
+        },
+      });
+
+      const transformData = await response.data;
+
+      console.log(transformData);
+
+      // const transformData = await response.data.list.map((data) => ({
+      //   dt: data.dt,
+      //   temp: data.main.temp,
+      //   temp_min: data.main.temp_min,
+      //   temp_max: data.main.temp_max,
+      //   humidity: data.main.humidity,
+      //   icon: data.weather[0].icon,
+      //   desc: data.weather[0].description,
+      //   clouds: data.clouds.all,
+      //   wind: data.wind.speed,
+      // }));
       setForecast(transformData);
     } catch (err) {
-      if (OPEN_WEATHER_MAP_KEY.length === 0) {
-        // Use mock data if no key
-        const transformData = await testData.list.map((data) => ({
-          dt: data.dt,
-          temp: data.main.temp,
-          temp_min: data.main.temp_min,
-          temp_max: data.main.temp_max,
-          humidity: data.main.humidity,
-          icon: data.weather[0].icon,
-          desc: data.weather[0].description,
-          clouds: data.clouds.all,
-          wind: data.wind.speed,
-        }));
-        setForecast(transformData);
-        setError("");
-      } else {
-        setError(err.stack);
-      }
+      console.log(err);
+      // if (OPEN_WEATHER_MAP_KEY.length === 0) {
+      //   // Use mock data if no key
+      //   const transformData = await testData.list.map((data) => ({
+      //     dt: data.dt,
+      //     temp: data.main.temp,
+      //     temp_min: data.main.temp_min,
+      //     temp_max: data.main.temp_max,
+      //     humidity: data.main.humidity,
+      //     icon: data.weather[0].icon,
+      //     desc: data.weather[0].description,
+      //     clouds: data.clouds.all,
+      //     wind: data.wind.speed,
+      //   }));
+      //   setForecast(transformData);
+      //   setError("");
+      // } else {
+      //   setError(err.stack);
+      // }
     }
   };
 
