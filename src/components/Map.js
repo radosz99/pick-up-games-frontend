@@ -18,6 +18,7 @@ import { observer } from "mobx-react-lite";
 import { useTheme } from "@mui/material/styles";
 import { useRef, useEffect } from "react";
 import Switch from "@mui/material/Switch";
+import axios from "axios";
 
 function Map() {
   const { appStore } = useStore();
@@ -51,10 +52,29 @@ function Map() {
 
     useMapEvents({
       click: (e) => {
-        setPosition(e.latlng); // 👈 add marker
-        appStore.setNewCourtcoordinates(e.latlng);
-        appStore.setAddCourtFlag(false);
-        appStore.setAddCourtModalOpen(true);
+        const baseUrl = `https://nominatim.openstreetmap.org/reverse?format=jsonv2`;
+        try {
+          axios
+            .get(`${baseUrl}`, {
+              params: {
+                lat: e.latlng.lat,
+                lon: e.latlng.lng,
+                zoom: 18,
+                addressdetails: 1,
+              },
+            })
+            .then((response) => {
+              let city = response.data.address.city;
+              let road = response.data.address.road;
+              appStore.setNewCourtShortInfo({ city: city, road: road });
+              setPosition(e.latlng); // 👈 add marker
+              appStore.setNewCourtcoordinates(e.latlng);
+              appStore.setAddCourtFlag(false);
+              appStore.setAddCourtModalOpen(true);
+            });
+        } catch (error) {
+          console.log(error);
+        }
       },
     });
 

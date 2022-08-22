@@ -3,6 +3,7 @@ import { makeAutoObservable, runInAction } from "mobx";
 export default class AppStore {
   coordinates = [];
   newCourtCoordinates = []; // Wrocław coordinates
+  newCourtShortInfo = { road: undefined, city: undefined };
   courtsMarkers = [];
   hoursRange = [new Date().getHours() + 10, new Date().getHours() + 14];
   currentTimeInUnixSec = Math.floor(new Date().getTime() / 1000); // its set inside WeatherComponent
@@ -20,6 +21,12 @@ export default class AppStore {
   setCoordinates = (newCoordinates) => {
     runInAction(() => {
       this.coordinates = newCoordinates;
+    });
+  };
+
+  setNewCourtShortInfo = (newNewCourtShortInfo) => {
+    runInAction(() => {
+      this.newCourtShortInfo = newNewCourtShortInfo;
     });
   };
 

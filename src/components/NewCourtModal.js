@@ -9,9 +9,10 @@ import { observer } from "mobx-react-lite";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import FormControl from "@mui/material/FormControl";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
+import { toJS } from "mobx";
 
 const style = {
   position: "absolute",
@@ -74,10 +75,13 @@ function NewCourtModal() {
               <TextField label="Court name" />
             </Grid>
             <Grid item xs={2} sx={{ mr: 5 }}>
-              <TextField label="City" />
+              <TextField label="City" value={appStore.newCourtShortInfo.city} />
             </Grid>
             <Grid item xs={2} sx={{ mr: 5 }}>
-              <TextField label="Street" />
+              <TextField
+                label="Street"
+                value={appStore.newCourtShortInfo.road}
+              />
             </Grid>
           </Grid>
         </Box>
