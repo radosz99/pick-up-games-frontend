@@ -204,6 +204,12 @@ export const hoursMarks = [
   },
 ];
 
+export const hoursMarksConverter = (input) => {
+  if (input < 24) return input;
+  if (input < 48) return input - 24;
+  throw new Error(`Unexpected input" ${input}`);
+};
+
 export const days = [
   "Sunday",
   "Monday",

@@ -6,16 +6,31 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { baseUrl } from "../../constants/constants";
 import { hour } from "../../constants/constants";
+import { hoursMarks, hoursMarksConverter } from "../../constants/constants";
 
 function WeatherComponent() {
   const { appStore } = useStore();
 
-  const currentHourInUnixSec = Math.floor(
-    new Date().setMinutes(0, 0, 0) / 1000
-  );
-
   const [forecast, setForecast] = useState([]);
   const [step_in_hours, setStep_in_hours] = useState(0);
+
+  let start_range = appStore.hoursRange[0];
+  let end_range = appStore.hoursRange[1];
+  let selectedHourInUnixSec = 0;
+
+  if (start_range < 25) {
+    selectedHourInUnixSec = Math.floor(
+      new Date().setHours(start_range, 0, 0, 0) / 1000
+    );
+  } else {
+    let date = new Date(new Date().setDate(new Date().getDate() + 1)).setHours(
+      hoursMarksConverter(start_range),
+      0,
+      0,
+      0
+    );
+    selectedHourInUnixSec = Math.floor(date / 1000);
+  }
 
   useEffect(() => {
     try {
@@ -23,14 +38,13 @@ function WeatherComponent() {
         .get(`${baseUrl}/weather?lat${51}`, {
           params: {
             lon: 17,
-            start: currentHourInUnixSec,
-            end: currentHourInUnixSec + 8 * hour,
+            start: selectedHourInUnixSec,
+            end: selectedHourInUnixSec + 8 * hour,
           },
         })
         .then((response) => {
+          // console.log(response.data);
           const transformData = [];
-          const start = response.data.start;
-          const end = response.data.end;
 
           setStep_in_hours(response.data.step_in_hours);
 
@@ -58,7 +72,7 @@ function WeatherComponent() {
     } catch (err) {
       console.log(err);
     }
-  }, [currentHourInUnixSec]); // notice the empty array here
+  }, [selectedHourInUnixSec]); // notice the empty array here
 
   return (
     <Grid item xs={5}>

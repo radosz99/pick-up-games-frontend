@@ -17,18 +17,20 @@ const WeatherWidget = ({ config, forecast }) => {
         firstMomentOfDay = moment.unix(item.dt);
         forecast[index].moment = firstMomentOfDay;
         forecastOfDay.push(item);
-      } else {
-        const currentMoment = moment.unix(item.dt);
-        forecast[index].moment = currentMoment;
-        if (firstMomentOfDay.isSame(currentMoment, "day")) {
-          forecastOfDay.push(item);
-        } else {
-          forecastOfDayList.push(forecastOfDay);
-          forecastOfDay = [];
-          forecastOfDay.push(item);
-          firstMomentOfDay = currentMoment;
-        }
+        forecastOfDayList.push(forecastOfDay);
       }
+      // else {
+      //   const currentMoment = moment.unix(item.dt);
+      //   forecast[index].moment = currentMoment;
+      //   if (firstMomentOfDay.isSame(currentMoment, "day")) {
+      //     forecastOfDay.push(item);
+      //   } else {
+      //     forecastOfDayList.push(forecastOfDay);
+      //     forecastOfDay = [];
+      //     forecastOfDay.push(item);
+      //     firstMomentOfDay = currentMoment;
+      //   }
+      // }
     });
     /* eslint-enable no-param-reassign */
     const forecastList = forecastOfDayList;

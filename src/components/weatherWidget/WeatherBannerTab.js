@@ -72,17 +72,20 @@ const WeatherBannerTab = ({
           {forecastOfDay.map((item) => renderTab(item))}
         </TabList>
       </Tabs>
-      <TabContainer>
+      {/* <TabContainer>
         <Slider
           min={0}
           max={forecastOfDay.length - 1}
           step={step}
           value={tabIndex}
           handle={handle}
-          onChange={(e) => setTabIndex(e)}
+          onChange={(e) => {
+            console.log("first")
+            setTabIndex(e);
+          }}
           marks={marks}
         />
-      </TabContainer>
+      </TabContainer> */}
     </Container>
   );
 };
