@@ -17,13 +17,16 @@ function WeatherComponent() {
   let start_range = appStore.hoursRange[0];
   let end_range = appStore.hoursRange[1];
   let selectedHourInUnixSec = 0;
+  let start_date = new Date(
+    new Date().setDate(new Date().getDate() + appStore.selectedDay)
+  );
 
   if (start_range < 25) {
     selectedHourInUnixSec = Math.floor(
-      new Date().setHours(start_range, 0, 0, 0) / 1000
+      start_date.setHours(start_range, 0, 0, 0) / 1000
     );
   } else {
-    let date = new Date(new Date().setDate(new Date().getDate() + 1)).setHours(
+    let date = new Date(start_date.setDate(start_date.getDate() + 1)).setHours(
       hoursMarksConverter(start_range),
       0,
       0,

@@ -32,6 +32,8 @@ function CourtDetailsIconsWithCarusel() {
 
   const handleDateChange = (newValue) => {
     setValue(newValue);
+    let selectedDay = new Date(newValue).getDate() - new Date().getDate();
+    appStore.setSelectedDay(selectedDay);
     let isToday = new Date(newValue).getDay() === new Date().getDay();
     if (isToday) appStore.setCurrentHour(new Date().getHours());
     else appStore.setCurrentHour(5);
