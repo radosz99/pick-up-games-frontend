@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
 export default class AppStore {
-  coordinates = [51.109175, 17.032684]; // Wrocław coordinates
+  coordinates = [];
   newCourtCoordinates = []; // Wrocław coordinates
   courtsMarkers = [];
   hoursRange = [new Date().getHours() + 10, new Date().getHours() + 14];

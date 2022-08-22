@@ -29,10 +29,22 @@ function Map() {
     "https://tile.thunderforest.com/atlas/{z}/{x}/{y}.png?apikey=4a73bc6859bf49d089f11fef85911536";
 
   useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      function (position) {
+        appStore.setCoordinates([
+          position.coords.latitude,
+          position.coords.longitude,
+        ]);
+      },
+      function (error) {
+        appStore.setCoordinates([51.109175, 17.032684]); // Wrocław coordinates
+      }
+    );
+
     if (ref.current) {
       ref.current.setUrl(appStore.sateliteView ? sateliteMapUrl : mapUrl);
     }
-  }, [appStore.sateliteView]);
+  }, [appStore.sateliteView, appStore]);
 
   const AddMarker = () => {
     const [position, setPosition] = useState(null);
@@ -52,99 +64,105 @@ function Map() {
   };
 
   return (
-    <MapContainer
-      center={appStore.coordinates}
-      zoom={13}
-      zoomControl={false}
-      scrollWheelZoom={true}
-    >
-      <TileLayer
-        ref={ref}
-        url={appStore.sateliteView ? sateliteMapUrl : mapUrl}
-        subdomains={["mt1", "mt2", "mt3"]}
-      />
-      <ZoomControl position={"bottomleft"} />
-      <SearchField />
-      <Control>
-        <FormControlLabel
-          control={
-            <Switch
-              color="warning"
-              checked={appStore.sateliteView}
-              onChange={(e) => {
-                appStore.setSateliteView(e.target.checked);
+    <>
+      {appStore.coordinates.length > 0 && (
+        <MapContainer
+          center={appStore.coordinates}
+          zoom={13}
+          zoomControl={false}
+          scrollWheelZoom={true}
+        >
+          <TileLayer
+            ref={ref}
+            url={appStore.sateliteView ? sateliteMapUrl : mapUrl}
+            subdomains={["mt1", "mt2", "mt3"]}
+          />
+          <ZoomControl position={"bottomleft"} />
+          <SearchField />
+          <Control>
+            <FormControlLabel
+              control={
+                <Switch
+                  color="warning"
+                  checked={appStore.sateliteView}
+                  onChange={(e) => {
+                    appStore.setSateliteView(e.target.checked);
+                  }}
+                />
+              }
+              label={<Typography variant="h3">Satellite</Typography>}
+            />
+          </Control>
+          <Control prepend position="topleft">
+            <Button
+              variant="contained"
+              disabled={appStore.addCourtFlag}
+              size="large"
+              color="primary"
+              onClick={(e) => {
+                appStore.setSateliteView(true);
+                e.stopPropagation();
+                appStore.setAddCourtFlag(true);
+                var element =
+                  document.getElementsByClassName("leaflet-container")[0];
+                element.classList.add("cursor");
               }}
-            />
-          }
-          label={<Typography variant="h3">Satellite</Typography>}
-        />
-      </Control>
-      <Control prepend position="topleft">
-        <Button
-          variant="contained"
-          disabled={appStore.addCourtFlag}
-          size="large"
-          color="primary"
-          onClick={(e) => {
-            appStore.setSateliteView(true);
-            e.stopPropagation();
-            appStore.setAddCourtFlag(true);
-            var element =
-              document.getElementsByClassName("leaflet-container")[0];
-            element.classList.add("cursor");
-          }}
-          sx={{ mt: 5, ml: 5, fontSize: 24 }}
-        >
-          Add court
-        </Button>
-        <Box
-          sx={{
-            backgroundColor: theme.palette.secondary.main,
-            p: 1,
-            mt: 10,
-            border: 15,
-            borderColor: theme.palette.secondary.main,
-            borderRadius: 10,
-          }}
-        >
-          <Box>
-            <FormControlLabel
-              control={<Checkbox defaultChecked />}
-              label={<Typography variant="p">Outdoor</Typography>}
-            />
-            <br />
-            <FormControlLabel
-              control={<Checkbox defaultChecked />}
-              label={<Typography variant="p">Indoor</Typography>}
-            />
-          </Box>
-          <Box sx={{ mt: 2 }}>
-            <FormControlLabel
-              control={<Checkbox defaultChecked />}
-              label={<Typography variant="p">With players today</Typography>}
-            />
-            <br />
-            <FormControlLabel
-              control={<Checkbox defaultChecked />}
-              label={<Typography variant="p">With photos</Typography>}
-            />
-            <br />
-            <FormControlLabel
-              control={<Checkbox defaultChecked />}
-              label={<Typography variant="p">Highly rated</Typography>}
-            />
-          </Box>
-        </Box>
-      </Control>
-      {appStore.addCourtFlag && <AddMarker />}
-      {appStore.courtsMarkers.map((position, idx) => (
-        <Marker key={`marker-${idx}`} position={position}>
-          <Popup>
-            <span>This will be court description.</span>
-          </Popup>
-        </Marker>
-      ))}
-    </MapContainer>
+              sx={{ mt: 5, ml: 5, fontSize: 24 }}
+            >
+              Add court
+            </Button>
+            <Box
+              sx={{
+                backgroundColor: theme.palette.secondary.main,
+                p: 1,
+                mt: 10,
+                border: 15,
+                borderColor: theme.palette.secondary.main,
+                borderRadius: 10,
+              }}
+            >
+              <Box>
+                <FormControlLabel
+                  control={<Checkbox defaultChecked />}
+                  label={<Typography variant="p">Outdoor</Typography>}
+                />
+                <br />
+                <FormControlLabel
+                  control={<Checkbox defaultChecked />}
+                  label={<Typography variant="p">Indoor</Typography>}
+                />
+              </Box>
+              <Box sx={{ mt: 2 }}>
+                <FormControlLabel
+                  control={<Checkbox defaultChecked />}
+                  label={
+                    <Typography variant="p">With players today</Typography>
+                  }
+                />
+                <br />
+                <FormControlLabel
+                  control={<Checkbox defaultChecked />}
+                  label={<Typography variant="p">With photos</Typography>}
+                />
+                <br />
+                <FormControlLabel
+                  control={<Checkbox defaultChecked />}
+                  label={<Typography variant="p">Highly rated</Typography>}
+                />
+              </Box>
+            </Box>
+          </Control>
+          {appStore.addCourtFlag && <AddMarker />}
+          {appStore.courtsMarkers.map((position, idx) => (
+            <Marker key={`marker-${idx}`} position={position}>
+              <Popup>
+                <span>This will be court description.</span>
+              </Popup>
+            </Marker>
+          ))}
+        </MapContainer>
+      )}
+    </>
   );
 }
 
