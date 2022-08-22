@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from "mobx";
 
 export default class AppStore {
-  coordinates = [];
+  coordinates = [51.109175, 17.032684];
   newCourtCoordinates = []; // Wrocław coordinates
   newCourtShortInfo = { road: undefined, city: undefined };
   courtsMarkers = [];
