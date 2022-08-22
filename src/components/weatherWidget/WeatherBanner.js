@@ -19,7 +19,6 @@ const WeatherBanner = ({ forecastNow, unit, locale }) => (
       }, ${forecastNow.desc_2}`}
     </h5>
     <BannerContainer>
-      {/* TODO: ADD ICON */}
       <BannerIcon src={forecastNow.icon_url} />
       <Temperature>{Math.round(forecastNow.temp * 10) / 10}</Temperature>
       <Unit>
@@ -29,8 +28,7 @@ const WeatherBanner = ({ forecastNow, unit, locale }) => (
       <div style={{ flex: "1" }} />
       <DetailContainer>
         <InfoText>
-          Clouds:
-          <b>{forecastNow.clouds}%</b>
+          Clouds: <b>{forecastNow.clouds}%</b>
         </InfoText>
         <InfoText>
           Rain: <b>{forecastNow.rain} mm/h</b>
@@ -46,7 +44,7 @@ const WeatherBanner = ({ forecastNow, unit, locale }) => (
           </b>
         </InfoText>
         <InfoText>
-          Pop: <b>{forecastNow.pop}%</b>
+          Pop: <b>{Math.floor(forecastNow.pop, 2)}%</b>
         </InfoText>
         <InfoText>
           Uvi: <b>{forecastNow.uvi}</b>
