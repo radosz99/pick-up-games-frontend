@@ -5,7 +5,7 @@ export default class AppStore {
   newCourtCoordinates = []; // Wrocław coordinates
   courtsMarkers = [];
   hoursRange = [new Date().getHours() + 10, new Date().getHours() + 14];
-  currentHour = new Date().getHours();
+  currentTimeInUnixSec = Math.floor(new Date().getTime() / 1000); // its set inside WeatherComponent
   sateliteView = false;
   selectedDay = 0; // 0 - today, 1 - tommorow, and so on...
   addCourtFlag = false;

@@ -19,6 +19,7 @@ const WeatherBannerTab = ({
   locale,
   unit,
   onLocationClick,
+  step,
 }) => {
   const [tabIndex, setTabIndex] = useState(0);
 
@@ -75,6 +76,7 @@ const WeatherBannerTab = ({
         <Slider
           min={0}
           max={forecastOfDay.length - 1}
+          step={step}
           value={tabIndex}
           handle={handle}
           onChange={(e) => setTabIndex(e)}
@@ -88,6 +90,7 @@ const WeatherBannerTab = ({
 WeatherBannerTab.defaultProps = {
   unit: "metric",
   locale: "zh-tw",
+  step: 1,
   forecastOfDay: [],
 };
 
@@ -97,18 +100,31 @@ WeatherBannerTab.propTypes = {
     PropTypes.shape({
       dt: PropTypes.number.isRequired,
       temp: PropTypes.number.isRequired,
-      temp_min: PropTypes.number.isRequired,
-      temp_max: PropTypes.number.isRequired,
       humidity: PropTypes.number.isRequired,
-      icon: PropTypes.string.isRequired,
-      desc: PropTypes.string.isRequired,
+      icon_url: PropTypes.string.isRequired,
+      desc_1: PropTypes.string.isRequired,
+      desc_2: PropTypes.string.isRequired,
       clouds: PropTypes.number.isRequired,
-      wind: PropTypes.number.isRequired,
+      wind_speed: PropTypes.number.isRequired,
+      pop: PropTypes.number.isRequired,
+      rain: PropTypes.number.isRequired,
+      uvi: PropTypes.number.isRequired,
+      snow: PropTypes.number.isRequired,
     })
   ),
   unit: PropTypes.string,
   locale: PropTypes.string,
 };
+
+// dt: PropTypes.number.isRequired,
+//       temp: PropTypes.number.isRequired,
+//       temp_min: PropTypes.number.isRequired,
+//       temp_max: PropTypes.number.isRequired,
+//       humidity: PropTypes.number.isRequired,
+//       icon: PropTypes.string.isRequired,
+//       desc: PropTypes.string.isRequired,
+//       clouds: PropTypes.number.isRequired,
+//       wind: PropTypes.number.isRequired,
 
 export default WeatherBannerTab;
 

@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
 import styled from "styled-components";
-import iconCodeMapping from "./WeatherIcon";
 
 /**
  * Render a primary display of the current forecast, including a date time, a weather icon,
@@ -14,13 +13,14 @@ import iconCodeMapping from "./WeatherIcon";
  */
 const WeatherBanner = ({ forecastNow, unit, locale }) => (
   <div>
-    {/* <h5>
+    <h5>
       {`${moment.unix(forecastNow.dt).locale(locale).format("dddd a h:mm")}, ${
-        forecastNow.desc
-      }`}
-    </h5> */}
+        forecastNow.desc_1
+      }, ${forecastNow.desc_2}`}
+    </h5>
     <BannerContainer>
-      <BannerIcon src={iconCodeMapping[forecastNow.icon]} />
+      {/* TODO: ADD ICON */}
+      <BannerIcon src={forecastNow.icon_url} />
       <Temperature>{Math.round(forecastNow.temp * 10) / 10}</Temperature>
       <Unit>
         &deg;
@@ -33,14 +33,24 @@ const WeatherBanner = ({ forecastNow, unit, locale }) => (
           <b>{forecastNow.clouds}%</b>
         </InfoText>
         <InfoText>
+          Rain:
+          <b>{forecastNow.rain}</b>
+        </InfoText>
+        <InfoText>
           Humidity: <b>{forecastNow.humidity}%</b>
         </InfoText>
         <InfoText>
           Wind:{" "}
           <b>
-            {forecastNow.wind}
+            {forecastNow.wind_speed}
             {unit === "metric" ? "m/s" : "mph"}
           </b>
+        </InfoText>
+        <InfoText>
+          Pop: <b>{forecastNow.pop}%</b>
+        </InfoText>
+        <InfoText>
+          Uvi: <b>{forecastNow.uvi}</b>
         </InfoText>
       </DetailContainer>
     </BannerContainer>
@@ -56,13 +66,16 @@ WeatherBanner.propTypes = {
   forecastNow: PropTypes.shape({
     dt: PropTypes.number.isRequired,
     temp: PropTypes.number.isRequired,
-    temp_min: PropTypes.number.isRequired,
-    temp_max: PropTypes.number.isRequired,
     humidity: PropTypes.number.isRequired,
-    icon: PropTypes.string.isRequired,
-    desc: PropTypes.string.isRequired,
+    icon_url: PropTypes.string.isRequired,
+    desc_1: PropTypes.string.isRequired,
+    desc_2: PropTypes.string.isRequired,
     clouds: PropTypes.number.isRequired,
-    wind: PropTypes.number.isRequired,
+    wind_speed: PropTypes.number.isRequired,
+    pop: PropTypes.number.isRequired,
+    rain: PropTypes.number.isRequired,
+    uvi: PropTypes.number.isRequired,
+    snow: PropTypes.number.isRequired,
   }).isRequired,
   unit: PropTypes.string,
   locale: PropTypes.string,

@@ -4,110 +4,75 @@ import Grid from "@mui/material/Grid";
 import WeatherWidget from "../weatherWidget/WeatherWidget";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-// mock data for testing without API call
 import { baseUrl } from "../../constants/constants";
-
-const cities = [
-  { city: "taipei", label: "🇹🇼 Taipei" },
-  { city: "tokyo", label: "🇯🇵 Tokyo" },
-  { city: "moscow", label: "🇷🇺 Moscow" },
-  { city: "sydney", label: "🇦🇺 Sydney" },
-  { city: "london", label: "🇬🇧 London" },
-  { city: "paris", label: "🇫🇷 Paris" },
-  { city: "mexico", label: "🇲🇽 Mexico" },
-  { city: "seattle", label: "🇺🇸 Seattle" },
-  { city: "washington", label: "🇺🇸 Washington" },
-  { city: "beijing", label: "🇨🇳 Beijing" },
-];
+import { hour } from "../../constants/constants";
 
 function WeatherComponent() {
   const { appStore } = useStore();
 
-  const params = new URLSearchParams(window.location.search);
-  const city = params.get("city_index");
+  const currentHourInUnixSec = Math.floor(
+    new Date().setMinutes(0, 0, 0) / 1000
+  );
 
-  const [cityIndex, setCityIndex] = useState(city || 0);
   const [forecast, setForecast] = useState([]);
-  const [error, setError] = useState("");
-
-  const fetchWeatherAsync = async (cityId) => {
-    try {
-      const response = await axios.get(`${baseUrl}/weather?lat${51}`, {
-        // params: {
-        //   q: cityId,
-        //   lang: "zh_tw",
-        //   appid: OPEN_WEATHER_MAP_KEY,
-        //   units: "metric",
-        // },
-        params: {
-          lon: 17,
-          start: Math.floor(new Date().getTime() / 1000) + 3600,
-          end: Math.floor(new Date().getTime() / 1000) + 10800,
-        },
-      });
-
-      const transformData = await response.data;
-
-      console.log(transformData);
-
-      // const transformData = await response.data.list.map((data) => ({
-      //   dt: data.dt,
-      //   temp: data.main.temp,
-      //   temp_min: data.main.temp_min,
-      //   temp_max: data.main.temp_max,
-      //   humidity: data.main.humidity,
-      //   icon: data.weather[0].icon,
-      //   desc: data.weather[0].description,
-      //   clouds: data.clouds.all,
-      //   wind: data.wind.speed,
-      // }));
-      setForecast(transformData);
-    } catch (err) {
-      console.log(err);
-      // if (OPEN_WEATHER_MAP_KEY.length === 0) {
-      //   // Use mock data if no key
-      //   const transformData = await testData.list.map((data) => ({
-      //     dt: data.dt,
-      //     temp: data.main.temp,
-      //     temp_min: data.main.temp_min,
-      //     temp_max: data.main.temp_max,
-      //     humidity: data.main.humidity,
-      //     icon: data.weather[0].icon,
-      //     desc: data.weather[0].description,
-      //     clouds: data.clouds.all,
-      //     wind: data.wind.speed,
-      //   }));
-      //   setForecast(transformData);
-      //   setError("");
-      // } else {
-      //   setError(err.stack);
-      // }
-    }
-  };
+  const [step_in_hours, setStep_in_hours] = useState(0);
 
   useEffect(() => {
-    fetchWeatherAsync(cities[cityIndex].city);
-  }, [cityIndex]); // notice the empty array here
+    try {
+      axios
+        .get(`${baseUrl}/weather?lat${51}`, {
+          params: {
+            lon: 17,
+            start: currentHourInUnixSec,
+            end: currentHourInUnixSec + 8 * hour,
+          },
+        })
+        .then((response) => {
+          const transformData = [];
+          const start = response.data.start;
+          const end = response.data.end;
+
+          setStep_in_hours(response.data.step_in_hours);
+
+          let temp = response.data.single_forecasts;
+
+          temp.forEach((temp) => {
+            transformData.push({
+              clouds: temp.clouds,
+              dt: temp.unix_timestamp, //date time
+              pop: temp.pop, // prawdopodobieństwo deszczu
+              // unix_timestamp: temp.unix_timestamp,
+              desc_1: temp.desc_1,
+              desc_2: temp.desc_2,
+              humidity: temp.humidity,
+              icon_url: temp.icon_url,
+              rain: temp.rain,
+              snow: temp.snow,
+              temp: temp.temp,
+              uvi: temp.uvi,
+              wind_speed: temp.wind_speed,
+            });
+          });
+          setForecast(transformData);
+        });
+    } catch (err) {
+      console.log(err);
+    }
+  }, [currentHourInUnixSec]); // notice the empty array here
 
   return (
-    <Grid item xs={4}>
-      <WeatherWidget
-        config={{
-          location: cities[cityIndex].label,
-          unit: "metric",
-          locale: "zh-tw",
-          onLocationClick: () => {
-            if (cityIndex + 1 >= cities.length) {
-              setCityIndex(0);
-              fetchWeatherAsync(cities[0].city);
-            } else {
-              setCityIndex(cityIndex + 1);
-              fetchWeatherAsync(cities[cityIndex + 1].city);
-            }
-          },
-        }}
-        forecast={forecast}
-      />
+    <Grid item xs={5}>
+      {forecast.length > 0 && (
+        <WeatherWidget
+          config={{
+            location: "Wrocław", //TODO
+            unit: "metric",
+            locale: "zh-tw",
+            step: step_in_hours,
+          }}
+          forecast={forecast}
+        />
+      )}
     </Grid>
   );
 }

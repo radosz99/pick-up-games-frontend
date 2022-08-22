@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import moment from "moment";
 import styled from "styled-components";
 import WeatherBannerTab from "./WeatherBannerTab";
-import MiniWeatherCard from "./MiniWeatherCard";
 
 const WeatherWidget = ({ config, forecast }) => {
   const [forecastIdx, setForecastIdx] = useState(0);
@@ -42,44 +41,8 @@ const WeatherWidget = ({ config, forecast }) => {
           unit={config.unit}
           locale={config.locale}
           onLocationClick={config.onLocationClick}
+          step={config.step}
         />
-        {/* <Next5Container>
-          <MiniWeatherCard
-            onClick={() => setForecastIdx(0)}
-            forecastList={forecastList[0]}
-            isSelected={forecastIdx === 0}
-            unit={config.unit}
-            locale={config.locale}
-          />
-          <MiniWeatherCard
-            onClick={() => setForecastIdx(1)}
-            forecastList={forecastList[1]}
-            isSelected={forecastIdx === 1}
-            unit={config.unit}
-            locale={config.locale}
-          />
-          <MiniWeatherCard
-            onClick={() => setForecastIdx(2)}
-            forecastList={forecastList[2]}
-            isSelected={forecastIdx === 2}
-            unit={config.unit}
-            locale={config.locale}
-          />
-          <MiniWeatherCard
-            onClick={() => setForecastIdx(3)}
-            forecastList={forecastList[3]}
-            isSelected={forecastIdx === 3}
-            unit={config.unit}
-            locale={config.locale}
-          />
-          <MiniWeatherCard
-            onClick={() => setForecastIdx(4)}
-            forecastList={forecastList[4]}
-            isSelected={forecastIdx === 4}
-            unit={config.unit}
-            locale={config.locale}
-          />
-        </Next5Container> */}
       </ContentContainer>
     );
   }
@@ -102,13 +65,16 @@ WeatherWidget.propTypes = {
     PropTypes.shape({
       dt: PropTypes.number.isRequired,
       temp: PropTypes.number.isRequired,
-      temp_min: PropTypes.number.isRequired,
-      temp_max: PropTypes.number.isRequired,
       humidity: PropTypes.number.isRequired,
-      icon: PropTypes.string.isRequired,
-      desc: PropTypes.string.isRequired,
+      icon_url: PropTypes.string.isRequired,
+      desc_1: PropTypes.string.isRequired,
+      desc_2: PropTypes.string.isRequired,
       clouds: PropTypes.number.isRequired,
-      wind: PropTypes.number.isRequired,
+      wind_speed: PropTypes.number.isRequired,
+      pop: PropTypes.number.isRequired,
+      rain: PropTypes.number.isRequired,
+      uvi: PropTypes.number.isRequired,
+      snow: PropTypes.number.isRequired,
     })
   ),
   config: PropTypes.shape({
@@ -125,13 +91,6 @@ const ContentContainer = styled.div`
   border: 1px solid #dddddd;
   box-shadow: 3px 3px 3px #aaaaaa;
   padding: 1rem 1rem;
-`;
-
-const Next5Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  margin-top: 1rem;
-  justify-content: space-around;
 `;
 
 export default WeatherWidget;

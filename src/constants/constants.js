@@ -3,6 +3,8 @@ export const baseUrl =
     ? "http://127.0.0.1:8000"
     : "http://153.92.221.4:8120";
 
+export const hour = 3600;
+
 export const hoursMarks = [
   {
     value: 0,
