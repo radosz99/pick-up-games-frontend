@@ -67,7 +67,6 @@ function Map() {
               let city =
                 response.data.address.city ?? response.data.address.village;
               let road = response.data.address.road;
-              console.log(response.data.address);
               appStore.setNewCourtShortInfo({ city: city, road: road });
               setPosition(e.latlng); // 👈 add marker
               appStore.setNewCourtcoordinates(e.latlng);
