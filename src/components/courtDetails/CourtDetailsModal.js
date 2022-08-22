@@ -111,19 +111,6 @@ function CourtDetailsModal() {
           alignItems="center"
           sx={{ mt: 5 }}
         >
-          <Grid
-            item
-            xs={4}
-            sx={{
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <Icon icon="gis:location-man-alt" height={40} />
-            <Typography variant="p" sx={{ ml: 4, color: "red" }}>
-              PLAYER AMOUNT: 4
-            </Typography>
-          </Grid>
           <WeatherComponent />
         </Grid>
       </Box>
