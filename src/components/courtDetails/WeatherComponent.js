@@ -38,7 +38,7 @@ function WeatherComponent() {
   useEffect(() => {
     try {
       axios
-        .get(`${baseUrl}/weather?lat${51}`, {
+        .get(`${baseUrl}/weather?lat=${51}`, {
           params: {
             lon: 17,
             start: selectedHourInUnixSec,
