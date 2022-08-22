@@ -109,5 +109,5 @@ const DetailContainer = styled.div`
 `;
 
 const InfoText = styled.div`
-  text-align: right;
+  text-align: left;
 `;
