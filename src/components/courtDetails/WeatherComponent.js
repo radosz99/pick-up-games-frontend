@@ -57,7 +57,7 @@ function WeatherComponent() {
             transformData.push({
               clouds: temp.clouds,
               dt: temp.unix_timestamp, //date time
-              pop: temp.pop, // prawdopodobieństwo deszczu
+              pop: temp.pop * 100, // prawdopodobieństwo deszczu
               // unix_timestamp: temp.unix_timestamp,
               desc_1: temp.desc_1,
               desc_2: temp.desc_2,
