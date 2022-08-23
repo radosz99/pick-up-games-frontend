@@ -176,24 +176,23 @@ function TimelineSliderComponent() {
     <Grid container direction="row" justifyContent="center" alignItems="center">
       <Grid item>
         <Box sx={{ width: "75vw", textAlign: "center", mt: 5 }}>
-          {appStore.currentHour && (
-            <CustomSlider
-              getAriaLabel={() => "Hour range"}
-              components={{
-                Thumb: CustomThumbComponent,
-                Mark: CustomMarkComponent,
-                // Input: CustomInputComponent,
-              }}
-              value={appStore.hoursRange}
-              isRtl={true}
-              marks={hoursMarks}
-              valueLabelFormat={numFormatter}
-              min={appStore.currentHour}
-              max={appStore.currentHour + 23}
-              step={0.5}
-              onChange={handleChange}
-              sx={{
-                background: `
+          <CustomSlider
+            getAriaLabel={() => "Hour range"}
+            components={{
+              Thumb: CustomThumbComponent,
+              Mark: CustomMarkComponent,
+              // Input: CustomInputComponent,
+            }}
+            value={appStore.hoursRange}
+            isRtl={true}
+            marks={hoursMarks}
+            valueLabelFormat={numFormatter}
+            min={appStore.currentHour}
+            max={appStore.currentHour + 23}
+            step={0.5}
+            onChange={handleChange}
+            sx={{
+              background: `
               linear-gradient(90deg,
                 rgb(255,0,0) ${4.34783}%,
                 rgb(255,0,0) ${4.34783 * 2}%,
@@ -219,9 +218,8 @@ function TimelineSliderComponent() {
                 rgb(100,250,50) ${4.34783 * 22}%,
                 rgb(255,0,0) ${4.34783 * 23}%)
             `,
-              }}
-            />
-          )}
+            }}
+          />
         </Box>
       </Grid>
     </Grid>
