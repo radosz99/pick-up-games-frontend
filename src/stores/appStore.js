@@ -13,6 +13,7 @@ export default class AppStore {
   addCourtModalOpen = false;
   courtModalOpen = false;
   openDrawer = false;
+  currentHour = new Date().getHours();
 
   constructor() {
     makeAutoObservable(this);
