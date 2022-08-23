@@ -20,7 +20,9 @@ const WeatherBanner = ({ forecastNow, unit, locale }) => (
     </h5>
     <BannerContainer>
       <BannerIcon src={forecastNow.icon_url} />
-      <Temperature>{Math.round(forecastNow.temp * 10) / 10}</Temperature>
+      <Temperature>
+        {(Math.round(forecastNow.temp * 10) / 10).toFixed(1)}
+      </Temperature>
       <Unit>
         &deg;
         {unit === "metric" ? "C" : "F"}
