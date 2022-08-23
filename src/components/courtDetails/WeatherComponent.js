@@ -6,7 +6,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { baseUrl } from "../../constants/constants";
 import { hour } from "../../constants/constants";
-import { hoursMarks, hoursMarksConverter } from "../../constants/constants";
+import { hoursMarksConverter } from "../../constants/utils";
 
 function WeatherComponent() {
   const { appStore } = useStore();

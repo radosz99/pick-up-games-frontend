@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import { Typography, Modal } from "@mui/material";
+import { Typography, Modal, Button } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import CloseIcon from "@mui/icons-material/Close";
 import { useStore } from "../../stores/store";
@@ -12,6 +12,7 @@ import { useTheme } from "@mui/material/styles";
 import WeatherComponent from "./WeatherComponent";
 import TimelineSliderComponent from "./TimelineSliderComponent";
 import CourtDetailsIconsWithCarusel from "./CourtDetailsIconsWithCarusel";
+import { numFormatter } from "../../constants/utils";
 
 const style = {
   position: "absolute",
@@ -106,10 +107,24 @@ function CourtDetailsModal() {
         <TimelineSliderComponent />
         <Grid
           container
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+          sx={{ mt: 2 }}
+        >
+          <Grid item>
+            <Button variant="contained" size="large">
+              I'll be on the court from {numFormatter(appStore.hoursRange[0])}{" "}
+              to {numFormatter(appStore.hoursRange[1])}
+            </Button>
+          </Grid>
+        </Grid>
+        <Grid
+          container
           direction="row"
           justifyContent="center"
           alignItems="center"
-          sx={{ mt: 5 }}
+          // sx={{ mt: 2 }}
         >
           <WeatherComponent />
         </Grid>
