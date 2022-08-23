@@ -113,7 +113,7 @@ function CourtDetailsModal() {
           sx={{ mt: 2 }}
         >
           <Grid item>
-            <Button variant="contained" size="large">
+            <Button variant="contained" size="large" sx={{ width: "50vw" }}>
               I'll be on the court from {numFormatter(appStore.hoursRange[0])}{" "}
               to {numFormatter(appStore.hoursRange[1])}
             </Button>
