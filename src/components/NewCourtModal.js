@@ -41,7 +41,6 @@ function NewCourtModal() {
       open={appStore.addCourtModalOpen}
       onClose={() => {
         appStore.setAddCourtModalOpen(false);
-        appStore.setSateliteView(false);
       }}
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
@@ -50,7 +49,6 @@ function NewCourtModal() {
         <Box
           onClick={() => {
             appStore.setAddCourtModalOpen(false);
-            appStore.setSateliteView(false);
           }}
           sx={{ position: "absolute", right: 30, cursor: "pointer" }}
         >
@@ -311,7 +309,6 @@ function NewCourtModal() {
             onClick={() => {
               appStore.addCourtMarker(appStore.newCourtCoordinates);
               appStore.setAddCourtModalOpen(false);
-              appStore.setSateliteView(false);
             }}
           >
             SUBMIT COURT

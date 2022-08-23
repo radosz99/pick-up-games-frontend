@@ -1,7 +1,7 @@
 export const baseUrl =
   process.env.NODE_ENV === "development"
-    ? "http://127.0.0.1:8000"
-    : "https://matcher.pl/api";
+    ? "//153.92.221.4:8120/v1"
+    : "//api.matcher.pl/v1";
 
 export const hour = 3600;
 

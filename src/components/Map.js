@@ -127,7 +127,6 @@ function Map() {
           size="large"
           color="primary"
           onClick={(e) => {
-            appStore.setSateliteView(true);
             e.stopPropagation();
             appStore.setAddCourtFlag(true);
             var element =
