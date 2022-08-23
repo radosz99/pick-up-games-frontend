@@ -33,7 +33,7 @@ const WeatherBanner = ({ forecastNow, unit, locale }) => (
           Clouds: <b>{forecastNow.clouds}%</b>
         </InfoText>
         <InfoText>
-          Rain: <b>{forecastNow.rain} mm/h</b>
+          Rain: <b>{forecastNow.rain.toFixed(2)} mm/h</b>
         </InfoText>
         <InfoText>
           Humidity: <b>{forecastNow.humidity}%</b>
