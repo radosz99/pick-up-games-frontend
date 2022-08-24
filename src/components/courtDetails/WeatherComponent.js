@@ -78,7 +78,7 @@ function WeatherComponent() {
   }, [selectedHourInUnixSec]); // notice the empty array here
 
   return (
-    <Grid item xs={5}>
+    <Grid item xs={5} sx={{ height: 250 }}>
       {forecast.length > 0 && (
         <WeatherWidget
           config={{
