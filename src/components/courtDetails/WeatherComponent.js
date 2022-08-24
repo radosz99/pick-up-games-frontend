@@ -7,6 +7,8 @@ import axios from "axios";
 import { baseUrl } from "../../constants/constants";
 import { hour } from "../../constants/constants";
 import { hoursMarksConverter } from "../../constants/utils";
+import Box from "@mui/material/Box";
+import { Typography } from "@mui/material";
 
 function WeatherComponent() {
   const { appStore } = useStore();
@@ -71,6 +73,9 @@ function WeatherComponent() {
             });
           });
           setForecast(transformData);
+        })
+        .catch((error) => {
+          setForecast([]);
         });
     } catch (err) {
       console.log(err);
@@ -89,6 +94,18 @@ function WeatherComponent() {
           }}
           forecast={forecast}
         />
+      )}
+      {forecast.length === 0 && (
+        <Box
+          sx={{ mt: 5 }}
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Typography variant="h3">
+            Weather for this date is not available
+          </Typography>
+        </Box>
       )}
     </Grid>
   );
