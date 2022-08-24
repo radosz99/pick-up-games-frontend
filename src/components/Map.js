@@ -24,6 +24,7 @@ import { useMap } from "react-leaflet/hooks";
 function Map() {
   const { appStore } = useStore();
   const theme = useTheme();
+  const [searchBarEnabled, setSearchBarEnabled] = useState(false);
 
   const ref = useRef(null);
   const sateliteMapUrl = "https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}";
@@ -37,8 +38,10 @@ function Map() {
           position.coords.latitude,
           position.coords.longitude,
         ]);
+        setSearchBarEnabled(true);
       },
       function (error) {
+        setSearchBarEnabled(true);
         // appStore.setCoordinates([51.109175, 17.032684]); // Wrocław coordinates
       }
     );
@@ -105,7 +108,7 @@ function Map() {
         subdomains={["mt1", "mt2", "mt3"]}
       />
       <ZoomControl position={"bottomleft"} />
-      <SearchField />
+      {searchBarEnabled && <SearchField />}
       <Control>
         <FormControlLabel
           control={
