@@ -45,11 +45,13 @@ function Map() {
         // appStore.setCoordinates([51.109175, 17.032684]); // Wrocław coordinates
       }
     );
+  }, [appStore]);
 
+  useEffect(() => {
     if (ref.current) {
       ref.current.setUrl(appStore.sateliteView ? sateliteMapUrl : mapUrl);
     }
-  }, [appStore]);
+  }, [appStore, appStore.sateliteView]);
 
   const AddMarker = () => {
     const [position, setPosition] = useState(null);
