@@ -49,7 +49,7 @@ function Map() {
     if (ref.current) {
       ref.current.setUrl(appStore.sateliteView ? sateliteMapUrl : mapUrl);
     }
-  }, []);
+  }, [appStore]);
 
   const AddMarker = () => {
     const [position, setPosition] = useState(null);
