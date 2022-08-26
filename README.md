@@ -1,3 +1,5 @@
+![example workflow](https://github.com/radosz99/pick-up-games-frontend/actions/workflows/deploy_actions.yaml/badge.svg)
+
 # Getting Started with Create React App
 
 
