@@ -26,4 +26,9 @@ jobs:
         with:
           python-version: '3.8'
       - run: pip install -r requirements.txt
+      - shell: bash
+        env:
+          PASSWORD: ${{ secrets.PASSWORD }}
+          SERVER_ID: ${{ secrets.SERVER_ID }}
+        run: python frontend_deploy.py build/
       - run: echo "🍏 This job's status is ${{ job.status }}."
