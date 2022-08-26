@@ -28,8 +28,5 @@ jobs:
       - name: Install requirements via pip
         run: pip install -r requirements.txt
       - name: Deploy build on server via Python script
-        env:
-          PASSWORD: ${{ secrets.PASSWORD }}
-          SERVER_IP: ${{ secrets.SERVER_ID }}
         run: python deploy.py build/ ${{ secrets.SERVER_IP }} ${{ secrets.PASSWORD }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
