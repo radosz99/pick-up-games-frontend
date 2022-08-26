@@ -132,7 +132,7 @@ function Map() {
           size="large"
           color="primary"
           onClick={(e) => {
-            e.stopPropagation();
+            // e.stopPropagation();
             appStore.setAddCourtFlag(true);
             var element =
               document.getElementsByClassName("leaflet-container")[0];

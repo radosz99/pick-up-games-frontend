@@ -75,17 +75,6 @@ function CustomThumbComponent(props) {
   );
 }
 
-// function CustomInputComponent(props) {
-//   const { children, className, ...other } = props;
-//   const extraClassName =
-//     other["data-index"] === 0 ? "first-thumb" : "second-thumb";
-//   return (
-//     <SliderInput {...other} className={clsx(className, extraClassName)}>
-//       {children}
-//     </SliderInput>
-//   );
-// }
-
 function CustomMarkComponent(props) {
   const { children, className, ...other } = props;
   const [visible, setVisible] = useState(false);
@@ -142,14 +131,13 @@ function TimelineSliderComponent() {
             components={{
               Thumb: CustomThumbComponent,
               Mark: CustomMarkComponent,
-              // Input: CustomInputComponent,
             }}
             value={appStore.hoursRange}
             isRtl={true}
             marks={hoursMarks}
             valueLabelFormat={numFormatter}
             min={appStore.currentHour}
-            max={appStore.currentHour + 23}
+            max={appStore.currentHour < 24 ? 23.5 : 47.5}
             step={0.5}
             onChange={handleChange}
             sx={{
