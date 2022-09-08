@@ -220,3 +220,46 @@ export const days = [
   "Friday",
   "Saturday",
 ];
+
+export const sampleCourts = [
+  {
+    id: 1,
+    name: "xd",
+    address: {
+      country: "Poland",
+      city: "Wroclaw",
+      street_name: "Zielinskiego",
+      postal_code: "53-533",
+      latitude: 56.0,
+      longitude: 17.0,
+      street_number: "49/2",
+    },
+    details: {
+      courts_number: 2,
+      hoops_number: 4,
+      lightning: false,
+      surface: "Dirt",
+    },
+    created: "2022-08-30T18:33:30.638235Z",
+  },
+  {
+    id: 2,
+    name: "test",
+    address: {
+      country: "Poland",
+      city: "Dalachów",
+      street_name: "Gabryśka",
+      postal_code: "46-325",
+      latitude: 53.0,
+      longitude: 14.0,
+      street_number: "12",
+    },
+    details: {
+      courts_number: 1,
+      hoops_number: 1,
+      lightning: true,
+      surface: "Rubber",
+    },
+    created: "2022-09-08T20:27:26.372975Z",
+  },
+];

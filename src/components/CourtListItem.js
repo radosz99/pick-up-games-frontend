@@ -8,7 +8,7 @@ import { Button } from "@mui/material";
 import { useStore } from "../stores/store";
 import { useTheme } from "@mui/material/styles";
 
-function CourtListItem() {
+function CourtListItem({ court }) {
   const { appStore } = useStore();
   const theme = useTheme();
 
@@ -25,7 +25,7 @@ function CourtListItem() {
       }}
     >
       <Typography fontWeight="bold" variant="h5">
-        Court name
+        {court.name}
       </Typography>
       <Box
         sx={{
@@ -39,7 +39,8 @@ function CourtListItem() {
         </Typography>
       </Box>
       <Typography variant="p" sx={{ mt: 2 }}>
-        Location, Country
+        {court.address.street_name} {court.address.street_number},{" "}
+        {court.address.city}, {court.address.country}
       </Typography>
       <Box
         sx={{
