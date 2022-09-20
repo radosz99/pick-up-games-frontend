@@ -14,6 +14,7 @@ export default class AppStore {
   courtModalOpen = false;
   openDrawer = false;
   currentHour = new Date().getHours();
+  courts = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -22,6 +23,12 @@ export default class AppStore {
   setCoordinates = (newCoordinates) => {
     runInAction(() => {
       this.coordinates = newCoordinates;
+    });
+  };
+
+  setCourts = (newCourts) => {
+    runInAction(() => {
+      this.courts = newCourts;
     });
   };
 

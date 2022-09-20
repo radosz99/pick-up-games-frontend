@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { styled, useTheme } from "@mui/material/styles";
+import React from "react";
+import { styled, useTheme, makeStyles } from "@mui/material/styles";
 import Drawer from "@mui/material/Drawer";
 import IconButton from "@mui/material/IconButton";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
@@ -11,7 +11,6 @@ import Box from "@mui/material/Box";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import CourtListItem from "../CourtListItem";
 import Grid from "@mui/material/Grid";
-import { sampleCourts } from "../../constants/constants";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
@@ -25,7 +24,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 function PersistentDrawerRight() {
   const { appStore } = useStore();
   const theme = useTheme();
-  const [courts, setCourts] = useState([]);
   let isXL = useMediaQuery(theme.breakpoints.down("xl"));
 
   let drawerWidth = isXL ? "32vw" : "24vw";
@@ -33,11 +31,6 @@ function PersistentDrawerRight() {
   const handleDrawerClose = () => {
     appStore.setOpenDrawer(false);
   };
-
-  useEffect(() => {
-    setCourts(sampleCourts);
-    console.log(sampleCourts);
-  }, []); // notice the empty array here
 
   return (
     <Drawer
@@ -48,19 +41,31 @@ function PersistentDrawerRight() {
           width: drawerWidth,
           backgroundColor: theme.palette.primary.main,
         },
+        "& ::-webkit-scrollbar": {
+          width: 5,
+        },
+        "& ::-webkit-scrollbar-track": {
+          boxShadow: `inset 0 0 6px rgba(0, 0, 0, 0.3)`,
+        },
+        "& ::-webkit-scrollbar-thumb": {
+          backgroundColor: "darkgrey",
+          outline: `1px solid slategrey`,
+        },
       }}
       variant="persistent"
       anchor="right"
       open={appStore.openDrawer}
     >
       <DrawerHeader>
-        <IconButton onClick={handleDrawerClose}>
-          {theme.direction === "rtl" ? (
-            <ChevronLeftIcon />
-          ) : (
-            <ChevronRightIcon />
-          )}
-        </IconButton>
+        <Box textAlign="center ">
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === "rtl" ? (
+              <ChevronLeftIcon />
+            ) : (
+              <ChevronRightIcon />
+            )}
+          </IconButton>
+        </Box>
       </DrawerHeader>
       <Box textAlign="center">
         <Typography variant="h3">COURTS NEARBY</Typography>
@@ -71,7 +76,7 @@ function PersistentDrawerRight() {
         justifyContent="center"
         alignItems="center"
       >
-        {courts.map((court) => (
+        {appStore.courts.map((court) => (
           <Grid item key={court.id}>
             <CourtListItem court={court} />
           </Grid>

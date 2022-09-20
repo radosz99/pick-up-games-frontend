@@ -8,7 +8,7 @@ import {
 } from "react-leaflet";
 import React, { useState } from "react";
 import SearchField from "./SearchField";
-import { Button, Typography } from "@mui/material";
+import { Button, Typography, Grid } from "@mui/material";
 import Control from "react-leaflet-custom-control";
 import Box from "@mui/material/Box";
 import Checkbox from "@mui/material/Checkbox";
@@ -182,10 +182,26 @@ function Map() {
         </Box>
       </Control>
       {appStore.addCourtFlag && <AddMarker />}
-      {appStore.courtsMarkers.map((position, idx) => (
-        <Marker key={`marker-${idx}`} position={position}>
+      {appStore.courts.map((court, idx) => (
+        <Marker
+          key={`marker-${court.id}`}
+          position={[court.address.latitude, court.address.longitude]}
+        >
           <Popup>
-            <span>This will be court description.</span>
+            <Grid
+              container
+              direction="column"
+              justifyContent="center"
+              alignItems="center"
+            >
+              <span>{court.name}</span>
+              <Button
+                sx={{ color: "red", fontSize: 14 }}
+                onClick={() => appStore.setCourtModalOpen(true)}
+              >
+                See court details
+              </Button>
+            </Grid>
           </Popup>
         </Marker>
       ))}

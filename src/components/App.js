@@ -1,5 +1,5 @@
 import Header from "./ui/Header";
-import React from "react";
+import React, { useEffect } from "react";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "./ui/Theme";
 import Grid from "@mui/material/Grid";
@@ -13,9 +13,15 @@ import NewCourtModal from "./NewCourtModal";
 import CourtDetailsModal from "./courtDetails/CourtDetailsModal";
 import { observer } from "mobx-react-lite";
 import PersistentDrawerRight from "./ui/PersistentDrawerRight";
+import { useStore } from "../stores/store";
+import { sampleCourts } from "../constants/constants";
 
 function App() {
-  // const { appStore } = useStore();
+  const { appStore } = useStore();
+  useEffect(() => {
+    appStore.setCourts(sampleCourts.slice(1, 100));
+    console.log(sampleCourts);
+  }, [appStore]);
 
   return (
     <ThemeProvider theme={theme}>
