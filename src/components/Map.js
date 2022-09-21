@@ -45,7 +45,8 @@ function Map() {
         // appStore.setCoordinates([51.109175, 17.032684]); // Wrocław coordinates
       }
     );
-  }, [appStore]);
+    console.log("runne");
+  }, []);
 
   useEffect(() => {
     if (ref.current) {
@@ -70,10 +71,18 @@ function Map() {
               },
             })
             .then((response) => {
+              console.log(response);
               let city =
                 response.data.address.city ?? response.data.address.village;
               let road = response.data.address.road;
-              appStore.setNewCourtShortInfo({ city: city, road: road });
+              let country = response.data.address.country;
+              let postCode = response.data.address.postode;
+              appStore.setNewCourtShortInfo({
+                city: city,
+                road: road,
+                country: country,
+                postCode: postCode,
+              });
               setPosition(e.latlng); // 👈 add marker
               appStore.setNewCourtcoordinates(e.latlng);
               appStore.setAddCourtFlag(false);
@@ -85,7 +94,9 @@ function Map() {
       },
     });
 
-    return position === null ? null : (
+    return position === null ? (
+      position
+    ) : (
       <Marker draggable={true} position={position}></Marker>
     );
   };

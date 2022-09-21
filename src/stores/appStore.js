@@ -24,6 +24,7 @@ export default class AppStore {
     runInAction(() => {
       this.coordinates = newCoordinates;
     });
+    console.log("first");
   };
 
   setCourts = (newCourts) => {
@@ -94,7 +95,9 @@ export default class AppStore {
     });
   };
 
-  addCourtMarker = (coordinatesOfCourt) => {
-    this.courtsMarkers.push(coordinatesOfCourt);
+  addCourt = (court) => {
+    runInAction(() => {
+      this.courts.push(court);
+    });
   };
 }

@@ -28,6 +28,7 @@ const style = {
 function NewCourtModal() {
   const { appStore } = useStore();
 
+  const [name, setName] = useState("");
   const [type, setType] = useState(1);
   const [surfaceType, setSurfaceType] = useState("");
   const [numberOfHoops, setNumberOfHoops] = useState("");
@@ -69,15 +70,36 @@ function NewCourtModal() {
             sx={{ mt: 2 }}
           >
             <Grid item xs={2} sx={{ mr: 5 }}>
-              <TextField label="Court name" />
+              <TextField
+                label="Court name"
+                value={name}
+                onChange={(event) => {
+                  setName(event.target.value);
+                }}
+              />
             </Grid>
             <Grid item xs={2} sx={{ mr: 5 }}>
-              <TextField label="City" value={appStore.newCourtShortInfo.city} />
+              <TextField
+                label="City"
+                value={appStore.newCourtShortInfo.city}
+                onChange={(event) => {
+                  appStore.setNewCourtShortInfo({
+                    road: appStore.newCourtShortInfo.road,
+                    city: event.target.value,
+                  });
+                }}
+              />
             </Grid>
             <Grid item xs={2} sx={{ mr: 5 }}>
               <TextField
                 label="Street"
                 value={appStore.newCourtShortInfo.road}
+                onChange={(event) => {
+                  appStore.setNewCourtShortInfo({
+                    road: event.target.value,
+                    city: appStore.newCourtShortInfo.city,
+                  });
+                }}
               />
             </Grid>
           </Grid>
@@ -307,7 +329,26 @@ function NewCourtModal() {
             color="primary"
             sx={{ width: "60vw", height: 60 }}
             onClick={() => {
-              appStore.addCourtMarker(appStore.newCourtCoordinates);
+              let model = {
+                id: Math.random() * (10000 - 250) + 250,
+                name: name,
+                address: {
+                  country: appStore.newCourtShortInfo.country,
+                  city: appStore.newCourtShortInfo.city,
+                  street_name: appStore.newCourtShortInfo.road,
+                  postal_code: appStore.newCourtShortInfo.postcode,
+                  latitude: appStore.newCourtCoordinates.lat,
+                  longitude: appStore.newCourtCoordinates.lng,
+                  street_number: "35/4", // do wyrzucenia
+                },
+                details: {
+                  courts_number: numberOfCourts,
+                  hoops_number: numberOfHoops,
+                  lightning: lightning,
+                },
+                created: Date.now(),
+              };
+              appStore.addCourt(model);
               appStore.setAddCourtModalOpen(false);
             }}
           >
