@@ -212,7 +212,11 @@ function Map() {
               <span>{court.name}</span>
               <Button
                 sx={{ color: "red", fontSize: 14 }}
-                onClick={() => appStore.setCourtModalOpen(true)}
+                onClick={() => {
+                  appStore.setCourtModalOpen(true);
+                  appStore.setSelectedCourtId(court.id);
+                  appStore.setSelectedCourt(court);
+                }}
               >
                 See court details
               </Button>

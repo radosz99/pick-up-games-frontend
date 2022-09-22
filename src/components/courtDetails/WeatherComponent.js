@@ -15,6 +15,7 @@ function WeatherComponent() {
 
   const [forecast, setForecast] = useState([]);
   const [step_in_hours, setStep_in_hours] = useState(0);
+  const [loading_forecast, setLoading_forecast] = useState(false);
 
   let start_range = appStore.hoursRange[0];
   let end_range = appStore.hoursRange[1];
@@ -38,16 +39,25 @@ function WeatherComponent() {
   }
 
   useEffect(() => {
+    let lat = 51;
+    let lon = 17;
+    if (appStore.selectedCourt) {
+      lat = appStore.selectedCourt.address.latitude;
+      lon = appStore.selectedCourt.address.longitude;
+    }
     try {
+      setLoading_forecast(true);
       axios
-        .get(`${baseUrl}/forecast?lat=${51}`, {
+        .get(`${baseUrl}/forecast?lat=${lat}`, {
           params: {
-            lon: 17,
+            lon: lon,
             start: selectedHourInUnixSec,
             end: selectedHourInUnixSec + 8 * hour,
           },
         })
         .then((response) => {
+          setLoading_forecast(false);
+
           // console.log(response.data);
           const transformData = [];
 
@@ -76,15 +86,17 @@ function WeatherComponent() {
         })
         .catch((error) => {
           setForecast([]);
+          setLoading_forecast(false);
         });
     } catch (err) {
+      setLoading_forecast(false);
       console.log(err);
     }
   }, [selectedHourInUnixSec]); // notice the empty array here
 
   return (
     <Grid item xs={5} sx={{ height: 250 }}>
-      {forecast.length > 0 && (
+      {(forecast.length > 0) & !loading_forecast && (
         <WeatherWidget
           config={{
             location: "Wrocław", //TODO
@@ -95,7 +107,17 @@ function WeatherComponent() {
           forecast={forecast}
         />
       )}
-      {forecast.length === 0 && (
+      {loading_forecast && (
+        <Box
+          sx={{ mt: 5 }}
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+        >
+          <Typography variant="h3">Loading ...</Typography>
+        </Box>
+      )}
+      {forecast.length === 0 && !loading_forecast && (
         <Box
           sx={{ mt: 5 }}
           display="flex"

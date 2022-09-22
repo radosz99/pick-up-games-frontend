@@ -46,7 +46,7 @@ function CourtDetailsModal() {
         </Box>
 
         <Typography variant="h2" align="center">
-          COURT NAME
+          {appStore.selectedCourt ? appStore.selectedCourt.name : "COURT NAME"}
         </Typography>
         <Grid
           container
@@ -99,7 +99,17 @@ function CourtDetailsModal() {
           >
             <NavigationIcon sx={{ mr: 1 }} />
             <Typography variant="p">
-              Andrzeja Modrzewskiego-Frycza 12 Wroclaw 50-155, Poland
+              {appStore.selectedCourt
+                ? appStore.selectedCourt.address.street_name +
+                  " " +
+                  appStore.selectedCourt.address.city +
+                  " " +
+                  appStore.selectedCourt.address.street_number +
+                  " " +
+                  appStore.selectedCourt.address.postal_code +
+                  ", " +
+                  appStore.selectedCourt.address.country
+                : "ADRESS"}
             </Typography>
           </Grid>
         </Grid>

@@ -16,6 +16,8 @@ export default class AppStore {
   currentHour = new Date().getHours();
   courts = [];
   coordinatesSet = false;
+  selectedCourtId = 0;
+  selectedCourt = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -24,6 +26,18 @@ export default class AppStore {
   setCoordinates = (newCoordinates) => {
     runInAction(() => {
       this.coordinates = newCoordinates;
+    });
+  };
+
+  setSelectedCourtId = (courtId) => {
+    runInAction(() => {
+      this.selectedCourtId = courtId;
+    });
+  };
+
+  setSelectedCourt = (court) => {
+    runInAction(() => {
+      this.selectedCourt = court;
     });
   };
 
