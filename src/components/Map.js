@@ -107,6 +107,8 @@ function Map() {
     if (!appStore.coordinatesSet) {
       map.setView(center, zoom);
     }
+    map.on("move", () => appStore.setCoordinatesSet(true));
+
     return null;
   }
 
