@@ -4,6 +4,7 @@ import {
   Marker,
   Popup,
   useMapEvents,
+  useMapEvent,
   ZoomControl,
 } from "react-leaflet";
 import React, { useState } from "react";
@@ -103,7 +104,9 @@ function Map() {
 
   function ChangeView({ center, zoom }) {
     const map = useMap();
-    map.setView(center, zoom);
+    if (!appStore.coordinatesSet) {
+      map.setView(center, zoom);
+    }
     return null;
   }
 
@@ -145,6 +148,7 @@ function Map() {
           onClick={(e) => {
             // e.stopPropagation();
             appStore.setAddCourtFlag(true);
+            appStore.setCoordinatesSet(true);
             var element =
               document.getElementsByClassName("leaflet-container")[0];
             element.classList.add("cursor");
