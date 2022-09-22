@@ -210,6 +210,13 @@ function Map() {
               alignItems="center"
             >
               <span>{court.name}</span>
+              <span>
+                {court.address.street_name +
+                  " " +
+                  court.address.city +
+                  " " +
+                  court.address.street_number}
+              </span>
               <Button
                 sx={{ color: "red", fontSize: 14 }}
                 onClick={() => {
