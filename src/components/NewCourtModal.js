@@ -256,7 +256,7 @@ function NewCourtModal() {
               <Grid item sx={{ mr: 5 }} xs={2}>
                 <FormControl fullWidth>
                   <InputLabel id="openToPublic-select-label">
-                    Lightning
+                    Open to public?
                   </InputLabel>
                   <Select
                     labelId="openToPublic-select-label"
@@ -275,7 +275,9 @@ function NewCourtModal() {
               </Grid>
               <Grid item xs={2}>
                 <FormControl fullWidth>
-                  <InputLabel id="rimHeight-select-label">Lightning</InputLabel>
+                  <InputLabel id="rimHeight-select-label">
+                    Rim height
+                  </InputLabel>
                   <Select
                     labelId="rimHeight-select-label"
                     id="rimHeight-select"
