@@ -51,7 +51,10 @@ function CourtListItem({ court }) {
       >
         <Button
           sx={{ color: "red", fontSize: 14 }}
-          onClick={() => appStore.setCourtModalOpen(true)}
+          onClick={() => {
+            appStore.setCourtModalOpen(true);
+            appStore.setSelectedCourt(court);
+          }}
         >
           See court details
         </Button>

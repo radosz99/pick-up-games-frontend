@@ -17,7 +17,6 @@ export default class AppStore {
   courts = [];
   coordinatesSet = false;
   selectedCourtId = 0;
-  selectedCourt = null;
 
   constructor() {
     makeAutoObservable(this);
@@ -26,12 +25,6 @@ export default class AppStore {
   setCoordinates = (newCoordinates) => {
     runInAction(() => {
       this.coordinates = newCoordinates;
-    });
-  };
-
-  setSelectedCourtId = (courtId) => {
-    runInAction(() => {
-      this.selectedCourtId = courtId;
     });
   };
 

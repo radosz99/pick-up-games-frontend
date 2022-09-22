@@ -221,7 +221,6 @@ function Map() {
                 sx={{ color: "red", fontSize: 14 }}
                 onClick={() => {
                   appStore.setCourtModalOpen(true);
-                  appStore.setSelectedCourtId(court.id);
                   appStore.setSelectedCourt(court);
                 }}
               >
