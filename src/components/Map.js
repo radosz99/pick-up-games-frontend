@@ -20,6 +20,16 @@ import { useRef, useEffect } from "react";
 import Switch from "@mui/material/Switch";
 import axios from "axios";
 import { useMap } from "react-leaflet/hooks";
+import * as L from "leaflet";
+
+const LeafIcon = L.Icon.extend({
+  options: {},
+});
+
+const greenIcon = new LeafIcon({
+  iconUrl:
+    "https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|2ecc71&chf=a,s,ee00FFFF",
+});
 
 function Map() {
   const { appStore } = useStore();
@@ -35,6 +45,10 @@ function Map() {
     navigator.geolocation.getCurrentPosition(
       function (position) {
         appStore.setCoordinates([
+          position.coords.latitude,
+          position.coords.longitude,
+        ]);
+        appStore.setCurrentLocation([
           position.coords.latitude,
           position.coords.longitude,
         ]);
@@ -105,6 +119,17 @@ function Map() {
       map.setView(center, zoom);
     }
     map.on("move", () => appStore.setCoordinatesSet(true));
+
+    // map.locate().on("locationfound", function (e) {
+    //   // appStore.setCurrentLocation([e.latlng.lat, e.latlng.lng]);
+    //   // console.log(e.latlng);
+    //   // setPosition(e.latlng);
+    //   // map.flyTo(e.latlng, map.getZoom());
+    //   // const radius = e.accuracy;
+    //   // const circle = L.circle(e.latlng, radius);
+    //   // circle.addTo(map);
+    //   // setBbox(e.bounds.toBBoxString().split(","));
+    // });
 
     return null;
   }
@@ -195,6 +220,13 @@ function Map() {
           </Box>
         </Box>
       </Control>
+      {appStore.currentLocation && (
+        <Marker icon={greenIcon} key={1} position={appStore.currentLocation}>
+          <Popup>
+            <p>You are here</p>
+          </Popup>
+        </Marker>
+      )}
       {appStore.addCourtFlag && <AddMarker />}
       {appStore.courts.map((court, idx) => (
         <Marker
