@@ -18,7 +18,7 @@ function WeatherComponent() {
   const [loading_forecast, setLoading_forecast] = useState(false);
 
   let start_range = appStore.hoursRange[0];
-  let end_range = appStore.hoursRange[1];
+  // let end_range = appStore.hoursRange[1];
   let selectedHourInUnixSec = 0;
   let start_date = new Date(
     new Date().setDate(new Date().getDate() + appStore.selectedDay)
@@ -92,7 +92,7 @@ function WeatherComponent() {
       setLoading_forecast(false);
       console.log(err);
     }
-  }, [selectedHourInUnixSec]); // notice the empty array here
+  }, [selectedHourInUnixSec, appStore.selectedCourt]); // notice the empty array here
 
   return (
     <Grid item xs={5} sx={{ height: 250 }}>

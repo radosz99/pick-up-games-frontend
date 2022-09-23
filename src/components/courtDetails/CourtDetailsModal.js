@@ -7,7 +7,6 @@ import { observer } from "mobx-react-lite";
 import Rating from "@mui/material/Rating";
 import NavigationIcon from "@mui/icons-material/Navigation";
 import PeopleAltIcon from "@mui/icons-material/PeopleAlt";
-import { Icon } from "@iconify/react";
 import { useTheme } from "@mui/material/styles";
 import WeatherComponent from "./WeatherComponent";
 import TimelineSliderComponent from "./TimelineSliderComponent";

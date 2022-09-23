@@ -4,7 +4,6 @@ import {
   Marker,
   Popup,
   useMapEvents,
-  useMapEvent,
   ZoomControl,
 } from "react-leaflet";
 import React, { useState } from "react";
@@ -46,7 +45,7 @@ function Map() {
         // appStore.setCoordinates([51.109175, 17.032684]); // Wrocław coordinates
       }
     );
-  }, []);
+  }, [appStore]);
 
   useEffect(() => {
     if (ref.current) {
