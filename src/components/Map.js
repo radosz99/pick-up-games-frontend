@@ -46,7 +46,6 @@ function Map() {
         // appStore.setCoordinates([51.109175, 17.032684]); // Wrocław coordinates
       }
     );
-    console.log("runne");
   }, []);
 
   useEffect(() => {
@@ -72,12 +71,11 @@ function Map() {
               },
             })
             .then((response) => {
-              console.log(response);
               let city =
                 response.data.address.city ?? response.data.address.village;
               let road = response.data.address.road;
               let country = response.data.address.country;
-              let postCode = response.data.address.postode;
+              let postCode = response.data.address.postcode;
               appStore.setNewCourtShortInfo({
                 city: city,
                 road: road,

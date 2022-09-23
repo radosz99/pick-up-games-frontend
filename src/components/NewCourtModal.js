@@ -84,8 +84,11 @@ function NewCourtModal() {
                 value={appStore.newCourtShortInfo.city}
                 onChange={(event) => {
                   appStore.setNewCourtShortInfo({
-                    road: appStore.newCourtShortInfo.road,
                     city: event.target.value,
+                    road: appStore.newCourtShortInfo.road,
+                    country: appStore.newCourtShortInfo.country,
+                    postCode: appStore.newCourtShortInfo.postCode,
+                    street_number: appStore.newCourtShortInfo.street_number,
                   });
                 }}
               />
@@ -98,6 +101,24 @@ function NewCourtModal() {
                   appStore.setNewCourtShortInfo({
                     road: event.target.value,
                     city: appStore.newCourtShortInfo.city,
+                    country: appStore.newCourtShortInfo.country,
+                    postCode: appStore.newCourtShortInfo.postCode,
+                    street_number: appStore.newCourtShortInfo.street_number,
+                  });
+                }}
+              />
+            </Grid>
+            <Grid item xs={2} sx={{ mr: 5 }}>
+              <TextField
+                label="Street number"
+                value={appStore.newCourtShortInfo.street_number}
+                onChange={(event) => {
+                  appStore.setNewCourtShortInfo({
+                    street_number: event.target.value,
+                    city: appStore.newCourtShortInfo.city,
+                    country: appStore.newCourtShortInfo.country,
+                    postCode: appStore.newCourtShortInfo.postCode,
+                    road: appStore.newCourtShortInfo.road,
                   });
                 }}
               />
@@ -338,10 +359,10 @@ function NewCourtModal() {
                   country: appStore.newCourtShortInfo.country,
                   city: appStore.newCourtShortInfo.city,
                   street_name: appStore.newCourtShortInfo.road,
-                  postal_code: appStore.newCourtShortInfo.postcode,
+                  postal_code: appStore.newCourtShortInfo.postCode,
                   latitude: appStore.newCourtCoordinates.lat,
                   longitude: appStore.newCourtCoordinates.lng,
-                  street_number: "35/4", // do wyrzucenia
+                  street_number: appStore.newCourtShortInfo.street_number,
                 },
                 details: {
                   courts_number: numberOfCourts,
