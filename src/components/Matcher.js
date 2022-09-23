@@ -12,13 +12,17 @@ import CourtDetailsModal from "./courtDetails/CourtDetailsModal";
 import { observer } from "mobx-react-lite";
 import PersistentDrawerRight from "./ui/PersistentDrawerRight";
 import { useStore } from "../stores/store";
-import { sampleCourts } from "../constants/constants";
+import axios from "axios";
 
 function Matcher() {
   const { appStore } = useStore();
   useEffect(() => {
-    appStore.setCourts(sampleCourts.slice(1, 100));
-    console.log(sampleCourts);
+    axios
+      .get(`https://backend.matcher.pl/api/v1/court/?format=json`, {})
+      .then((response) => {
+        appStore.setCourts(response.data);
+        console.log(response.data);
+      });
   }, [appStore]);
 
   return (

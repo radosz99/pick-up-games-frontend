@@ -109,7 +109,7 @@ function CourtDetailsModal() {
                   appStore.selectedCourt.address.postal_code +
                   ", " +
                   appStore.selectedCourt.address.country
-                : "ADRESS"}
+                : "ADDRESS"}
             </Typography>
           </Grid>
         </Grid>

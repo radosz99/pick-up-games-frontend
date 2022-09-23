@@ -91,7 +91,10 @@ function CourtDetailsIconsWithCarusel() {
                 <Typography variant="p">Number of courts</Typography>
               </Grid>
               <Grid item>
-                <Typography variant="h3">1</Typography>
+                <Typography variant="h3">
+                  {appStore.selectedCourt &&
+                    appStore.selectedCourt.details.courts_number}
+                </Typography>
               </Grid>
             </Grid>
           </Grid>
@@ -114,7 +117,10 @@ function CourtDetailsIconsWithCarusel() {
                 <Typography variant="p">Number of hoops</Typography>
               </Grid>
               <Grid item>
-                <Typography variant="h3">1</Typography>
+                <Typography variant="h3">
+                  {appStore.selectedCourt &&
+                    appStore.selectedCourt.details.hoops_number}
+                </Typography>
               </Grid>
             </Grid>
           </Grid>
@@ -137,7 +143,13 @@ function CourtDetailsIconsWithCarusel() {
                 <Typography variant="p">Lightning</Typography>
               </Grid>
               <Grid item>
-                <Typography variant="h3">n/a</Typography>
+                <Typography variant="h3">
+                  {appStore.selectedCourt
+                    ? appStore.selectedCourt.details.lightning
+                      ? "Yes"
+                      : "No"
+                    : "N/A"}
+                </Typography>
               </Grid>
             </Grid>
           </Grid>
