@@ -48,7 +48,6 @@ function Map() {
           position.coords.latitude,
           position.coords.longitude,
         ]);
-        console.log(position.coords);
         appStore.setCurrentLocation([
           position.coords.latitude,
           position.coords.longitude,
@@ -74,7 +73,6 @@ function Map() {
     useMapEvents({
       click: (e) => {
         const baseUrl = `https://nominatim.openstreetmap.org/reverse?format=jsonv2`;
-        console.log(e.latlng);
         try {
           axios
             .get(`${baseUrl}`, {
