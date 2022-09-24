@@ -13,14 +13,10 @@ import { observer } from "mobx-react-lite";
 import PersistentDrawerRight from "./ui/PersistentDrawerRight";
 import { useStore } from "../stores/store";
 import axios from "axios";
-import { getDistance } from "geolib";
+import { getDistanceBetweenTwoPoints } from "../constants/utils";
 
 function Matcher() {
   const { appStore } = useStore();
-
-  const getDistanceBetweenTwoPoints = (point1, point2) => {
-    return (getDistance(point1, point2) / 1000).toFixed(1);
-  };
 
   useEffect(() => {
     axios.get(`https://backend.matcher.pl/api/v1/court/`).then((response) => {

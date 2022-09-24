@@ -1,4 +1,5 @@
 import { makeAutoObservable, runInAction } from "mobx";
+import { getDistanceBetweenTwoPoints } from "../constants/utils";
 
 export default class AppStore {
   coordinates = [51.051409, 18.594532];
@@ -32,6 +33,34 @@ export default class AppStore {
   setSelectedCourt = (court) => {
     runInAction(() => {
       this.selectedCourt = court;
+    });
+  };
+
+  /**
+   * @param {Array} currentLocation The date
+   */
+  setCourtsDistance = (currentLocation) => {
+    runInAction(() => {
+      let courts = this.courts;
+      courts.forEach((court) => {
+        court.distanceFromCurrentLocation = getDistanceBetweenTwoPoints(
+          {
+            latitude: court.address.latitude,
+            longitude: court.address.longitude,
+          },
+          {
+            latitude: currentLocation[0],
+            longitude: currentLocation[1],
+          }
+        );
+      });
+      courts.sort(
+        (a, b) =>
+          parseInt(a.distanceFromCurrentLocation) -
+          parseInt(b.distanceFromCurrentLocation)
+      );
+
+      // this.courts = [];
     });
   };
 

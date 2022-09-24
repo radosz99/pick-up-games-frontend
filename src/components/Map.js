@@ -129,7 +129,20 @@ function Map() {
 
   function LocationMarker() {
     const map = useMapEvents({
-      click() {},
+      moveend(e) {
+        // console.log(e);
+        appStore.setCourtsDistance([
+          e.target._lastCenter.lat,
+          e.target._lastCenter.lng,
+        ]);
+      },
+      dragend(e) {
+        console.log(map);
+        appStore.setCourtsDistance([
+          e.target._lastCenter.lat,
+          e.target._lastCenter.lng,
+        ]);
+      },
       locationfound(e) {
         appStore.setCoordinates([e.latlng.lat, e.latlng.lng]);
         map.flyTo(e.latlng, map.getZoom());

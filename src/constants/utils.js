@@ -1,3 +1,5 @@
+import { getDistance } from "geolib";
+
 export const numFormatter = (num) => {
   // console.log(num);
   // 0 - 12 = 12pm - 12am
@@ -41,4 +43,8 @@ export const hoursMarksConverter = (input) => {
   if (input < 24) return input;
   if (input < 48) return input - 24;
   throw new Error(`Unexpected input" ${input}`);
+};
+
+export const getDistanceBetweenTwoPoints = (point1, point2) => {
+  return (getDistance(point1, point2) / 1000).toFixed(1);
 };
