@@ -120,18 +120,35 @@ function Map() {
     }
     map.on("move", () => appStore.setCoordinatesSet(true));
 
-    // map.locate().on("locationfound", function (e) {
-    //   // appStore.setCurrentLocation([e.latlng.lat, e.latlng.lng]);
-    //   // console.log(e.latlng);
-    //   // setPosition(e.latlng);
-    //   // map.flyTo(e.latlng, map.getZoom());
-    //   // const radius = e.accuracy;
-    //   // const circle = L.circle(e.latlng, radius);
-    //   // circle.addTo(map);
-    //   // setBbox(e.bounds.toBBoxString().split(","));
-    // });
-
     return null;
+  }
+
+  function LocationMarker() {
+    const map = useMapEvents({
+      click() {},
+      locationfound(e) {
+        map.flyTo(e.latlng, map.getZoom());
+      },
+    });
+
+    return (
+      <>
+        <Control>
+          <Button
+            variant="contained"
+            disabled={appStore.addCourtFlag}
+            size="large"
+            color="primary"
+            onClick={(e) => {
+              map.locate();
+            }}
+            sx={{ mt: 5, ml: 5, fontSize: 24 }}
+          >
+            Localize me
+          </Button>
+        </Control>
+      </>
+    );
   }
 
   return (
@@ -181,6 +198,7 @@ function Map() {
         >
           Add court
         </Button>
+
         <Box
           sx={{
             backgroundColor: theme.palette.secondary.main,
@@ -261,6 +279,7 @@ function Map() {
           </Popup>
         </Marker>
       ))}
+      <LocationMarker />
     </MapContainer>
   );
 }
