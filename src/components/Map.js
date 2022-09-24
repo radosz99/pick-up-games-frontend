@@ -6,6 +6,7 @@ import {
   useMapEvents,
   ZoomControl,
 } from "react-leaflet";
+import "../styles.css";
 import React, { useState } from "react";
 import SearchField from "./SearchField";
 import { Button, Typography, Grid } from "@mui/material";
@@ -291,9 +292,9 @@ function Map() {
           </Box>
         </Control>
         {appStore.currentLocation && (
-          <Marker icon={greenIcon} key={1} position={appStore.currentLocation}>
-            <Popup>
-              <p>You are here</p>
+          <Marker icon={greenIcon} position={appStore.currentLocation}>
+            <Popup className="user_location_popup">
+              <span>You are here</span>
             </Popup>
           </Marker>
         )}
@@ -331,7 +332,6 @@ function Map() {
             </Popup>
           </Marker>
         ))}
-        {/* <LocationMarker /> */}
       </MapContainer>
     </div>
   );

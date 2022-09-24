@@ -29,6 +29,10 @@
     cursor: url("../public/addLocation.svg"), auto;
   }
 
+.user_location_popup .leaflet-popup-tip-container{
+  margin-left: -8px;
+}
+
 /* width */
 ::-webkit-scrollbar {
     width: 5px;
