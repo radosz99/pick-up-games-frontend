@@ -14,7 +14,7 @@ function CourtListItem({ court }) {
   const theme = useTheme();
 
   const getDistanceBetweenTwoPoints = (point1, point2) => {
-    return getDistance(point1, point2);
+    return (getDistance(point1, point2) / 1000).toFixed(1);
   };
 
   return (
