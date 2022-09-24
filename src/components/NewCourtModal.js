@@ -12,6 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { useState } from "react";
 import FormControl from "@mui/material/FormControl";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
+import axios from "axios";
 
 const style = {
   position: "absolute",
@@ -36,6 +37,33 @@ function NewCourtModal() {
   const [rimHeight, setRimHeight] = useState("");
   const [lightning, setLightning] = useState("");
   const [openToPublic, setOpenToPublic] = useState("");
+
+  const handleSubmit = async () => {
+    let model = {
+      name: name,
+      address: {
+        country: appStore.newCourtShortInfo.country,
+        city: appStore.newCourtShortInfo.city,
+        street_name: appStore.newCourtShortInfo.road,
+        postal_code: appStore.newCourtShortInfo.postCode,
+        latitude: appStore.newCourtCoordinates.lat,
+        longitude: appStore.newCourtCoordinates.lng,
+        street_number: appStore.newCourtShortInfo.street_number,
+      },
+      details: {
+        courts_number: numberOfCourts === 0 ? null : numberOfCourts,
+        hoops_number: numberOfHoops === 0 ? null : numberOfHoops,
+        lightning: lightning === 0 ? null : lightning,
+        surface: surfaceType,
+      },
+    };
+
+    await axios
+      .post(`https://backend.matcher.pl/api/v1/court/`, model)
+      .then((response) => {
+        appStore.addCourt(response.data);
+      });
+  };
 
   return (
     <Modal
@@ -188,15 +216,14 @@ function NewCourtModal() {
                     onChange={(event) => setSurfaceType(event.target.value)}
                     sx={{ textAlign: "center" }}
                   >
-                    <MenuItem value={1}>n/a</MenuItem>
-                    <MenuItem value={2}>Cement</MenuItem>
-                    <MenuItem value={3}>Concrete</MenuItem>
-                    <MenuItem value={4}>Dirt</MenuItem>
-                    <MenuItem value={5}>Grass</MenuItem>
-                    <MenuItem value={6}>Plastic</MenuItem>
-                    <MenuItem value={7}>Rubber</MenuItem>
-                    <MenuItem value={8}>Wood</MenuItem>
-                    <MenuItem value={9}>Other</MenuItem>
+                    <MenuItem value="Cement">Cement</MenuItem>
+                    <MenuItem value="Concrete">Concrete</MenuItem>
+                    <MenuItem value="Dirt">Dirt</MenuItem>
+                    <MenuItem value="Grass">Grass</MenuItem>
+                    <MenuItem value="Plastic">Plastic</MenuItem>
+                    <MenuItem value="Rubber">Rubber</MenuItem>
+                    <MenuItem value="Wood">Wood</MenuItem>
+                    <MenuItem value="Other">Other</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
@@ -214,14 +241,14 @@ function NewCourtModal() {
                     onChange={(event) => setNumberOfHoops(event.target.value)}
                     sx={{ textAlign: "center" }}
                   >
-                    <MenuItem value={1}>n/a</MenuItem>
-                    <MenuItem value={2}>1</MenuItem>
-                    <MenuItem value={3}>2</MenuItem>
-                    <MenuItem value={4}>3</MenuItem>
-                    <MenuItem value={5}>4</MenuItem>
-                    <MenuItem value={6}>5</MenuItem>
-                    <MenuItem value={7}>6</MenuItem>
-                    <MenuItem value={8}>{"> 6"}</MenuItem>
+                    <MenuItem value={0}>n/a</MenuItem>
+                    <MenuItem value={1}>1</MenuItem>
+                    <MenuItem value={2}>2</MenuItem>
+                    <MenuItem value={3}>3</MenuItem>
+                    <MenuItem value={4}>4</MenuItem>
+                    <MenuItem value={5}>5</MenuItem>
+                    <MenuItem value={6}>6</MenuItem>
+                    <MenuItem value={7}>{"> 6"}</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
@@ -239,11 +266,11 @@ function NewCourtModal() {
                     onChange={(event) => setNumberOfCourts(event.target.value)}
                     sx={{ textAlign: "center" }}
                   >
-                    <MenuItem value={1}>n/a</MenuItem>
-                    <MenuItem value={2}>1</MenuItem>
-                    <MenuItem value={3}>2</MenuItem>
-                    <MenuItem value={4}>3</MenuItem>
-                    <MenuItem value={5}>{"> 4"}</MenuItem>
+                    <MenuItem value={0}>n/a</MenuItem>
+                    <MenuItem value={1}>1</MenuItem>
+                    <MenuItem value={2}>2</MenuItem>
+                    <MenuItem value={3}>3</MenuItem>
+                    <MenuItem value={4}>{"> 4"}</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
@@ -268,9 +295,9 @@ function NewCourtModal() {
                     onChange={(event) => setLightning(event.target.value)}
                     sx={{ textAlign: "center" }}
                   >
-                    <MenuItem value={1}>n/a</MenuItem>
-                    <MenuItem value={2}>Yes</MenuItem>
-                    <MenuItem value={3}>No</MenuItem>
+                    <MenuItem value={0}>n/a</MenuItem>
+                    <MenuItem value={true}>Yes</MenuItem>
+                    <MenuItem value={false}>No</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
@@ -339,6 +366,9 @@ function NewCourtModal() {
               width: 250,
               height: 250,
               backgroundColor: "#988989",
+              borderWidth: 10,
+              borderColor: "thistle",
+              borderRadius: 50,
             }}
           >
             <AddAPhotoIcon sx={{ fontSize: 65 }} />
@@ -352,26 +382,7 @@ function NewCourtModal() {
             color="primary"
             sx={{ width: "60vw", height: 60 }}
             onClick={() => {
-              let model = {
-                id: Math.random() * (10000 - 250) + 250,
-                name: name,
-                address: {
-                  country: appStore.newCourtShortInfo.country,
-                  city: appStore.newCourtShortInfo.city,
-                  street_name: appStore.newCourtShortInfo.road,
-                  postal_code: appStore.newCourtShortInfo.postCode,
-                  latitude: appStore.newCourtCoordinates.lat,
-                  longitude: appStore.newCourtCoordinates.lng,
-                  street_number: appStore.newCourtShortInfo.street_number,
-                },
-                details: {
-                  courts_number: numberOfCourts,
-                  hoops_number: numberOfHoops,
-                  lightning: lightning,
-                },
-                created: Date.now(),
-              };
-              appStore.addCourt(model);
+              handleSubmit();
               appStore.setAddCourtModalOpen(false);
             }}
           >

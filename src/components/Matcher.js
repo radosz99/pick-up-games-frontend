@@ -21,7 +21,6 @@ function Matcher() {
       .get(`https://backend.matcher.pl/api/v1/court/?format=json`, {})
       .then((response) => {
         appStore.setCourts(response.data);
-        console.log(response.data);
       });
   }, [appStore]);
 

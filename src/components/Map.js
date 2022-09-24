@@ -94,6 +94,8 @@ function Map() {
                 road: road,
                 country: country,
                 postCode: postCode,
+                street_name: "",
+                street_number: "",
               });
               setPosition(e.latlng); // 👈 add marker
               appStore.setNewCourtcoordinates(e.latlng);
