@@ -6,7 +6,7 @@ import {
   useMapEvents,
   ZoomControl,
 } from "react-leaflet";
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import SearchField from "./SearchField";
 import { Button, Typography, Grid } from "@mui/material";
 import Control from "react-leaflet-custom-control";
@@ -55,7 +55,6 @@ const DisplayPosition = observer(({ map }) => {
       color="primary"
       onClick={() => {
         navigator.geolocation.getCurrentPosition(function (position) {
-          console.log(appStore.courtModalOpen);
           appStore.setCoordinates([
             position.coords.latitude,
             position.coords.longitude,

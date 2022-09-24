@@ -80,7 +80,6 @@ const WeatherBannerTab = ({
           value={tabIndex}
           handle={handle}
           onChange={(e) => {
-            console.log("first")
             setTabIndex(e);
           }}
           marks={marks}

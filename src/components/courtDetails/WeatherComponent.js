@@ -58,7 +58,6 @@ function WeatherComponent() {
         .then((response) => {
           setLoading_forecast(false);
 
-          // console.log(response.data);
           const transformData = [];
 
           setStep_in_hours(response.data.step_in_hours);
