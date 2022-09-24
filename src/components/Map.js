@@ -77,7 +77,10 @@ const DisplayPosition = observer(({ map }) => {
         position: "absolute",
         top: 160,
         left: 10,
-        display: appStore.addCourtModalOpen ? "none" : "block",
+        display:
+          appStore.addCourtModalOpen || appStore.courtModalOpen
+            ? "none"
+            : "block",
         zIndex: 9999999,
       }}
     >
