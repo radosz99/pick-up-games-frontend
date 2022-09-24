@@ -7,10 +7,15 @@ import { observer } from "mobx-react-lite";
 import { Button } from "@mui/material";
 import { useStore } from "../stores/store";
 import { useTheme } from "@mui/material/styles";
+import { getDistance } from "geolib";
 
 function CourtListItem({ court }) {
   const { appStore } = useStore();
   const theme = useTheme();
+
+  const getDistanceBetweenTwoPoints = (point1, point2) => {
+    return getDistance(point1, point2);
+  };
 
   return (
     <Box
@@ -79,7 +84,19 @@ function CourtListItem({ court }) {
           }}
         >
           <NavigationIcon />
-          <Typography variant="p">1.5 km</Typography>
+          <Typography variant="p">
+            {getDistanceBetweenTwoPoints(
+              {
+                latitude: court.address.latitude,
+                longitude: court.address.longitude,
+              },
+              {
+                latitude: appStore.currentLocation[0],
+                longitude: appStore.currentLocation[1],
+              }
+            )}{" "}
+            km
+          </Typography>
         </Box>
       </Box>
     </Box>

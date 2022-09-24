@@ -48,6 +48,7 @@ function Map() {
           position.coords.latitude,
           position.coords.longitude,
         ]);
+        console.log(position.coords);
         appStore.setCurrentLocation([
           position.coords.latitude,
           position.coords.longitude,
@@ -73,6 +74,7 @@ function Map() {
     useMapEvents({
       click: (e) => {
         const baseUrl = `https://nominatim.openstreetmap.org/reverse?format=jsonv2`;
+        console.log(e.latlng);
         try {
           axios
             .get(`${baseUrl}`, {
@@ -120,7 +122,9 @@ function Map() {
     if (!appStore.coordinatesSet) {
       map.setView(center, zoom);
     }
-    map.on("move", () => appStore.setCoordinatesSet(true));
+    map.on("move", (e) => {
+      appStore.setCoordinatesSet(true);
+    });
 
     return null;
   }
@@ -129,6 +133,7 @@ function Map() {
     const map = useMapEvents({
       click() {},
       locationfound(e) {
+        appStore.setCoordinates([e.latlng.lat, e.latlng.lng]);
         map.flyTo(e.latlng, map.getZoom());
       },
     });
@@ -143,6 +148,7 @@ function Map() {
             color="primary"
             onClick={(e) => {
               map.locate();
+              // appStore.setCoordinates([e.latitude, e.longitude]);
             }}
             sx={{ mt: 5, ml: 5, fontSize: 24 }}
           >
