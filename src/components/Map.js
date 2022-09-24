@@ -213,28 +213,28 @@ function Map() {
         >
           <Box>
             <FormControlLabel
-              control={<Checkbox defaultChecked />}
+              control={<Checkbox />}
               label={<Typography variant="p">Outdoor</Typography>}
             />
             <br />
             <FormControlLabel
-              control={<Checkbox defaultChecked />}
+              control={<Checkbox />}
               label={<Typography variant="p">Indoor</Typography>}
             />
           </Box>
           <Box sx={{ mt: 2 }}>
             <FormControlLabel
-              control={<Checkbox defaultChecked />}
+              control={<Checkbox />}
               label={<Typography variant="p">With players today</Typography>}
             />
             <br />
             <FormControlLabel
-              control={<Checkbox defaultChecked />}
+              control={<Checkbox />}
               label={<Typography variant="p">With photos</Typography>}
             />
             <br />
             <FormControlLabel
-              control={<Checkbox defaultChecked />}
+              control={<Checkbox />}
               label={<Typography variant="p">Highly rated</Typography>}
             />
           </Box>
