@@ -40,6 +40,8 @@ function Matcher() {
           parseInt(b.distanceFromCurrentLocation)
       );
 
+      console.log(courts);
+
       appStore.setCourts(courts);
     });
   }, [appStore]);

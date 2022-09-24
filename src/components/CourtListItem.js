@@ -67,7 +67,7 @@ function CourtListItem({ court }) {
           }}
         >
           <PeopleAltIcon sx={{ mr: 1 }} />
-          <Typography variant="p">2</Typography>
+          <Typography variant="p">{court.expected_players_number}</Typography>
         </Box>
 
         <Box

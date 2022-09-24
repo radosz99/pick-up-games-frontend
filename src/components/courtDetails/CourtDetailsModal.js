@@ -62,7 +62,11 @@ function CourtDetailsModal() {
                 textAlign: "center",
               }}
             >
-              <Typography variant="p">OUTDOOR</Typography>
+              <Typography variant="p">
+                {appStore.selectedCourt
+                  ? appStore.selectedCourt.details.type
+                  : "Court type"}
+              </Typography>
             </Box>
           </Grid>
           <Grid
@@ -86,7 +90,12 @@ function CourtDetailsModal() {
             }}
           >
             <PeopleAltIcon sx={{ mr: 1 }} />
-            <Typography variant="p">2 PLAYERS IN HERE</Typography>
+            <Typography variant="p">
+              {appStore.selectedCourt
+                ? appStore.selectedCourt.actual_players_number +
+                  " players in here"
+                : "Players amount"}
+            </Typography>
           </Grid>
           <Grid
             item
