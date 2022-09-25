@@ -62,9 +62,10 @@ const DisplayPosition = observer(({ map }) => {
             position.coords.latitude,
             position.coords.longitude,
           ]);
-          map.setView(
-            [position.coords.latitude, position.coords.longitude],
-            13
+
+          map.flyTo(
+            { lat: position.coords.latitude, lon: position.coords.longitude },
+            map.getZoom()
           );
         });
       }}
