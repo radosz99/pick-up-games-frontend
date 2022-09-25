@@ -204,7 +204,7 @@ function Map() {
       <MapContainer
         center={appStore.coordinates}
         zoom={13}
-        minZoom={10}
+        minZoom={8}
         zoomControl={false}
         scrollWheelZoom={true}
         ref={setMap}
