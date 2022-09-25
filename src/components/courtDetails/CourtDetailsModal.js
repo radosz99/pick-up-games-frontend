@@ -12,6 +12,7 @@ import WeatherComponent from "./WeatherComponent";
 import TimelineSliderComponent from "./TimelineSliderComponent";
 import CourtDetailsIconsWithCarusel from "./CourtDetailsIconsWithCarusel";
 import { numFormatter } from "../../constants/utils";
+import axios from "axios";
 
 const style = {
   position: "absolute",
@@ -30,11 +31,32 @@ function CourtDetailsModal() {
   const { appStore } = useStore();
   const theme = useTheme();
 
-  const handleSubmit = () => {
-    //get date without hour
-    // add hour to result
-    // do it with start range and end range
-    //send request to api
+  //todo: handle other days than today
+  const handleSubmit = async () => {
+    let minutes = 0;
+    let today = new Date();
+    let chosenDay = new Date();
+
+    chosenDay.setDate(today.getDate() + appStore.selectedDay);
+
+    appStore.hoursRange[0] % 1 !== 0 ? (minutes = 30) : (minutes = 0);
+    let start = chosenDay.setHours(appStore.hoursRange[0], minutes, 0, 0);
+
+    appStore.hoursRange[1] % 1 !== 0 ? (minutes = 30) : (minutes = 0);
+    let end = chosenDay.setHours(appStore.hoursRange[1], minutes, 0, 0);
+
+    let model = {
+      player_nick: "testing",
+      start: start / 1000,
+      end: end / 1000,
+      court: appStore.selectedCourt.id,
+    };
+
+    await axios
+      .post(`https://backend.matcher.pl/api/v1/timeframe/`, model)
+      .then((response) => {
+        console.log(response.data);
+      });
   };
 
   return (
