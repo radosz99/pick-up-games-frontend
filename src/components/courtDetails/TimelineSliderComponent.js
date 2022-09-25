@@ -15,8 +15,8 @@ import { numFormatter } from "../../constants/utils";
 
 const CustomSlider = styled(Slider)(({ theme }) => ({
   // color: "#3a8589",
-  height: 3,
-  //   padding: "13px 0",
+  height: 1,
+  padding: "10px 0",
   "& .MuiSlider-thumb": {
     height: 27,
     width: 27,
