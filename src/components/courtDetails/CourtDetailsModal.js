@@ -13,6 +13,7 @@ import TimelineSliderComponent from "./TimelineSliderComponent";
 import CourtDetailsIconsWithCarusel from "./CourtDetailsIconsWithCarusel";
 import { numFormatter } from "../../constants/utils";
 import axios from "axios";
+import TimelinePlayersOnCourt from "./TimelinePlayersOnCourt";
 
 const style = {
   position: "absolute",
@@ -153,6 +154,7 @@ function CourtDetailsModal() {
         </Grid>
         <CourtDetailsIconsWithCarusel />
         <TimelineSliderComponent />
+        <TimelinePlayersOnCourt />
         <Grid
           container
           direction="column"

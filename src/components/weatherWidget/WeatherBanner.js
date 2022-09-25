@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import moment from "moment";
 import styled from "styled-components";
-
+import { Typography } from "@mui/material";
 /**
  * Render a primary display of the current forecast, including a date time, a weather icon,
  * current temperature, humidity, cloud density and wind
@@ -13,11 +13,12 @@ import styled from "styled-components";
  */
 const WeatherBanner = ({ forecastNow, unit, locale }) => (
   <div>
-    <h5>
-      {`${moment.unix(forecastNow.dt).locale(locale).format("dddd a h:mm")}, ${
-        forecastNow.desc_1
-      }, ${forecastNow.desc_2}`}
-    </h5>
+    <Typography
+      variant="h1"
+      style={{ fontSize: "0.83em", fontWeight: "bold" }}
+    >{`${moment.unix(forecastNow.dt).locale(locale).format("dddd a h:mm")}, ${
+      forecastNow.desc_1
+    }, ${forecastNow.desc_2}`}</Typography>
     <BannerContainer>
       <BannerIcon src={forecastNow.icon_url} />
       <Temperature>

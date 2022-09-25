@@ -17,6 +17,7 @@ export default class AppStore {
   openDrawer = false;
   currentHour = new Date().getHours();
   courts = [];
+  selectedCourtTimeframes = {};
   coordinatesSet = false;
   selectedCourtId = 0;
   outdoor_filters = false;
@@ -114,6 +115,12 @@ export default class AppStore {
         else return court;
       });
       this.setCourts(filteredCourts);
+    });
+  };
+
+  setSelectedCourtTimeframes = (timeframesDict) => {
+    runInAction(() => {
+      this.selectedCourtTimeframes = timeframesDict;
     });
   };
 
