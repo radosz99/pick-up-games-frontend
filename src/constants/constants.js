@@ -103,6 +103,10 @@ export const hoursMarks = [
     label: "11pm",
   },
   {
+    value: 23.5,
+    label: "11:30pm",
+  },
+  {
     value: 24,
     label: "12pm",
   },
@@ -197,6 +201,10 @@ export const hoursMarks = [
   {
     value: 47,
     label: "11pm",
+  },
+  {
+    value: 47.5,
+    label: "11:30pm",
   },
   {
     value: 48,
