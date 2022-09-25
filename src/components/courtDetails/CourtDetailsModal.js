@@ -19,6 +19,7 @@ const style = {
   left: "50%",
   transform: "translate(-50%, -50%)",
   width: "80vw",
+  height: 700,
   bgcolor: "#D9D9D9",
   border: "2px solid #000",
   boxShadow: 24,
@@ -52,7 +53,7 @@ function CourtDetailsModal() {
           direction="row"
           justifyContent="space-between"
           alignItems="center"
-          sx={{ mt: 4 }}
+          sx={{ mt: 2 }}
         >
           <Grid item xs={1}>
             <Box

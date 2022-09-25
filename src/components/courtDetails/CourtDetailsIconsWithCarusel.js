@@ -48,7 +48,7 @@ function CourtDetailsIconsWithCarusel() {
     >
       <Grid item xs={2}>
         <Carousel
-          sx={{ textAlign: "center", mt: 5, width: "30vw" }}
+          sx={{ textAlign: "center", mt: 5, width: "30vw", height: 200 }}
           navButtonsAlwaysVisible={true}
         >
           {items.map((item, i) => (
@@ -88,7 +88,7 @@ function CourtDetailsIconsWithCarusel() {
               alignItems="center"
             >
               <Grid item>
-                <Typography variant="p">Number of courts</Typography>
+                <Typography variant="p">Courts</Typography>
               </Grid>
               <Grid item>
                 <Typography variant="h3">
@@ -114,7 +114,7 @@ function CourtDetailsIconsWithCarusel() {
               alignItems="center"
             >
               <Grid item>
-                <Typography variant="p">Number of hoops</Typography>
+                <Typography variant="p">Hoops</Typography>
               </Grid>
               <Grid item>
                 <Typography variant="h3">
@@ -140,7 +140,7 @@ function CourtDetailsIconsWithCarusel() {
               alignItems="center"
             >
               <Grid item>
-                <Typography variant="p">Lightning</Typography>
+                <Typography variant="p">Lighting</Typography>
               </Grid>
               <Grid item>
                 <Typography variant="h3">

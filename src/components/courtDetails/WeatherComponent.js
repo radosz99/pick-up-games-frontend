@@ -95,7 +95,7 @@ function WeatherComponent() {
 
   return (
     <Grid item xs={5} sx={{ height: 250 }}>
-      {(forecast.length > 0) & !loading_forecast && (
+      {forecast.length > 0 && !loading_forecast && (
         <WeatherWidget
           config={{
             location: "Wrocław", //TODO
@@ -113,7 +113,7 @@ function WeatherComponent() {
           justifyContent="center"
           alignItems="center"
         >
-          <Typography variant="h3">Loading ...</Typography>
+          <Typography variant="h3">Loading...</Typography>
         </Box>
       )}
       {forecast.length === 0 && !loading_forecast && (

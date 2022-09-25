@@ -48,11 +48,6 @@ const WeatherWidget = ({ config, forecast }) => {
       </ContentContainer>
     );
   }
-  return (
-    <div>
-      <h3>No forecast data available!</h3>
-    </div>
-  );
 };
 
 WeatherWidget.defaultProps = {
@@ -90,8 +85,6 @@ const ContentContainer = styled.div`
   display: block;
   margin: 10px 5px;
   text-align: left;
-  border: 1px solid #dddddd;
-  box-shadow: 3px 3px 3px #aaaaaa;
   padding: 1rem 1rem;
 `;
 

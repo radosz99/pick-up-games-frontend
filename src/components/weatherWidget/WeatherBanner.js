@@ -27,8 +27,12 @@ const WeatherBanner = ({ forecastNow, unit, locale }) => (
         &deg;
         {unit === "metric" ? "C" : "F"}
       </Unit>
-      <div style={{ flex: "1" }} />
-      <DetailContainer>
+      <div
+        style={{
+          marginLeft: 80,
+          marginTop: -40,
+        }}
+      >
         <InfoText>
           Clouds: <b>{forecastNow.clouds}%</b>
         </InfoText>
@@ -51,7 +55,7 @@ const WeatherBanner = ({ forecastNow, unit, locale }) => (
         <InfoText>
           Uvi: <b>{forecastNow.uvi}</b>
         </InfoText>
-      </DetailContainer>
+      </div>
     </BannerContainer>
   </div>
 );
@@ -101,11 +105,6 @@ const Temperature = styled.div`
 const Unit = styled.div`
   font-size: 1rem;
   margin-top: 0.7rem;
-`;
-
-const DetailContainer = styled.div`
-  display: flex;
-  flex-direction: column;
 `;
 
 const InfoText = styled.div`
