@@ -4,6 +4,13 @@ import ProgressBar from "react-bootstrap/ProgressBar";
 import axios from "axios";
 import { useStore } from "../../stores/store";
 
+const getBarColor = (value) => {
+  if (value === 0) return "warning";
+  if (value === 1) return "success";
+  if (value === 2) return "info";
+  if (value >= 3) return "danger";
+};
+
 function TimelinePlayersOnCourt() {
   const { appStore } = useStore();
 
@@ -27,7 +34,7 @@ function TimelinePlayersOnCourt() {
         }
         appStore.setSelectedCourtTimeframes(dict);
       });
-  }, []);
+  }, [appStore]);
 
   return (
     <div>
@@ -35,23 +42,20 @@ function TimelinePlayersOnCourt() {
         {Object.getOwnPropertyNames(appStore.selectedCourtTimeframes).map(
           (key) => (
             <ProgressBar
-              variant="success"
-              now={33}
+              variant={getBarColor(appStore.selectedCourtTimeframes[key])}
+              now={
+                100 /
+                Object.getOwnPropertyNames(appStore.selectedCourtTimeframes)
+                  .length
+              }
               key={key}
               label={appStore.selectedCourtTimeframes[key]}
             />
           )
         )}
-        {/* <ProgressBar variant="danger" now={33} key={2} label={1} /> */}
-        {/* <ProgressBar variant="warning" now={33} key={2} label={1} /> */}
-        {/* <ProgressBar variant="danger" now={20} key={3} label={0} /> */}
-        {/* <ProgressBar variant="warning" now={33} key={4} label={0} /> */}
       </ProgressBar>
     </div>
   );
 }
 
 export default observer(TimelinePlayersOnCourt);
-
-//40
-//66.66
