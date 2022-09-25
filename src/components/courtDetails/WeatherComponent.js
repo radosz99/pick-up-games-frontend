@@ -94,7 +94,7 @@ function WeatherComponent() {
   }, [selectedHourInUnixSec, appStore.selectedCourt]); // notice the empty array here
 
   return (
-    <Grid item xs={5} sx={{ height: 250 }}>
+    <Grid item sx={{ height: 250 }}>
       {forecast.length > 0 && !loading_forecast && (
         <WeatherWidget
           config={{
