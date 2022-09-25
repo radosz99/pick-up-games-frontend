@@ -36,7 +36,7 @@ const DisplayPosition = observer(({ map }) => {
 
   const onMove = useCallback(() => {
     let current_coords = map.getCenter();
-    // appStore.setCoordinates([current_coords.lat, current_coords.lng]);
+    appStore.setCoordinates([current_coords.lat, current_coords.lng]);
     appStore.setCourtsDistance([current_coords.lat, current_coords.lng]);
   }, [map, appStore]);
 

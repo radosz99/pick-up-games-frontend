@@ -19,6 +19,11 @@ export default class AppStore {
   courts = [];
   coordinatesSet = false;
   selectedCourtId = 0;
+  outdoor_filters = false;
+  indoor_filters = false;
+  playersToday_filters = false;
+  photos_filters = false;
+  rated_filters = false;
 
   constructor() {
     makeAutoObservable(this);
@@ -28,6 +33,36 @@ export default class AppStore {
     runInAction(() => {
       this.coordinates = newCoordinates;
     });
+  };
+
+  resetFilters = () => {
+    runInAction(() => {
+      this.outdoor_filters = false;
+      this.indoor_filters = false;
+      this.playersToday_filters = false;
+      this.photos_filters = false;
+      this.rated_filters = false;
+    });
+  };
+
+  setOutdoorFilters = (value) => {
+    this.outdoor_filters = value;
+  };
+
+  setIndoorFilters = (value) => {
+    this.indoor_filters = value;
+  };
+
+  setPlayersTodayFilters = (value) => {
+    this.playersToday_filters = value;
+  };
+
+  setPhotosFilters = (value) => {
+    this.photos_filters = value;
+  };
+
+  setRatedFilters = (value) => {
+    this.rated_filters = value;
   };
 
   setSelectedCourt = (court) => {
@@ -59,8 +94,26 @@ export default class AppStore {
           parseInt(a.distanceFromCurrentLocation) -
           parseInt(b.distanceFromCurrentLocation)
       );
+    });
+  };
 
-      // this.courts = [];
+  /**
+   * @param {boolean} outdoor The date
+   * @param {boolean} indoor The date
+   * @param {boolean} playersToday The date
+   * @param {boolean} photos The date
+   * @param {boolean} rated The date
+   */
+  filterCourts = () => {
+    runInAction(() => {
+      let filteredCourts = this.courts.filter((court) => {
+        if (this.outdoor_filters && !this.indoor_filters)
+          return court.details.type === "Outdoor";
+        else if (!this.outdoor_filters && this.indoor_filters)
+          return court.details.type === "Indoor";
+        else return court;
+      });
+      this.setCourts(filteredCourts);
     });
   };
 

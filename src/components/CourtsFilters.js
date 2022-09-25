@@ -6,24 +6,73 @@ import { useStore } from "../stores/store";
 import { useTheme } from "@mui/material/styles";
 import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
-import { useState } from "react";
+import axios from "axios";
+import { getDistanceBetweenTwoPoints } from "../constants/utils";
 
-function CourtListItem({ court }) {
+function CourtFilters() {
   const { appStore } = useStore();
   const theme = useTheme();
 
-  const [outdoor, setOutdoor] = useState(true);
-  const [indoor, setIndoor] = useState(false);
-  const [playersToday, setPlayersToday] = useState(false);
-  const [photos, setPhotos] = useState(false);
-  const [rated, setRated] = useState(false);
+  const resetFiltersHandler = async () => {
+    appStore.resetFilters();
+    await axios
+      .get(`https://backend.matcher.pl/api/v1/court/`)
+      .then((response) => {
+        let courts = response.data;
 
-  const resetFiltersHandler = () => {
-    setOutdoor(false);
-    setIndoor(false);
-    setPlayersToday(false);
-    setPhotos(false);
-    setRated(false);
+        courts.forEach((court) => {
+          court.distanceFromCurrentLocation = getDistanceBetweenTwoPoints(
+            {
+              latitude: court.address.latitude,
+              longitude: court.address.longitude,
+            },
+            {
+              latitude: appStore.coordinates[0],
+              longitude: appStore.coordinates[1],
+            }
+          );
+        });
+
+        courts.sort(
+          (a, b) =>
+            parseInt(a.distanceFromCurrentLocation) -
+            parseInt(b.distanceFromCurrentLocation)
+        );
+
+        appStore.setCourts(courts);
+      });
+  };
+
+  const filterHandle = async () => {
+    await axios
+      .get(`https://backend.matcher.pl/api/v1/court/`)
+      .then((response) => {
+        let courts = response.data;
+
+        courts.forEach((court) => {
+          court.distanceFromCurrentLocation = getDistanceBetweenTwoPoints(
+            {
+              latitude: court.address.latitude,
+              longitude: court.address.longitude,
+            },
+            {
+              latitude: appStore.coordinates[0],
+              longitude: appStore.coordinates[1],
+            }
+          );
+        });
+
+        courts.sort(
+          (a, b) =>
+            parseInt(a.distanceFromCurrentLocation) -
+            parseInt(b.distanceFromCurrentLocation)
+        );
+
+        appStore.setCourts(courts);
+      })
+      .finally(() => {
+        appStore.filterCourts();
+      });
   };
 
   return (
@@ -42,9 +91,9 @@ function CourtListItem({ court }) {
         <FormControlLabel
           control={
             <Checkbox
-              value={outdoor}
-              checked={outdoor}
-              onChange={(e) => setOutdoor(e.target.checked)}
+              value={appStore.outdoor_filters}
+              checked={appStore.outdoor_filters}
+              onChange={(e) => appStore.setOutdoorFilters(e.target.checked)}
             />
           }
           label={<Typography variant="p">Outdoor</Typography>}
@@ -53,9 +102,9 @@ function CourtListItem({ court }) {
         <FormControlLabel
           control={
             <Checkbox
-              value={indoor}
-              checked={indoor}
-              onChange={(e) => setIndoor(e.target.checked)}
+              value={appStore.indoor_filters}
+              checked={appStore.indoor_filters}
+              onChange={(e) => appStore.setIndoorFilters(e.target.checked)}
             />
           }
           label={<Typography variant="p">Indoor</Typography>}
@@ -65,9 +114,11 @@ function CourtListItem({ court }) {
         <FormControlLabel
           control={
             <Checkbox
-              value={playersToday}
-              checked={playersToday}
-              onChange={(e) => setPlayersToday(e.target.checked)}
+              value={appStore.playersToday_filters}
+              checked={appStore.playersToday_filters}
+              onChange={(e) =>
+                appStore.setPlayersTodayFilters(e.target.checked)
+              }
             />
           }
           label={<Typography variant="p">With players today</Typography>}
@@ -76,9 +127,9 @@ function CourtListItem({ court }) {
         <FormControlLabel
           control={
             <Checkbox
-              value={photos}
-              checked={photos}
-              onChange={(e) => setPhotos(e.target.checked)}
+              value={appStore.photos_filters}
+              checked={appStore.photos_filters}
+              onChange={(e) => appStore.setPhotosFilters(e.target.checked)}
             />
           }
           label={<Typography variant="p">With photos</Typography>}
@@ -87,9 +138,9 @@ function CourtListItem({ court }) {
         <FormControlLabel
           control={
             <Checkbox
-              value={rated}
-              checked={rated}
-              onChange={(e) => setRated(e.target.checked)}
+              value={appStore.rated_filters}
+              checked={appStore.rated_filters}
+              onChange={(e) => appStore.setRatedFilters(e.target.checked)}
             />
           }
           label={<Typography variant="p">Highly rated</Typography>}
@@ -109,7 +160,9 @@ function CourtListItem({ court }) {
           size="small"
           color="primary"
           sx={{ ml: 5 }}
-          onClick={(e) => {}}
+          onClick={(e) => {
+            filterHandle();
+          }}
         >
           Filter
         </Button>
@@ -118,4 +171,4 @@ function CourtListItem({ court }) {
   );
 }
 
-export default observer(CourtListItem);
+export default observer(CourtFilters);
