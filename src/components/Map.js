@@ -11,18 +11,16 @@ import React, { useState } from "react";
 import SearchField from "./SearchField";
 import { Button, Typography, Grid } from "@mui/material";
 import Control from "react-leaflet-custom-control";
-import Box from "@mui/material/Box";
-import Checkbox from "@mui/material/Checkbox";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import { useStore } from "../stores/store";
 import { observer } from "mobx-react-lite";
-import { useTheme } from "@mui/material/styles";
 import { useRef, useEffect } from "react";
 import Switch from "@mui/material/Switch";
 import axios from "axios";
 import { useMap } from "react-leaflet/hooks";
 import * as L from "leaflet";
 import { useCallback } from "react";
+import CourtsFilters from "./CourtsFilters";
 
 const LeafIcon = L.Icon.extend({
   options: {},
@@ -52,7 +50,7 @@ const DisplayPosition = observer(({ map }) => {
   return (
     <Button
       variant="contained"
-      size="large"
+      size="small"
       color="primary"
       onClick={() => {
         navigator.geolocation.getCurrentPosition(function (position) {
@@ -91,7 +89,6 @@ const DisplayPosition = observer(({ map }) => {
 
 function Map() {
   const { appStore } = useStore();
-  const theme = useTheme();
   const [searchBarEnabled, setSearchBarEnabled] = useState(false);
   const [map, setMap] = useState(null);
 
@@ -207,6 +204,7 @@ function Map() {
       <MapContainer
         center={appStore.coordinates}
         zoom={13}
+        minZoom={10}
         zoomControl={false}
         scrollWheelZoom={true}
         ref={setMap}
@@ -251,45 +249,7 @@ function Map() {
           >
             Add court
           </Button>
-
-          <Box
-            sx={{
-              backgroundColor: theme.palette.secondary.main,
-              p: 1,
-              mt: 10,
-              border: 15,
-              borderColor: theme.palette.secondary.main,
-              borderRadius: 10,
-            }}
-          >
-            <Box>
-              <FormControlLabel
-                control={<Checkbox />}
-                label={<Typography variant="p">Outdoor</Typography>}
-              />
-              <br />
-              <FormControlLabel
-                control={<Checkbox />}
-                label={<Typography variant="p">Indoor</Typography>}
-              />
-            </Box>
-            <Box sx={{ mt: 2 }}>
-              <FormControlLabel
-                control={<Checkbox />}
-                label={<Typography variant="p">With players today</Typography>}
-              />
-              <br />
-              <FormControlLabel
-                control={<Checkbox />}
-                label={<Typography variant="p">With photos</Typography>}
-              />
-              <br />
-              <FormControlLabel
-                control={<Checkbox />}
-                label={<Typography variant="p">Highly rated</Typography>}
-              />
-            </Box>
-          </Box>
+          <CourtsFilters />
         </Control>
         {appStore.currentLocation && (
           <Marker icon={greenIcon} position={appStore.currentLocation}>
