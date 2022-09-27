@@ -63,6 +63,8 @@ const DisplayPosition = observer(({ map }) => {
             position.coords.longitude,
           ]);
 
+          map.closePopup();
+
           map.flyTo(
             { lat: position.coords.latitude, lon: position.coords.longitude },
             map.getZoom()
@@ -94,6 +96,7 @@ function Map() {
   const [map, setMap] = useState(null);
 
   const ref = useRef(null);
+
   const sateliteMapUrl = "https://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}";
   const mapUrl =
     "https://tile.thunderforest.com/atlas/{z}/{x}/{y}.png?apikey=4a73bc6859bf49d089f11fef85911536";
@@ -113,7 +116,6 @@ function Map() {
       },
       function (error) {
         setSearchBarEnabled(true);
-        // appStore.setCoordinates([51.109175, 17.032684]); // Wrocław coordinates
       }
     );
   }, [appStore]);
@@ -183,21 +185,6 @@ function Map() {
 
     return null;
   }
-
-  // function LocationMarker() {
-  //   const map = useMapEvents({
-  //     locationfound(e) {
-  //       appStore.setCoordinates([e.latlng.lat, e.latlng.lng]);
-  //       map.flyTo(e.latlng, map.getZoom());
-  //     },
-  //   });
-
-  //   return (
-  //     <>
-  //       <Control></Control>
-  //     </>
-  //   );
-  // }
 
   return (
     <div>
