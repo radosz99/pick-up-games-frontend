@@ -14,6 +14,7 @@ import CourtDetailsIconsWithCarusel from "./CourtDetailsIconsWithCarusel";
 import { numFormatter } from "../../constants/utils";
 import axios from "axios";
 import TimelinePlayersOnCourt from "./TimelinePlayersOnCourt";
+import { toast } from "react-toastify";
 
 const style = {
   position: "absolute",
@@ -45,6 +46,17 @@ function CourtDetailsModal() {
             value) /
           (appStore.selectedCourt.ratings_number + 1);
         appStore.selectedCourt.ratings_number += 1;
+      })
+      .catch((err) => {
+        toast.error("You've already rated this court!", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       });
   };
 

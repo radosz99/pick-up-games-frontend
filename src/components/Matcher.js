@@ -14,6 +14,7 @@ import PersistentDrawerRight from "./ui/PersistentDrawerRight";
 import { useStore } from "../stores/store";
 import axios from "axios";
 import { getDistanceBetweenTwoPoints } from "../constants/utils";
+import { ToastContainer } from "react-toastify";
 
 function Matcher() {
   const { appStore } = useStore();
@@ -46,6 +47,17 @@ function Matcher() {
 
   return (
     <>
+      <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+      />
       <Header />
       <NewCourtModal />
       <CourtDetailsModal />

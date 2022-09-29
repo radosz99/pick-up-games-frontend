@@ -5,6 +5,7 @@ import App from "./components/App";
 import { store, StoreContext } from "./stores/store";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min";
+import "react-toastify/dist/ReactToastify.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
