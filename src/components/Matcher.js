@@ -21,7 +21,6 @@ function Matcher() {
   useEffect(() => {
     axios.get(`https://backend.matcher.pl/api/v1/court/`).then((response) => {
       let courts = response.data.results;
-      console.log(courts);
       courts.forEach((court) => {
         court.distanceFromCurrentLocation = getDistanceBetweenTwoPoints(
           {

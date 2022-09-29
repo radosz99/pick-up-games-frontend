@@ -32,6 +32,22 @@ function CourtDetailsModal() {
   const { appStore } = useStore();
   const theme = useTheme();
 
+  const ratingChangedHanlder = async (value) => {
+    await axios
+      .post(`https://backend.matcher.pl/api/v1/rating/`, {
+        court: appStore.selectedCourt.id,
+        stars: value,
+      })
+      .then(() => {
+        appStore.selectedCourt.rating =
+          (appStore.selectedCourt.rating *
+            appStore.selectedCourt.ratings_number +
+            value) /
+          (appStore.selectedCourt.ratings_number + 1);
+        appStore.selectedCourt.ratings_number += 1;
+      });
+  };
+
   //todo: handle other days than today
   const handleSubmit = async () => {
     let minutes = 0;
@@ -129,9 +145,17 @@ function CourtDetailsModal() {
               alignItems: "center",
             }}
           >
-            <Rating name="read-only" value={4} readOnly />
+            <Rating
+              onChange={(event, newValue) => {
+                ratingChangedHanlder(newValue);
+              }}
+              value={appStore.selectedCourt ? appStore.selectedCourt.rating : 0}
+            />
             <Typography variant="p" component="legend">
-              2 ratings
+              {appStore.selectedCourt
+                ? appStore.selectedCourt.ratings_number
+                : 0}{" "}
+              ratings
             </Typography>
           </Grid>
           <Grid
