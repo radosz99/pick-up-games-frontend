@@ -23,7 +23,9 @@ import { useCallback } from "react";
 import CourtsFilters from "./CourtsFilters";
 
 const LeafIcon = L.Icon.extend({
-  options: {},
+  options: {
+    iconAnchor: [17, 46],
+  },
 });
 
 const greenIcon = new LeafIcon({
