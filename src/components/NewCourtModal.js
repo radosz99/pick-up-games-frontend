@@ -30,11 +30,11 @@ function NewCourtModal() {
   const { appStore } = useStore();
 
   const [name, setName] = useState("");
-  const [type, setType] = useState(1);
+  const [type, setType] = useState("");
   const [surfaceType, setSurfaceType] = useState("");
   const [numberOfHoops, setNumberOfHoops] = useState("");
   const [numberOfCourts, setNumberOfCourts] = useState("");
-  const [rimHeight, setRimHeight] = useState("");
+  const [rimType, setRimType] = useState("");
   const [lightning, setLightning] = useState("");
   const [openToPublic, setOpenToPublic] = useState("");
 
@@ -55,8 +55,13 @@ function NewCourtModal() {
         hoops_number: numberOfHoops === 0 ? null : numberOfHoops,
         lightning: lightning === 0 ? null : lightning,
         surface: surfaceType,
+        rim_type: rimType,
+        public: openToPublic,
+        type: type,
       },
     };
+
+    console.log(model);
 
     await axios
       .post(`https://backend.matcher.pl/api/v1/court/`, model)
@@ -173,12 +178,12 @@ function NewCourtModal() {
                   id="type-select"
                   autoWidth
                   value={type}
-                  label="type"
+                  label="Type"
                   onChange={(event) => setType(event.target.value)}
                   sx={{ textAlign: "center" }}
                 >
-                  <MenuItem value={1}>Outdoor</MenuItem>
-                  <MenuItem value={2}>Indoor</MenuItem>
+                  <MenuItem value="Outdoor">Outdoor</MenuItem>
+                  <MenuItem value="Indoor">Indoor</MenuItem>
                 </Select>
               </FormControl>
             </Grid>
@@ -315,31 +320,28 @@ function NewCourtModal() {
                     onChange={(event) => setOpenToPublic(event.target.value)}
                     sx={{ textAlign: "center" }}
                   >
-                    <MenuItem value={1}>n/a</MenuItem>
-                    <MenuItem value={2}>Yes</MenuItem>
-                    <MenuItem value={3}>No</MenuItem>
+                    {/* <MenuItem value={1}>n/a</MenuItem> */}
+                    <MenuItem value={true}>Yes</MenuItem>
+                    <MenuItem value={false}>No</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
-              <Grid item xs={2}>
+              <Grid item sx={{ mr: 5 }} xs={2}>
                 <FormControl fullWidth>
-                  <InputLabel id="rimHeight-select-label">
-                    Rim height
-                  </InputLabel>
+                  <InputLabel id="rimHeight-select-label">Rim type</InputLabel>
                   <Select
                     labelId="rimHeight-select-label"
                     id="rimHeight-select"
                     autoWidth
-                    value={rimHeight}
+                    value={rimType}
                     label="RimHeight"
-                    onChange={(event) => setRimHeight(event.target.value)}
+                    onChange={(event) => setRimType(event.target.value)}
                     sx={{ textAlign: "center" }}
                   >
-                    <MenuItem value={1}>Too high</MenuItem>
-                    <MenuItem value={2}>NBA / Fiba Height</MenuItem>
-                    <MenuItem value={3}>Too low</MenuItem>
-                    <MenuItem value={4}>Dunk hoop</MenuItem>
-                    <MenuItem value={5}>Missing or broken</MenuItem>
+                    <MenuItem value="Higher">Higher</MenuItem>
+                    <MenuItem value="Lower">Lower</MenuItem>
+                    <MenuItem value="Normal">Normal</MenuItem>
+                    <MenuItem value="Various">Various</MenuItem>
                   </Select>
                 </FormControl>
               </Grid>
