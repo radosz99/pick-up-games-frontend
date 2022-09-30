@@ -254,7 +254,7 @@ function Map() {
           </Marker>
         )}
         {appStore.addCourtFlag && <AddMarker />}
-        <MarkerClusterGroup>
+        <MarkerClusterGroup chunkedLoading>
           {appStore.courts.map((court, idx) => (
             <Marker
               title={court.details.name}

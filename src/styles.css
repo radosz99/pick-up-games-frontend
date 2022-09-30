@@ -33,6 +33,14 @@
   margin-left: -8px;
 }
 
+.leaflet-popup{
+  bottom: 36px !important;
+}
+
+.leaflet-popup-tip-container{
+  margin-left: -25px !important;
+}
+
 /* width */
 ::-webkit-scrollbar {
     width: 5px;
