@@ -46,6 +46,15 @@ function CourtDetailsModal() {
             value) /
           (appStore.selectedCourt.ratings_number + 1);
         appStore.selectedCourt.ratings_number += 1;
+        toast.success("Thanks for your opinion!", {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
       })
       .catch((err) => {
         toast.error("You've already rated this court!", {
