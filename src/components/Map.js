@@ -21,6 +21,7 @@ import { useMap } from "react-leaflet/hooks";
 import * as L from "leaflet";
 import { useCallback } from "react";
 import CourtsFilters from "./CourtsFilters";
+import MarkerClusterGroup from "react-leaflet-cluster";
 
 const LeafIcon = L.Icon.extend({
   options: {
@@ -31,6 +32,10 @@ const LeafIcon = L.Icon.extend({
 const greenIcon = new LeafIcon({
   iconUrl:
     "https://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|2ecc71&chf=a,s,ee00FFFF",
+});
+
+const defaultIcon = new LeafIcon({
+  iconUrl: "https://unpkg.com/leaflet@1.9.1/dist/images/marker-icon.png",
 });
 
 const DisplayPosition = observer(({ map }) => {
@@ -249,39 +254,43 @@ function Map() {
           </Marker>
         )}
         {appStore.addCourtFlag && <AddMarker />}
-        {appStore.courts.map((court, idx) => (
-          <Marker
-            key={`marker-${court.id}`}
-            position={[court.address.latitude, court.address.longitude]}
-          >
-            <Popup>
-              <Grid
-                container
-                direction="column"
-                justifyContent="center"
-                alignItems="center"
-              >
-                <span>{court.name}</span>
-                <span>
-                  {court.address.street_name +
-                    " " +
-                    court.address.city +
-                    " " +
-                    court.address.street_number}
-                </span>
-                <Button
-                  sx={{ color: "red", fontSize: 14 }}
-                  onClick={() => {
-                    appStore.setCourtModalOpen(true);
-                    appStore.setSelectedCourt(court);
-                  }}
+        <MarkerClusterGroup>
+          {appStore.courts.map((court, idx) => (
+            <Marker
+              title={court.details.name}
+              key={`marker-${court.id}`}
+              icon={defaultIcon}
+              position={[court.address.latitude, court.address.longitude]}
+            >
+              <Popup>
+                <Grid
+                  container
+                  direction="column"
+                  justifyContent="center"
+                  alignItems="center"
                 >
-                  See court details
-                </Button>
-              </Grid>
-            </Popup>
-          </Marker>
-        ))}
+                  <span>{court.name}</span>
+                  <span>
+                    {court.address.street_name +
+                      " " +
+                      court.address.city +
+                      " " +
+                      court.address.street_number}
+                  </span>
+                  <Button
+                    sx={{ color: "red", fontSize: 14 }}
+                    onClick={() => {
+                      appStore.setCourtModalOpen(true);
+                      appStore.setSelectedCourt(court);
+                    }}
+                  >
+                    See court details
+                  </Button>
+                </Grid>
+              </Popup>
+            </Marker>
+          ))}
+        </MarkerClusterGroup>
       </MapContainer>
     </div>
   );
