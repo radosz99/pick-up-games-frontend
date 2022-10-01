@@ -13,36 +13,25 @@ import { observer } from "mobx-react-lite";
 import PersistentDrawerRight from "./ui/PersistentDrawerRight";
 import { useStore } from "../stores/store";
 import axios from "axios";
-import { getDistanceBetweenTwoPoints } from "../constants/utils";
 import { ToastContainer } from "react-toastify";
 
 function Matcher() {
   const { appStore } = useStore();
 
   useEffect(() => {
-    axios.get(`https://backend.matcher.pl/api/v1/court/`).then((response) => {
-      let courts = response.data.results;
-      courts.forEach((court) => {
-        court.distanceFromCurrentLocation = getDistanceBetweenTwoPoints(
-          {
-            latitude: court.address.latitude,
-            longitude: court.address.longitude,
-          },
-          {
-            latitude: appStore.currentLocation[0],
-            longitude: appStore.currentLocation[1],
-          }
-        );
+    axios
+      .get(
+        `https://backend.matcher.pl/api/v1/court/?lat=${appStore.currentLocation[0]}&lon=${appStore.currentLocation[1]}&order_by=distance&reverse=False`
+      )
+      .then((response) => {
+        let courts = response.data.results;
+
+        courts.forEach((court) => {
+          court.distanceFromCurrentLocation = court.distance.toFixed(0);
+        });
+
+        appStore.setCourts(courts);
       });
-
-      courts.sort(
-        (a, b) =>
-          parseInt(a.distanceFromCurrentLocation) -
-          parseInt(b.distanceFromCurrentLocation)
-      );
-
-      appStore.setCourts(courts);
-    });
   }, [appStore]);
 
   return (
