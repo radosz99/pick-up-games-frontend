@@ -2,7 +2,6 @@ import Box from "@mui/material/Box";
 import TextField from "@mui/material/TextField";
 import { Typography, Modal } from "@mui/material";
 import Grid from "@mui/material/Grid";
-import { Button } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import { useStore } from "../stores/store";
 import { observer } from "mobx-react-lite";
@@ -13,6 +12,7 @@ import { useState } from "react";
 import FormControl from "@mui/material/FormControl";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import axios from "axios";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 const style = {
   position: "absolute",
@@ -29,6 +29,7 @@ const style = {
 function NewCourtModal() {
   const { appStore } = useStore();
 
+  const [loading, setLoading] = useState(false); ///TODO set false
   const [name, setName] = useState("");
   const [type, setType] = useState("");
   const [surfaceType, setSurfaceType] = useState("");
@@ -39,6 +40,8 @@ function NewCourtModal() {
   const [openToPublic, setOpenToPublic] = useState("");
 
   const handleSubmit = async () => {
+    setLoading(true);
+
     let model = {
       name: name,
       address: {
@@ -61,12 +64,11 @@ function NewCourtModal() {
       },
     };
 
-    console.log(model);
-
     await axios
       .post(`https://backend.matcher.pl/api/v1/court/`, model)
       .then((response) => {
         appStore.addCourt(response.data);
+        setLoading(false);
       });
   };
 
@@ -378,7 +380,8 @@ function NewCourtModal() {
         </Box>
 
         <Box textAlign="center" sx={{ mt: 5 }}>
-          <Button
+          <LoadingButton
+            loading={loading}
             variant="contained"
             size="large"
             color="primary"
@@ -389,7 +392,7 @@ function NewCourtModal() {
             }}
           >
             SUBMIT COURT
-          </Button>
+          </LoadingButton>
         </Box>
       </Box>
     </Modal>
