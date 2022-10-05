@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import axios from "axios";
 import { useStore } from "../../stores/store";
+import { Typography } from "@mui/material";
 
 const getBarColor = (value) => {
   if (value === 0) return "warning";
@@ -37,7 +38,8 @@ function TimelinePlayersOnCourt() {
   }, [appStore]);
 
   return (
-    <div>
+    <>
+      <Typography variant="h5">Players on court:</Typography>
       <ProgressBar min={0} max={100}>
         {Object.getOwnPropertyNames(appStore.selectedCourtTimeframes).map(
           (key) => (
@@ -54,7 +56,7 @@ function TimelinePlayersOnCourt() {
           )
         )}
       </ProgressBar>
-    </div>
+    </>
   );
 }
 

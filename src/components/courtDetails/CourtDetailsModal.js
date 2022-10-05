@@ -134,7 +134,7 @@ function CourtDetailsModal() {
           <CloseIcon />
         </Box>
 
-        <Typography variant="h2" align="center">
+        <Typography variant="h2" align="center" sx={{ mt: -3 }}>
           {appStore.selectedCourt ? appStore.selectedCourt.name : "COURT NAME"}
         </Typography>
         <Grid
