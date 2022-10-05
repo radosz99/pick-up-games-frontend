@@ -35,7 +35,7 @@ function CourtListItem({ court }) {
       >
         <Rating name="read-only" value={4} readOnly />
         <Typography variant="p" component="legend" sx={{ ml: 4 }}>
-          2 RATINGS
+          {court.ratings_number} RATINGS
         </Typography>
       </Box>
       <Typography variant="p" sx={{ mt: 2 }}>
