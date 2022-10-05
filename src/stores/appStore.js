@@ -2,12 +2,12 @@ import { makeAutoObservable, runInAction } from "mobx";
 import { getDistanceBetweenTwoPoints } from "../constants/utils";
 
 export default class AppStore {
-  coordinates = [51.051409, 18.594532];
+  coordinates = [51.0656512, 17.032684];
   currentLocation = [51.0656512, 17.032684];
   newCourtCoordinates = []; // Wrocław coordinates
   newCourtShortInfo = { road: undefined, city: undefined };
   courtsMarkers = [];
-  hoursRange = [new Date().getHours() + 10, new Date().getHours() + 14];
+  hoursRange = [new Date().getHours() + 1, new Date().getHours() + 2];
   currentTimeInUnixSec = Math.floor(new Date().getTime() / 1000); // its set inside WeatherComponent
   sateliteView = false;
   selectedDay = 0; // 0 - today, 1 - tommorow, and so on...
